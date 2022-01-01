@@ -1,8 +1,6 @@
 # FakeBook-App-Social-Network
 8. Getting to know the API project files
-
 9. Creating our first Entity
-
 10. Introduction to Entity Framework what is EF?
 
   * an object relational mapper is used to translate our code to SQL commands
@@ -35,19 +33,12 @@ summery. EF Features:
  * this is all called 'code first' and it's better because it's more convenient for developers
 
 11. Adding Entity Framework to our project
-
 12. Adding a DbContext class
-
 13. Creating the Connection string.
-
 14. Creating the DB using EF Code first migrations
-
 15. Adding a new API Controller
-
 16. Making our code Asynchronous
-
 17. Saving our code into Source control
-
 18. Section 1 Summary
 
  * used doentet cli to create app, solution file gitignore file
