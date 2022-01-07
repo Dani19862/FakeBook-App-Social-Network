@@ -54,3 +54,4 @@ C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Socia
 C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\bin\Debug\net5.0\Humanizer.dll
 C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\obj\Debug\net5.0\API.csproj.CopyComplete
