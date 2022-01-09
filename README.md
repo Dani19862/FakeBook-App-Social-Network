@@ -10,3 +10,6 @@
 21. Running the angular project and reviewing the bootstrap of the app
 22. adding VS Code extentions to work with Angular
 23. Making HTTP requests in Angular
+24. Adding CORS support in the API
+25. Displaying the fetched users in browser
+26. adding bootstrap and font-awesome
