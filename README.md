@@ -13,3 +13,15 @@
 24. Adding CORS support in the API
 25. Displaying the fetched users in browser
 26. adding bootstrap and font-awesome
+27. Using HTTPS in angular - WINDOWS
+
+summery:
+
+1. done with our working skeleton
+2. using angular cli - basic
+3. a look of angular files/components to bootstrap -very basic
+4. using httpClient to call for remote data - basic
+5. http => https
+6. adding packages
+
+next up: adding authentication
