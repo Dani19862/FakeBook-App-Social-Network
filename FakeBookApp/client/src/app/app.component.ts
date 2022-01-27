@@ -1,3 +1,4 @@
+import { AccountService } from './services/account.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,11 +11,17 @@ export class AppComponent implements OnInit {
   title = 'The FakeBookApp';
   users: any;
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private accountService :AccountService){
 
   }
   ngOnInit(): void  {
-    
+    this.setCurrentUser();
+  }
+
+  setCurrentUser(){
+    const userFromLS:any = localStorage.getItem('user');
+    const user = JSON.parse(userFromLS);
+    this.accountService.setCurrentUser(user);
   }
 }
 
