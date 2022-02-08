@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title = 'The FakeBookApp';
   users: any;
 
-  constructor(private http: HttpClient, private accountService :AccountService){
+  constructor(private accountService :AccountService){
 
   }
   ngOnInit(): void  {
@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
     const user = JSON.parse(userFromLS);
     this.accountService.setCurrentUser(user);
   }
+
+  
 }
 
 
