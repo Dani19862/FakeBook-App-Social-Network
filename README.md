@@ -1,46 +1,31 @@
-47. introduction: we'll be implementing the client side of the auth flow goals:
+Section 6: angular routing:
 
-    implementing login and register
-    creating components (cli)
-    using angular template forms
-    angular services
-    observables
-    structural directives
-    component communication parent <=> child using input/output
-48. Creating a nav bar
+ 63. Introduction
 
-49. Introduction to Angular template forms
+  * implement routing in our app
+  * understand routing
+  * adding a bootstrap theme
+  * using route guards (prevent access to components -not a real security thing)
+  * using a shared model
+  * Creating some more components
 
-50. Introduction to Angular services
+64. Adding the nav links
 
-51. Injecting services into components
+65. Routing in code
 
-52. Using conditionals to show and remove content
+66. Adding a toast service for notifications
 
-53. Using the angular bootstrap components dropdown
+67. Adding an Angular route guard
 
-54. Introduction to observables
+68. Adding a dummy route
 
-55. Persisting the login
+69. Adding a new theme
 
-56. Using the async pipe
+70. Tidying up the app module by using a shared module
 
-57. Adding a home page
+71. Section 6 summary
 
-58. Adding a register form
-
-59. Parent to child communication
-
-60. Child to parent communication
-
-61. Hooking up the register method to the service
-
-62. Section 5 summary
-
-  * implemented the register functionality.
-  * creating components
-  * forms => two way binding
-  * angular services for sharing data => singletons in their provided scope
-  * observables, async pipes for subscribing/unsubscribing to observables
-  * structural directives => conditionally rendering elements
-  * parent child communication => Input/Output
+   * router basics
+   * added bootstrap theme
+   * route guards (not a security, security is on the BE, FE have all the code)
+   * feature + shared modules (can talk about core module - things that are used in all the app)
