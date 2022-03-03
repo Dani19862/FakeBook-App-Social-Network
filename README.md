@@ -1,23 +1,21 @@
-Section 6: angular routing:
+ section 7 into:
+error handling on the FE and the BE: 
+learning goals:
 
- 63. Introduction
-  * implement routing in our app
-  * understand routing
-  * adding a bootstrap theme
-  * using route guards (prevent access to components -not a real security thing)
-  * using a shared model
-  * Creating some more components
-
-64. Adding the nav links
-65. Routing in code
-66. Adding a toast service for notifications
-67. Adding an Angular route guard
-68. Adding a dummy route
-69. Adding a new theme
-70. Tidying up the app module by using a shared module
-71. Section 6 summary
-
-   * router basics
-   * added bootstrap theme
-   * route guards (not a security, security is on the BE, FE have all the code)
-   * feature + shared modules (can talk about core module - things that are used in all the app)
+  1. API Middleware - understanding
+  2. angular interceptors - intercept requests and responses
+  3. troubleshooting exceptions
+  4. Creating an error controller for testing errors
+  5. Handling server errors
+  6. Exception handling middleware
+  7. Testing errors in the client
+  8. Adding an error interceptor
+  9. Displaying the server validation errors
+  10. Handling not found
+  11. Adding a server error page
+  12. Section 7 summary
+  
+       * implemented global error handling both in the frontend and backend
+       * angular interceptors
+     * troubleshoot exceptions 😉, create a helper page
+     * create a helper page for the frontend
