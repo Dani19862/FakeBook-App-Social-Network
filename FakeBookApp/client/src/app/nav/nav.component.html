@@ -17,10 +17,15 @@
           <a class="nav item" routerLinkActive="active" routerLink="/notifications"><i class="fa fa-bell"></i>Notifications</a>
         </li>
       </ng-container>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/errors">Errors</a>
+
+      </li>
     </ul>
     <!-- Edit Profile And Logout while user is connected -->
     <div class="dropdown" *ngIf="currentUser$ | async" dropdown>
-      <a class="dropdown-toggle text-light" href="#" dropdownToggle>Welcome user</a>
+      <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item">Edit Profile</a>
