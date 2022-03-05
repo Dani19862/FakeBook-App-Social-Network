@@ -1,3 +1,4 @@
+import { NotificationsComponent } from './notifications/notifications.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { CoreModule } from './modules/core.module';
@@ -29,7 +30,11 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     MessagesComponent,
     TestErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    NotificationsComponent
+
+
+
    ],
   imports: [
     BrowserModule,
