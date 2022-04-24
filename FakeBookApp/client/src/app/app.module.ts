@@ -1,3 +1,5 @@
+import { SharedModule } from './modules/shared.module';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
@@ -16,6 +18,8 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { TextInputComponent } from './forms/text-input/text-input.component';
+import { DateInputComponent } from './forms/date-input/date-input.component';
 
 
 
@@ -25,7 +29,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     NavComponent,
     HomeComponent,
     RegisterComponent,
-
+    TextInputComponent,
+    DateInputComponent,
     ListsComponent,
     MessagesComponent,
     TestErrorsComponent,
@@ -37,6 +42,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 
    ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -45,7 +51,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     CoreModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -35,7 +35,9 @@ const routes: Routes = [
   {
     path: 'server-error', component: ServerErrorComponent
   },
-  {path : 'notifications',component:NotificationsComponent},
+  {
+    path : 'notifications',component:NotificationsComponent
+  },
 
 
   { path: '**',

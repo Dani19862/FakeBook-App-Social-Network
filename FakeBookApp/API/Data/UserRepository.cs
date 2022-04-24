@@ -48,25 +48,8 @@ namespace API.Data
             return await _context.Users.FindAsync(id);
         }
 
-        // find user by username  //NOT USED ANYMORE
-        public async Task<AppUser> GetUserByUserNameAsync(string userName)
-        {
-            return await _context.Users
-            .Include(u => u.Photos) //get the photos of the user
-            .SingleOrDefaultAsync(x => x.UserName == userName);
-
-        }
-
-        //get all users
-        public async Task<IEnumerable<AppUser>> GetUsersAsync()
-        {
-            return await _context.Users
-            .Include(u => u.Photos) //get the photos of the user
-            .ToListAsync();
-
-
-        }
-
+     
+     
         //save changes to database and return true if changes were made or false if not more than 1 change was made    
         public async Task<bool> SaveAllAsync()
         {
