@@ -1,0 +1,78 @@
+<div class="row" *ngIf="member">
+  <div class="col-4">
+    <h1>Your Profile</h1>
+  </div>
+  <div class="col-8">
+
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+
+        <strong>Information:</strong>
+          You have made changes. any unsave changes will be lost
+
+    </div>
+  </div>
+
+
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title"><b>{{member.username}}</b> </h4>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-4">
+        <img class="img-thumbnail"
+        src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.username}}">
+        <div class="btn-group d-flex"><button class="btn btn-success">Message</button></div>
+      </div>
+      <div class="col-md-2">
+        <p>
+          <strong>Name:</strong>
+           {{member.username}}
+        </p>
+        <p>
+          <strong>Address:</strong>
+          {{member.city}}, {{member.country}}
+        </p>
+      </div>
+      <div class="col-md-5">
+        <p>
+          <strong>Introduction:</strong>
+        </p>
+        <p>{{member.introduction}}</p>
+        <div class="card-footer">
+
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <tabset class="member-tabset">
+      <tab heading="About {{member.knownAs}}">
+        <form #editForm = "ngForm" (ngSubmit)="updateMember()" id="editForm">
+          <h4>Description</h4>
+          <textarea [(ngModel)]="member.introduction" name="introduction"   class="form-control" rows="6"></textarea>
+
+          <h4>Interest</h4>
+          <textarea [(ngModel)]="member.interests" name="interests"   class="form-control" rows="6"></textarea>
+
+          <h4>Location Details</h4>
+          <div class="form-inline">
+            <label for="City">City:</label>
+            <input [(ngModel)]="member.city" name="city" type="text" class="form-control" placeholder="City">
+            <label for="Country">Country:</label>
+            <input [(ngModel)]="member.country" name="country" type="text" class="form-control" placeholder="Country">
+            <div class="card-footer">
+              <button [disabled]="editForm.pristine" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading=" Edit Photos">
+        photo will go from here
+      </tab>
+    </tabset>
+  </div>
+
+</div>
+</div>

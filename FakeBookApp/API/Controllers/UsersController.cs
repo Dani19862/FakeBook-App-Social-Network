@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +26,28 @@ namespace API.Controllers
             _userRepository = userRepository;
 
         }
+
+        [HttpPut] //update user by username after mapping it to MemberUpdateDto
+
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //get username from token => NameId
+            var user = await _userRepository.GetUserByUserNameAsync(username); //get user by username
+
+            _mapper.Map(memberUpdateDto, user); //map MemberUpdateDto to AppUser
+
+            _userRepository.Update(user); //update the user
+
+            if (await _userRepository.SaveAllAsync())
+            {
+                return NoContent();
+            }
+
+            return BadRequest($"Updating user {username} failed on save");
+            
+
+        }
+        
 
         [HttpGet]  //get all users from the database and map them to MemberDto
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()

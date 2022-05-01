@@ -1,3 +1,4 @@
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { SharedModule } from './modules/shared.module';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NotificationsComponent } from './notifications/notifications.component';
@@ -20,6 +21,9 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TextInputComponent } from './forms/text-input/text-input.component';
 import { DateInputComponent } from './forms/date-input/date-input.component';
+import { MemberEditComponent } from './member-edit/member-edit.component';
+
+
 
 
 
@@ -36,12 +40,11 @@ import { DateInputComponent } from './forms/date-input/date-input.component';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    NotificationsComponent
-
-
-
+    NotificationsComponent,
+    MemberEditComponent
    ],
   imports: [
+
     SharedModule,
     BrowserModule,
     AppRoutingModule,
@@ -51,9 +54,23 @@ import { DateInputComponent } from './forms/date-input/date-input.component';
     CoreModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
