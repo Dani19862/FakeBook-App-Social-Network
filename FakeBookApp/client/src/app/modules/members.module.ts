@@ -16,7 +16,8 @@ const routes: Routes = [
   declarations: [
     MemberDetailComponent,
     MemberListComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    
   ],
 
   imports: [
