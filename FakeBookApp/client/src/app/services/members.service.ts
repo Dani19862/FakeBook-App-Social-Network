@@ -16,7 +16,7 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
 
-  // get all members
+  // get all members 
   getMembers() : Observable<Member[]> {
     if(this.members.length){
       return of(this.members); // return cached members if any
@@ -31,7 +31,7 @@ export class MembersService {
   getMember(username: string) : Observable<Member> {
     const member = this.members.find(m => m.username === username);
     if(member){
-      return of(member);
+      return of(member); // return cached member if any
     }
      // get member by username from api url if member is not in cache
     return this.http.get<Member>(`${this.baseUrl}users/${username}`).pipe(
@@ -41,12 +41,25 @@ export class MembersService {
 
   // update member
   updateMember(member: Member)  {
-    return this.http.put(`${this.baseUrl}users/`, member).pipe(
+    return this.http.put(`${this.baseUrl}users`, member).pipe(
       tap(() => {
         const index = this.members.findIndex(x=> x.id === member.id); // find index of member in cache
         this.members[index] = member; // update member in cache
       })
     )
   }
+
+  // set Main photo
+
+  setMainPhoto(photoId: number) : Observable<any> {
+    return this.http.put(`${this.baseUrl}users/set-Main-Photo/${photoId}`, {});
+  }
+
+  // delete photo
+
+  deletePhoto(photoId: number) : Observable<any> {
+    return this.http.delete(`${this.baseUrl}users/delete-Photo/${photoId}`);
+  }
+
 
 }
