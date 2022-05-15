@@ -22,6 +22,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TextInputComponent } from './forms/text-input/text-input.component';
 import { DateInputComponent } from './forms/date-input/date-input.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
+import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.component';
+
 
 
 
@@ -41,7 +43,9 @@ import { MemberEditComponent } from './member-edit/member-edit.component';
     NotFoundComponent,
     ServerErrorComponent,
     NotificationsComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent,
+
    ],
   imports: [
 

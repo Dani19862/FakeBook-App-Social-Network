@@ -55,15 +55,12 @@ namespace API.Data
             return await _context.Users.FindAsync(id);
         }
 
-     
-     
         //save changes to database and return true if changes were made or false if not more than 1 change was made    
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
 
         }
-
 
         //update user
         public void Update(AppUser user)

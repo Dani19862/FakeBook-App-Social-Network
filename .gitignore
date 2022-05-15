@@ -108,3 +108,5 @@ StudentAssets
 **/bin
 .vs
 .vs**
+**/appsettings.json
+**/appsettings.Development.json
