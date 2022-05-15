@@ -79,7 +79,7 @@ export class PhotoEditorComponent implements OnInit {
   deletePhoto(photoId: number){
     this.membersService.deletePhoto(photoId).subscribe(() => {
       this.member.photos = this.member.photos.filter(p => p.id !== photoId);
-      this.toastr.success('Photo has been deleted successfully');  // show a success toastr to delete the photo
+      this.toastr.success('Photo has been deleted successfully');  /// show a success toastr to delete the photo
     })
   }
 
