@@ -28,6 +28,13 @@ namespace API.Helpers
 
             CreateMap<MemberUpdateDto,AppUser>(); //Map MemberUpdateDto to AppUser
 
+            //Map RegisterDto to AppUser and configer username to lowercase
+            CreateMap<RegisterDto,AppUser>().ForMember 
+            (
+                dest => dest.UserName,
+                opt => opt.MapFrom(src => src.Username.ToLower())
+            );
+
         }
 
         

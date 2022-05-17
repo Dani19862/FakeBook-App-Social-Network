@@ -16,7 +16,7 @@ export class MembersService {
   constructor(private http: HttpClient) { }
 
 
-  // get all members 
+  // get all members
   getMembers() : Observable<Member[]> {
     if(this.members.length){
       return of(this.members); // return cached members if any
@@ -26,6 +26,7 @@ export class MembersService {
       tap(members => this.members = members) // cache members
       )
     }
+
 
   // get member by username
   getMember(username: string) : Observable<Member> {
@@ -62,4 +63,6 @@ export class MembersService {
   }
 
 
+
 }
+

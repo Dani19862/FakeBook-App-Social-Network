@@ -8,9 +8,10 @@ export interface Member {
   knownAs:      string;
   created:      Date;
   lastActive:   Date;
-  gender:       string;
+  dateOfBirth:  Date;
+
   introduction: string;
-  lookingFor:   string;
+
   interests:    string;
   city:         string;
   country:      string;
