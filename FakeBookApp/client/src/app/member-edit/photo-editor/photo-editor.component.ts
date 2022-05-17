@@ -47,11 +47,19 @@ export class PhotoEditorComponent implements OnInit {
     }
     this.uploader.onSuccessItem = (item, response, status, headers) => {     // set the onSuccessItem callback function
       if(response){                                                          // if the response is not null
-        const photp: any = JSON.parse(response);                             // parse the response to a photo object
-        this.member.photoUrl = photp.photoUrl;                               // set the photoUrl to the photoUrl
+        const photo: Photo = JSON.parse(response);                             // parse the response to a photo object
+        this.member.photos.push(photo);                                        // set the photoUrl to the photoUrl
         this.toastr.success('Photo has been uploaded successfully');          // show a success toastr
+
+        if (photo.isMain){                                                      // if the photo is main
+          this.user.photoUrl = photo.url;                                       // set the photoUrl to the user photoUrl
+          this.member.photoUrl = photo.url;                                     // set the photoUrl to the member photoUrl
+          this.accounteService.setCurrentUser(this.user);                       // set the current user to the user
+        }
       }
     }
+
+
   }
 
   fileOverBase(e: any): void {        // set the file over base callback function to the event e (the file) --> drag file over the drop zone
