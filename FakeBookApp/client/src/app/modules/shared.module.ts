@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     }),
     NgxSpinnerModule,
     FileUploadModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot()
 
 
   ],
@@ -34,7 +38,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NgxSpinnerModule,
     ToastrModule,
     FileUploadModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    FormsModule,
+    PaginationModule
   ]
 })
 export class SharedModule { }

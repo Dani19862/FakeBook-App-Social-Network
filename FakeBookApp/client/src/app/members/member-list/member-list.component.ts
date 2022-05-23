@@ -1,7 +1,13 @@
-import { Observable } from 'rxjs';
-import { MembersService } from './../../services/members.service';
+import { take } from 'rxjs';
+import { UserParams } from './../../models/userParams';
+import { PaginatedResult, Pagination } from './../../models/pagination';
+
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/models/member';
+import { MembersService } from 'src/app/services/members.service';
+import { AccountService } from 'src/app/services/account.service';
+
+
 
 @Component({
   selector: 'app-member-list',
@@ -9,12 +15,45 @@ import { Member } from 'src/app/models/member';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  members$:Observable<Member[]>;
 
-  constructor(private memberservice: MembersService) { }
+  members: Member[];
+  pagination: Pagination;
+  pageNumber  = 1;
+  pageSize = 5;
+  //userParams: UserParams;
+  // genderList= [{
+  //   value: 'male',
+  //   display: 'Males'
+  // },{
+  //   value: 'female',
+  //   display: 'Females'
+  // }];
 
-  ngOnInit() {
-    this.members$ = this.memberservice.getMembers();
+  constructor(private memberService: MembersService,) {
+    //this.userParams = this.memberService.userParams;
   }
 
+  ngOnInit(): void {
+    this.loadMembers();
+  }
+
+  loadMembers() {
+    this.memberService.getMembers(this.pageNumber, this.pageSize).subscribe((response: PaginatedResult<Member[]>) => {
+      this.members = response.result;
+      this.pagination = response.pagination;
+    });
+
+
+  }
+
+  pageChanged({ page }: any) {
+   this.pageNumber = page;
+    this.loadMembers();
+  }
+
+  // resetFilters() {
+  //   this.userParams = this.memberService.resetUserParams();
+  //   this.loadMembers();
+  // }
 }
+

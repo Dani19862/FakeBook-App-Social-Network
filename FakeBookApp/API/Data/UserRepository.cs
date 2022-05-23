@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -24,12 +26,50 @@ namespace API.Data
             _config = config;
         }
 
-        // Get all users from the database and map them to MemberDto
-        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+        // Get all users accept from currentUser from the database and map them to MemberDto
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-           return await _context.Users
-           .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-           .ToListAsync();
+            
+            //var query = _context.Users.AsQueryable();  
+            // filter => all users except current user
+            //query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            
+            // filter => users with age between min and max
+           // var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
+            //var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+            
+            //query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
+
+            // query = userParams.OrderBy switch
+            // {
+            //     "created" => query.OrderByDescending(u => u.Created),
+            //     _ => query.OrderByDescending(u => u.LastActive)
+            // };
+            
+
+            // return await PagedList<MemberDto>.CreateAsync
+            // (
+            //     query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider),    
+            //     userParams.PageNumber, 
+            //     userParams.PageSize
+            // );
+
+            //////////////////
+
+            var query = _context.Users.AsQueryable();  
+            //filter => all users except current user
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            
+          
+            
+           
+
+            return await PagedList<MemberDto>.CreateAsync
+            (
+                query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
+                userParams.PageNumber,
+                userParams.PageSize
+            );
         }
 
         // Get the user by username after mapping it to MemberDto
@@ -67,6 +107,25 @@ namespace API.Data
         {
             _context.Entry<AppUser>(user).State = EntityState.Modified; //update user in database 
         }
+
+        //Search filter accept him self
+
+        // public async Task<PagedList<MemberDto>> Search(string search, UserParams userParams)
+        // {
+        //     var query = _context.Users.AsQueryable();
+        //     if (!string.IsNullOrEmpty(userParams.Search) && userParams.CurrentUsername != query.)
+        //     {
+        //         query = query.Where(u => u.UserName.ToLower().Contains(userParams.Search.ToLower()) ||
+        //                                  u.KnownAs.ToLower().Contains(userParams.Search.ToLower()));
+        //     }
+           
+        //     return await PagedList<MemberDto>.CreateAsync
+        //     (
+        //         query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
+        //         userParams.PageNumber,
+        //         userParams.PageSize
+        //     );
+        // }
 
     }
 }

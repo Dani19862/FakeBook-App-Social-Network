@@ -27,7 +27,7 @@
               </div>
               <div>
                   <strong>Last Active:</strong>
-                 
+
               </div>
               <div>
                   <strong>Member Since:</strong>
@@ -46,7 +46,7 @@
           <h4>Description:</h4>
           <textarea [(ngModel)]="member.introduction" name="introduction" class="form-control" rows="6"></textarea>
 
-          <h4 class="mt-2">Looking for</h4>
+
 
 
           <h4 class="mt-2">Interests</h4>
@@ -58,6 +58,8 @@
             <input type="text" [(ngModel)]="member.city" name="city" class="form-control mx-2">
             <label for="Country">Country:</label>
             <input type="text" [(ngModel)]="member.country" name="country" class="form-control mx-2">
+            <label for="Country">Name:</label>
+            <input type="text" [(ngModel)]="member.username" name="name" class="form-control mx-2">
           </div>
         </form>
       </tab>
