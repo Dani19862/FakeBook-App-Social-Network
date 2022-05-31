@@ -16,14 +16,13 @@ namespace API.Data
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-        private readonly IConfiguration _config;
         private readonly IMapper _mapper;
 
-        public UserRepository(DataContext context, IConfiguration config, IMapper mapper)
+        public UserRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;
-            _config = config;
+            
         }
 
         // Get all users accept from currentUser from the database and map them to MemberDto
@@ -59,10 +58,6 @@ namespace API.Data
             var query = _context.Users.AsQueryable();  
             //filter => all users except current user
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            
-          
-            
-           
 
             return await PagedList<MemberDto>.CreateAsync
             (

@@ -60,6 +60,8 @@ export class MembersService {
         params = params.append('pageSize', itemsPerPage.toString());
       }
 
+      //if (this.members.length === 0) return of(this.paginatedResult); //check cache 
+
       return this.http.get<Member[]>(`${this.baseUrl}users`, {
         observe: 'response',
         params

@@ -1,11 +1,7 @@
-import { take } from 'rxjs';
-import { UserParams } from './../../models/userParams';
 import { PaginatedResult, Pagination } from './../../models/pagination';
-
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/models/member';
 import { MembersService } from 'src/app/services/members.service';
-import { AccountService } from 'src/app/services/account.service';
 
 
 

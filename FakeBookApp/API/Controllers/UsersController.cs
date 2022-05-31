@@ -20,15 +20,16 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
+        
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService)
+        public UsersController( IUnitOfWork unitOfWork,IMapper mapper, IPhotoService photoService)
         {
-            _photoService = photoService;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _userRepository = userRepository;
+            _photoService = photoService;
 
         }
 
@@ -37,13 +38,13 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
             var username = User.GetUsername(); //get username from token => NameId
-            var user = await _userRepository.GetUserByUserNameAsync(username); //get user by username
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username); //get user by username
 
             _mapper.Map(memberUpdateDto, user); //map MemberUpdateDto to AppUser
 
-            _userRepository.Update(user); //update the user
+            _unitOfWork.UserRepository.Update(user); //update the user
 
-            if (await _userRepository.SaveAllAsync())
+            if (await _unitOfWork.Complete())
             {
                 return NoContent();
             }
@@ -56,11 +57,11 @@ namespace API.Controllers
         [HttpGet]  //get all users from the database and map them to MemberDto
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
-            var user = await _userRepository.GetUserByUserNameAsync(User.GetUsername());
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
 
             userParams.CurrentUsername = user.UserName;
 
-            var users = await _userRepository.GetMembersAsync(userParams);
+            var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
 
             return Ok(users);
@@ -70,7 +71,7 @@ namespace API.Controllers
         [HttpGet("{username}", Name ="GetUser")] //get user by username after mapping it to MemberDto
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            var userToReturn = await _userRepository.GetMemberAsync(username);
+            var userToReturn = await _unitOfWork.UserRepository.GetMemberAsync(username);
             return Ok(userToReturn);
         }
 
@@ -78,7 +79,7 @@ namespace API.Controllers
         public async Task<ActionResult<PhotoDto>> AddPhotoAsync(IFormFile file)
         {
             var username = User.GetUsername();
-            var user = await _userRepository.GetUserByUserNameAsync(username);
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
             
             var result = await _photoService.UploadPhotoAsync(file); //upload photo to cloudinary
 
@@ -99,19 +100,23 @@ namespace API.Controllers
 
             user.Photos.Add(photo); //add photo to user
 
-            if (await _userRepository.SaveAllAsync()) //save user to database and return photo url if successful
+            if (await _unitOfWork.Complete()) //save user to database and return photo url if successful
             {
                 var photoToReturn = _mapper.Map<PhotoDto>(photo); //map photo to PhotoDto
-                return CreatedAtRoute("GetUser", new {username = user.UserName}, photoToReturn);  //return photo url to client in response header with status code 201 Created and photo url in response body with status code 200 Ok 
+                return CreatedAtRoute("GetUser", new {username = user.UserName}, photoToReturn);  
             }
+
             return BadRequest("Could not add photo"  +" "+ result.Error.Message); //return error message if unsuccessful 
         }
+
+
+
 
         [HttpPut("set-main-photo/{photoId}")] //set photo to main 
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
             var username = User.GetUsername();
-            var user = await _userRepository.GetUserByUserNameAsync(username);
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
 
             var photo = user.Photos.FirstOrDefault(p=> p.Id == photoId); //get photo by id
 
@@ -134,7 +139,7 @@ namespace API.Controllers
 
             photo.IsMain = true; //set photo to main
 
-            if(await _userRepository.SaveAllAsync()) //save user to database and return photo url if successful
+            if(await _unitOfWork.Complete()) //save user to database and return photo url if successful
             {
                 return NoContent();     //return status code 204 No Content
             }
@@ -143,12 +148,14 @@ namespace API.Controllers
 
         }
 
+
+
         // delete photo from user 
         [HttpDelete("delete-photo/{photoId}")]
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
             var username = User.GetUsername();     //get username from token
-            var user = await _userRepository.GetUserByUserNameAsync(username);  //get user by username
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);  //get user by username
 
             var photo = user.Photos.FirstOrDefault(p=> p.Id == photoId); //get photo by photo id
 
@@ -175,9 +182,9 @@ namespace API.Controllers
 
             user.Photos.Remove(photo); //remove photo from user
 
-            if(await _userRepository.SaveAllAsync()) //save user to database and return photo url if successful
+            if(await _unitOfWork.Complete()) //save user to database and return photo url if successful
             {
-                return NoContent();     //return status code 204 No Content
+                return Ok();     
             }
             return BadRequest("Could not delete photo"); //return error message if unsuccessful
         }

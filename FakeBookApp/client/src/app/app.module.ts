@@ -23,9 +23,7 @@ import { TextInputComponent } from './forms/text-input/text-input.component';
 import { DateInputComponent } from './forms/date-input/date-input.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.component';
-
-
-
+import { FeedComponent } from './feed/feed.component';
 
 
 
@@ -45,6 +43,8 @@ import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.co
     NotificationsComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    FeedComponent,
+
 
    ],
   imports: [
@@ -56,7 +56,8 @@ import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.co
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+
   ],
   providers: [
     {

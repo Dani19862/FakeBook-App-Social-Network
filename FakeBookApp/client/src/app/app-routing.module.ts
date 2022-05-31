@@ -1,3 +1,6 @@
+import { FeedComponent } from './feed/feed.component';
+
+import { AppComponent } from './app.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -12,6 +15,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
+
   { path: '', component: HomeComponent, pathMatch: 'full' },
 
   {
@@ -20,14 +24,16 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     children: [
       { path: 'members',
-        loadChildren:() => import('./modules/members.module').then(m => m.MembersModule)
-      },
+      loadChildren:() => import('./modules/members.module').then(m => m.MembersModule)
+    },
       { path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'lists', component: ListsComponent},
       { path: 'messages', component: MessagesComponent},
 
     ]
   },
+
+  { path : 'feed', component: FeedComponent},
 
   {
     path: 'errors', component: TestErrorsComponent
