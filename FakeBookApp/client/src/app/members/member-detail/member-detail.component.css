@@ -2,3 +2,11 @@
   display: inline-block;
   margin-bottom: 20px;
 }
+
+.img{
+  width:  299px;
+  border: 2px solid #fff;
+  display: inline;
+
+
+}

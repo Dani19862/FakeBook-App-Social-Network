@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Reflection.Metadata;
 using System;
 using System.Diagnostics;
@@ -126,27 +127,33 @@ namespace API.Data
             return await Task.FromResult(postToRetuen);
             
         }
+
         
-        //Get All Posts of User
-        public async Task<PagedList<PostDto>> GetUserPostsAsync(PostParams postParams)  
+        //Get All Posts of User by username
+        public async Task<IEnumerable<PostDto>> GetUserPostsAsync(string userName)
         {
 
-            var posts =  _context.Posts.Where(p => p.AppUser.UserName == postParams.CurrentUsername).AsQueryable();
+            var posts = _context.Posts.Where(p => p.AppUser.UserName == userName).AsQueryable();
 
-            if (postParams.CurrentUsername == null) return new PagedList<PostDto>(new List<PostDto>{}, 0, 0, 0);
+            // if (postParams.CurrentUsername == null) return new PagedList<PostDto>(new List<PostDto>{}, 0, 0, 0); => with pagination
 
-            var result =  posts.Select
+            var result = posts.Select
             (
                 p => new PostDto
                 {
                     Id = p.Id,
                     Content = p.Content,
                     Created = p.Created,
-                    AppUserId = p.AppUserId
+                    AppUserId = p.AppUserId,
+                    Username = p.AppUser.UserName,
+                    PhotoUrl = p.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url
 
-                });
+                }
+            );
 
-            return await PagedList<PostDto>.CreateAsync(result, postParams.PageNumber, postParams.PageSize); 
+            //return await PagedList<PostDto>.CreateAsync(result, postParams.PageNumber, postParams.PageSize); 
+            
+            return await Task.FromResult(result);
 
         }
 

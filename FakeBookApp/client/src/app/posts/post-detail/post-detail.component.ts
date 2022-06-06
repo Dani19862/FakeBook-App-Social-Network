@@ -1,8 +1,8 @@
+import { PostsService } from 'src/app/services/posts.service';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
-import { Member } from 'src/app/models/member';
-import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-post-detail',
@@ -12,6 +12,10 @@ import { User } from 'src/app/models/user';
 export class PostDetailComponent  {
   @Input() post!: Post;
 
+
+  constructor(private postServices: PostsService) { }
+
+   
 
 
 }

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
 using System.Net;
@@ -93,17 +94,25 @@ namespace API.Controllers
         }
 
         // Get all posts of a user
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
-        {
-            var post = await _unitOfWork.PostRepository.GetUserPostsAsync(postParams);
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
+        // {
+        //     var post = await _unitOfWork.PostRepository.GetUserPostsAsync(postParams);
 
-            Response.AddPaginationHeader(post.CurrentPage, post.PageSize, post.TotalCount, post.TotalPages);
+        //     Response.AddPaginationHeader(post.CurrentPage, post.PageSize, post.TotalCount, post.TotalPages);
 
-            return Ok(post);
-
+        //     return Ok(post);
             
+        // }   
+
+        // Get all posts of a user without pagination
+        [HttpGet("{username}", Name = "GetUserPostsAsync")]
+        public async Task<ActionResult<PostDto>> GetUserPostsAsync(string username)
+        {
+            var posts = await _unitOfWork.PostRepository.GetUserPostsAsync(username);
+            return Ok(posts);
         }   
+
 
 
         // Get all posts

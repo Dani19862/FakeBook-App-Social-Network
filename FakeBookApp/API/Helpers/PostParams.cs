@@ -15,6 +15,10 @@ namespace API.Helpers
 
         public string CurrentUsername { get; set; }
 
+        public int AppUserId { get; set; }
+        
+        
+
         
 
     }

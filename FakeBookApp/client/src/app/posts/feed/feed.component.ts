@@ -27,43 +27,43 @@ export class FeedComponent implements OnInit {
     this.getllPosts();
   }
 
-  // get all posts with pagination
-  // getllPosts() {
-  //   this.PostServices.getallPosts(this.pageNumber, this.pageSize).subscribe((response:PaginatedResult<Post[]>) => {
-  //     this.posts = response.result;
-  //     this.pagination = response.pagination;
-  //   });
+    //get all posts without pagination
+    getllPosts() {
+      this.PostServices.getallPosts().subscribe(post => {
+        this.posts = post;
+        console.log(this.posts);
+      })
+    }
 
-  //get all posts without pagination
-  getllPosts() {
-    this.PostServices.getallPosts().subscribe(post => {
-      this.posts = post;
-      console.log(this.posts);
-    })
+    // create new post
+    createPost(postForm: NgForm) {
+      this.PostServices.createPost(postForm.value).subscribe(() => {
+        this.postForm.reset();
+        this.getllPosts();
 
-  }
- // onther component
-  getUsersPosts(id: number) {
-    this.PostServices.getUsersPosts(id).subscribe(posts => {
-      this.posts = posts;
-    });
-  }
+      })
+    }
 
-  getPost(id: number) {
-    this.PostServices.getPost(id).subscribe(post => {
-      this.post = post;
-    });
-  }
 
-  // create new post
-  createPost(postForm: NgForm) {
-    this.PostServices.createPost(postForm.value).subscribe(() => {
-      this.postForm.reset();
-      this.getllPosts();
+    getPost(id: number) {
+      this.PostServices.getPost(id).subscribe(post => {
+        this.post = post;
+      });
+    }
 
-    })
-  }
+    // delete post
+    deletePost(id: number) {
+      this.PostServices.deletePost(id).subscribe(() => {
+        this.getllPosts();
+      });
+    }
 
+    // get all posts with pagination
+    // getllPosts() {
+    //   this.PostServices.getallPosts(this.pageNumber, this.pageSize).subscribe((response:PaginatedResult<Post[]>) => {
+    //     this.posts = response.result;
+    //     this.pagination = response.pagination;
+    //   });
 
   // pageChanged({page}: any) {
   //   this.pageNumber = page;
