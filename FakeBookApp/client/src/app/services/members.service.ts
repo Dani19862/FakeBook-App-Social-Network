@@ -18,8 +18,8 @@ import { AccountService } from './account.service';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
-  userParams: UserParams;
-  user: User;
+  //userParams: UserParams;
+  //user: User;
   paginatedResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
 
   constructor(private http: HttpClient, /*private accountService: AccountService*/) {
@@ -44,7 +44,7 @@ export class MembersService {
   //   return this.userParams;
   // }
   // get all members with pagination => And httpParams
-  getMembers(/*userParams: UserParams*/ page?:number, itemsPerPage?: number) : Observable<PaginatedResult<Member[]>> {
+  getMembers(/*userParams: UserParams*/ page?:number, itemsPerPage?: number) : Observable <PaginatedResult<Member[]>> {
 
       // let params = this.getPaginationParams(userParams);
 
@@ -60,7 +60,7 @@ export class MembersService {
         params = params.append('pageSize', itemsPerPage.toString());
       }
 
-      //if (this.members.length === 0) return of(this.paginatedResult); //check cache 
+      //if (this.members.length === 0) return of(this.paginatedResult); //check cache
 
       return this.http.get<Member[]>(`${this.baseUrl}users`, {
         observe: 'response',
@@ -74,8 +74,6 @@ export class MembersService {
           return this.paginatedResult;
         })
       )
-
-
 
     }
 

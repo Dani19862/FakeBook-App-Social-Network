@@ -25,7 +25,7 @@ export class MemberListComponent implements OnInit {
   //   display: 'Females'
   // }];
 
-  constructor(private memberService: MembersService,) {
+  constructor(private memberService: MembersService) {
     //this.userParams = this.memberService.userParams;
   }
 

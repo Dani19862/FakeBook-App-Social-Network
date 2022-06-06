@@ -57,11 +57,11 @@ namespace API.Data
             {
                 Id = post.Id,
                 Content = postDto.Content,
-                Created =  DateTime.Now,
-                AppUserId = user.Id
-
+                Created = post.Created,
+                AppUserId = post.AppUserId,
+                Username = user.UserName
             };
-
+                
             _mapper.Map(postToRetuen, post);
             
             _context.Posts.Update(post);
@@ -81,15 +81,36 @@ namespace API.Data
 
         //Get All Posts
 
-        public async Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams)
+        // public async Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams)
+        // {
+            
+        //     var posts = _context.Posts
+        //         .Select(p => p)
+        //         .OrderByDescending(p => p.Created)
+        //         .AsQueryable();
+
+        //    //if (postParams.CurrentUsername == null)  return new PagedList<PostDto>(new List<PostDto>{}, 0, 0, 0);
+
+        //     var postToRetuen = posts.Select(p => new PostDto
+        //     {
+        //         Id = p.Id,
+        //         Content = p.Content,
+        //         Created = p.Created,
+        //         AppUserId = p.AppUserId,
+               
+        //     });
+
+        //     return await PagedList<PostDto>.CreateAsync(postToRetuen, postParams.PageNumber, postParams.PageSize);
+            
+        // }
+
+        public async Task<IEnumerable<PostDto>> GetAllPostsAsync()
         {
             
             var posts = _context.Posts
-                .Select(p => p)
-                .OrderByDescending(p => p.Created)
-                .AsQueryable();
-
-           //if (postParams.CurrentUsername == null)  return new PagedList<PostDto>(new List<PostDto>{}, 0, 0, 0);
+                 .Select(p => p)
+                 .OrderByDescending(p => p.Created)
+                 .AsQueryable();
 
             var postToRetuen = posts.Select(p => new PostDto
             {
@@ -97,10 +118,12 @@ namespace API.Data
                 Content = p.Content,
                 Created = p.Created,
                 AppUserId = p.AppUserId,
+                Username = p.AppUser.UserName,
+                PhotoUrl = p.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url
                
             });
 
-            return await PagedList<PostDto>.CreateAsync(postToRetuen, postParams.PageNumber, postParams.PageSize);
+            return await Task.FromResult(postToRetuen);
             
         }
         

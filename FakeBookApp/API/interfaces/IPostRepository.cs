@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Helpers;
+using System.Collections.Generic;
 
 
 namespace API.interfaces
@@ -16,7 +17,9 @@ namespace API.interfaces
 
         Task<Post> GetPostByIdAsync(int id);
 
-        Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams);
+        //Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams);
+
+        Task <IEnumerable<PostDto>> GetAllPostsAsync();
        
         Task<PagedList<PostDto>> GetUserPostsAsync(PostParams postParams);
 

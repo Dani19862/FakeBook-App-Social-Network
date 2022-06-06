@@ -1,4 +1,5 @@
 using System;
+using API.Entities;
 namespace API.DTOs
 {
     public class PostDto
@@ -7,10 +8,11 @@ namespace API.DTOs
         public string Content { get; set; }
         public int AppUserId { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-
-        //public AppUser AppUser { get; set; } = AppUser.Id;
+        public string Username { get; set; }
+        public string PhotoUrl { get; set; }
+        
+        //public AppUser AppUser { get; set; }
         
 
-        //public string PhotoUrl { get; set; }
     }
 }

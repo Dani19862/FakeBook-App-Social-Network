@@ -1,4 +1,4 @@
-import { FeedComponent } from './feed/feed.component';
+import { FeedComponent } from './posts/feed/feed.component';
 
 import { AppComponent } from './app.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';

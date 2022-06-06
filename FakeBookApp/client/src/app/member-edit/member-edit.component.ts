@@ -28,7 +28,8 @@ export class MemberEditComponent implements OnInit {
     private accounteService: AccountService,
     private memberService: MembersService,
     private toastr : ToastrService
-  ) {
+  )
+  {
        this.accounteService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
     }
 

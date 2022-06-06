@@ -14,7 +14,7 @@ namespace API.Entities
         public DateTime Created { get; set; } = DateTime.Now;
         public string Content { get; set; }
         public int AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public AppUser AppUser { get; set;}
 
         
 

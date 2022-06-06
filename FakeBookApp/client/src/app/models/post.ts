@@ -2,8 +2,9 @@
 export interface Post {
   id: number;
   content: string;
-  createdAt: Date;
+  created: Date;
   memberId : number;
-  memberName : string;
+  username : string;
+  photoUrl: string;
 
 }

@@ -1,4 +1,4 @@
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -19,47 +19,55 @@ export class PostsService {
 
   constructor(private http: HttpClient) { }
 
+
+  // getallPosts(page?:number, itemsPerPage?:number) : Observable <PaginatedResult<Post[]>> {
+
+    //   let params = new HttpParams();
+    //   if(page != null && itemsPerPage != null){
+  //     params = params.append('pageNumber', page.toString());
+  //     params = params.append('pageSize', itemsPerPage.toString());
+  //   }
+  //   return this.http.get<Post[]>(`${this.baseUrl}`, {
+  //     observe: 'response',
+  //     params
+  //   }).pipe(
+    //     map((res: HttpResponse<Post[]>) => {
+      //       this.paginatedResult.result = res.body as Post[];
+      //       if(res.headers.get('Pagination') != null){
+        //         this.paginatedResult.pagination = JSON.parse(res.headers.get('Pagination')|| '');
+        //       }
+        //       return this.paginatedResult;
+        //     })
+        //   );
+
+        // }
+
+  getallPosts(){
+    return this.http.get<Post[]>(`${this.baseUrl}Post`).pipe(
+    tap(posts => this.posts = posts));
+
+  }
+
   getPost(id: number) {
     return this.http.get<Post>(`${this.baseUrl}/posts/${id}`);
   }
 
-  getallPosts(page?:number, itemsPerPage?:number) : Observable <PaginatedResult<Post[]>> {
-
-    let params = new HttpParams();
-    if(page != null && itemsPerPage != null){
-      params = params.append('pageNumber', page.toString());
-      params = params.append('pageSize', itemsPerPage.toString());
-    }
-
-    return this.http.get<Post[]>(`${this.baseUrl}posts`,
-     {observe: 'response', params})
-    .pipe(
-      map(response => {
-        this.paginatedResult.result = response.body as Post[];
-        if(response.headers.get('Pagination') != null){
-          this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination') || '');
-        }
-        return this.paginatedResult;
-      })
-    );
-  }
-
   getUsersPosts(id: number) {
-    return this.http.get<Post[]>(`${this.baseUrl}/posts/user/${id}`);
+    return this.http.get<Post[]>(`${this.baseUrl}posts/user/${id}`);
   }
 
-  createPost(post: Post) {
-    return this.http.post(this.baseUrl + 'posts', post);
+  createPost(post: Post) : Observable<Post> {
+    return this.http.post<Post>(`${this.baseUrl}Post`, post);
   }
 
   updatePost(id: number, post: Post) {
     return this.http.put(this.baseUrl + 'posts/' + id, post);
+
   }
 
   deletePost(id: number) {
     return this.http.delete(this.baseUrl + 'posts/' + id);
   }
-
 
 
 }

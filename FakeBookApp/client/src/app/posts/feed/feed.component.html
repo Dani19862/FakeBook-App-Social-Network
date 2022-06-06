@@ -1,0 +1,36 @@
+
+<div class="container text-center">
+  <form #postForm="ngForm" (ngSubmit)="createPost(postForm)">
+    <div class="form-group">
+      <input type="text" name="content" class="form-control" ngModel
+        placeholder="Publish Your Post">
+    </div>
+    <button class="btn btn-primary" type="submit">Publish</button>
+  </form>
+</div>
+
+
+  <br><br><br>
+
+  <div class="col-2 mt-5" *ngFor="let post of posts">
+    <app-post-detail [post]="post"></app-post-detail>
+  </div>
+
+  <br>
+  {{pagination|json}}
+
+  <!-- <pagination
+  [boundaryLinks]="true"
+  [totalItems]="pagination.totalItems"
+  [itemsPerPage]="pagination.itemPerPage"
+  [(ngModel)]="pagination.currentPage"
+  (pageChanged)="pageChanged($event)"
+  previousText="&lsaquo;"
+  nextText="&rsaquo;"
+  firstText="&laquo;"
+  lastText="&raquo;"
+  >
+
+</pagination> -->
+
+

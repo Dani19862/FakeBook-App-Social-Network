@@ -11,7 +11,6 @@ namespace API.Data
 
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-       
         private readonly IUserRepository _userRepository;
 
         public UnitOfWork(DataContext context, IMapper mapper, IConfiguration config)

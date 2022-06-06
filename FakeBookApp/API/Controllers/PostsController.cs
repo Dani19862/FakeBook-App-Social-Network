@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Net;
 using System.Collections.Generic;
 //using Microsoft.AspNetCore.Authorization;
@@ -15,8 +17,6 @@ namespace API.Controllers
     //[Authorize]
     public class PostController : BaseApiController
     {
-        
-        
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -31,14 +31,22 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<PostDto>> AddPost(PostDto postDto)
         {
+
+            var appUserid = User.GetUserId(); //get username from token => NameId
+            var user = await _unitOfWork.UserRepository.GetUserByIdAsync(appUserid); //get user by username
+
+            //_mapper.Map(memberUpdateDto, user); //map MemberUpdateDto to AppUser
+
             
             var post = new Post 
             {
                 //Id= postDto.Id,    
+                Created = DateTime.Now,
                 Content = postDto.Content,
-                AppUserId = postDto.AppUserId,
-                Created = postDto.Created,
-                //PhotoUrl = postDto.PhotoUrl,
+                AppUserId = appUserid,
+                //Username = user.UserName,
+                //PhotoUrl =  postDto.PhotoUrl
+                AppUser = user
 
             };
 
@@ -99,14 +107,27 @@ namespace API.Controllers
 
 
         // Get all posts
-        [HttpGet("posts")]
-        public async Task <ActionResult<PostDto>> GetAllPostsAsync([FromQuery] PostParams postParams)  
+        // [HttpGet]
+        // public async Task <ActionResult<PostDto>> GetAllPostsAsync([FromQuery] PostParams postParams)  
+        // {
+        //     var post = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams);
+
+        //     Response.AddPaginationHeader(post.CurrentPage, post.PageSize, post.TotalCount, post.TotalPages);
+
+        //     return Ok(post);
+        // } 
+
+
+        
+        // Get all posts
+        [HttpGet]
+        public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
         {
-            var post = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams);
+            var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
+            return Ok(posts);
 
-            Response.AddPaginationHeader(post.CurrentPage, post.PageSize, post.TotalCount, post.TotalPages);
+        }
 
-            return Ok(post);
-        } 
+        
     }
 }
