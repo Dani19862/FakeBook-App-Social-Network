@@ -1,0 +1,40 @@
+<form  #editForm="ngForm" id="editForm">
+  <div class="container">
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+      <strong>Information</strong>
+      You have made changes. any unsaved changes will be lost
+  </div>
+    <div class="bg-white border mt-2 ">
+    <div>
+      <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
+        <div class="d-flex flex-row align-items-center feed-text px-2">
+          <img class="img" src="{{post.photoUrl || './assets/user.png'}}" alt="{{post.photoUrl}}" srcset="">
+                    <div class="d-flex flex-column flex-wrap ml-2">
+                      <span class="font-weight-bold">{{post.username}}</span>
+                      <span class="text-black-50 time">{{post.created}}</span>
+                    </div>
+        </div>
+        <div class="btn-group" dropdown>
+        <button [disabled]="editForm.pristine" form="editForm" id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle"
+                aria-controls="dropdown-basic">
+           <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+        role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item"  (click)="editPost(post)">Edit</a></li>
+          <li role="menuitem"><a class="dropdown-item"  (click)="deletePost(post.id)">Delete</a></li>
+        </ul>
+      </div>
+       </div>
+    </div>
+    <textarea [(ngModel)]="post.content" name="content" class="form-control" rows="6"></textarea>
+        <div class="d-flex justify-content-end socials p-2 py-3">
+          <i class="fa fa-thumbs-up"></i>
+          <i class="fa fa-comments-o"></i>
+          <i class="fa fa-share"></i>
+        </div>
+      </div>
+</div>
+</form>
+
+

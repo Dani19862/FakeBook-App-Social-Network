@@ -70,7 +70,7 @@ namespace API.Controllers
 
             _mapper.Map(postDto, post); 
             
-            await _unitOfWork.PostRepository.EditPostAsync(postDto);
+             _unitOfWork.PostRepository.EditPostAsync(post);
           
             if (await _unitOfWork.Complete()) return NoContent();   // here have exeptoion with saving because the postDto.Id
 
@@ -79,14 +79,14 @@ namespace API.Controllers
         }
 
         // Delete Post
-        [HttpDelete]
-        public async Task<ActionResult> DeletePost(int id)
+        [HttpDelete("delete-post/{postId}")]
+        public async Task<ActionResult> DeletePost(int postId)
         {
-            var post = await _unitOfWork.PostRepository.GetPostByIdAsync(id);
+            var post = await _unitOfWork.PostRepository.GetPostByIdAsync(postId);
 
             if (post == null) return NotFound();
 
-             _unitOfWork.PostRepository.DeletePostAsync(id);
+             _unitOfWork.PostRepository.DeletePostAsync(postId);
 
             if (await _unitOfWork.Complete()) return Ok(post);
 

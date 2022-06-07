@@ -7,6 +7,7 @@ import { MemberListComponent } from '../members/member-list/member-list.componen
 import { Routes, RouterModule } from '@angular/router';
 import { MemberCardComponent } from '../members/member-card/member-card.component';
 import { UsersPostsComponent } from '../posts/users-posts/users-posts.component';
+import { PostEditDeleteComponent } from '../posts/post-edit-delete/post-edit-delete.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
     MemberDetailComponent,
     MemberListComponent,
     MemberCardComponent,
-    UsersPostsComponent
+    UsersPostsComponent,
+    
 
 
   ],
@@ -38,7 +40,8 @@ const routes: Routes = [
     MemberDetailComponent,
     MemberListComponent,
     MemberCardComponent,
-    UsersPostsComponent
+    UsersPostsComponent,
+
 
   ],
 })

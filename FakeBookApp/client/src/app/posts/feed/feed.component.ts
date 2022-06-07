@@ -51,12 +51,6 @@ export class FeedComponent implements OnInit {
       });
     }
 
-    // delete post
-    deletePost(id: number) {
-      this.PostServices.deletePost(id).subscribe(() => {
-        this.getllPosts();
-      });
-    }
 
     // get all posts with pagination
     // getllPosts() {

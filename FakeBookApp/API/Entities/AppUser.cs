@@ -25,7 +25,7 @@ namespace API.Entities
 
         public virtual ICollection<Photo> Photos { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
+        //public virtual ICollection<Post> Posts { get; set; }
 
     
 

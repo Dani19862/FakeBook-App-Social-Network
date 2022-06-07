@@ -4,7 +4,6 @@
   </div>
   <div class="col-8">
 
-
    <div class="alert alert-info" *ngIf="editForm.dirty">
 
        <strong>Information</strong>
@@ -46,11 +45,8 @@
           <h4>Description:</h4>
           <textarea [(ngModel)]="member.introduction" name="introduction" class="form-control" rows="6"></textarea>
 
-          <!-- <h4 class="mt-2">Interests</h4>
-          <textarea [(ngModel)]="member.interests" name="interests" class="form-control" rows="6"></textarea> -->
-
-          <h4 class="mt-2">Location Details</h4>
-          <div class="form-inline">
+            <h4 class="mt-2">Location Details</h4>
+            <div class="form-inline">
             <label for="City">City:</label>
             <input type="text" [(ngModel)]="member.city" name="city" class="form-control mx-2">
             <label for="Country">Country:</label>
@@ -64,6 +60,13 @@
       <tab heading="Edit Photos">
         <app-photo-editor [member]="member"></app-photo-editor>
       </tab>
+      <tab heading="Edit/Delete Posts">
+        <h4 class="mt-2">Posts:</h4>
+        <div class="col-2" *ngFor="let post of posts">
+          <app-post-edit-delete [post]="post"></app-post-edit-delete> <br><br><br><br>
+      </div>
+      </tab>
     </tabset>
   </div>
+
 </div>

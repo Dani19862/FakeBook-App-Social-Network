@@ -13,9 +13,7 @@ export class PostDetailComponent  {
   @Input() post!: Post;
 
 
-  constructor(private postServices: PostsService) { }
 
-   
 
 
 }

@@ -46,28 +46,30 @@ namespace API.Data
 
         //Edit Post
 
-        public async Task<Post> EditPostAsync(PostDto postDto)
+        //public async Task<Post> EditPostAsync(PostDto postDto)
+        public void EditPostAsync(Post post)
         {
-            var post =  _context.Posts.Where(p => p.Id == postDto.Id).FirstOrDefault();
+            _context.Entry<Post>(post).State = EntityState.Modified; 
+            // var post =  _context.Posts.Where(p => p.Id == postDto.Id).FirstOrDefault();
 
-            var user = await _userRepository.GetUserByIdAsync(postDto.AppUserId);
+            // var user = await _userRepository.GetUserByIdAsync(postDto.AppUserId);
             
-            if (post == null) return null;
+            // if (post == null) return null;
             
-            var postToRetuen = new PostDto   // only content and created can be edited
-            {
-                Id = post.Id,
-                Content = postDto.Content,
-                Created = post.Created,
-                AppUserId = post.AppUserId,
-                Username = user.UserName
-            };
+            // var postToRetuen = new PostDto()   // only content and created can be edited
+            // {
+            //     Id = post.Id,
+            //     Content = postDto.Content,
+            //     Created = post.Created,
+            //     AppUserId = post.AppUserId,
+            //     Username = user.UserName
+            // };
                 
-            _mapper.Map(postToRetuen, post);
+            // _mapper.Map(postToRetuen, post);
             
-            _context.Posts.Update(post);
+            // _context.Posts.Update(post);
 
-            return post;
+            // return post;
 
         }
       

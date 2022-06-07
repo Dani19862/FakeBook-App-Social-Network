@@ -43,6 +43,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     BsDatepickerModule,
     FormsModule,
     PaginationModule,
+    BsDropdownModule
 
   ]
 })

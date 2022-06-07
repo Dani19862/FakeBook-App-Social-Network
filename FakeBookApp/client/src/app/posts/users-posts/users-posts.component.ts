@@ -16,13 +16,13 @@ export class UsersPostsComponent implements OnInit {
 
   }
 
-   // delete post
-   deletePost(postid : number) {
-    this.postService.deletePost(this.post.id).subscribe(() => {
-      this.postService.getallPosts();
-    });
+   // delete post  // NOT USED HERE => USED IN MEMBER-EDIT COMPONENT
+  //  deletePost(postid : number) {
+  //   this.postService.deletePost(this.post.username).subscribe(() => {
+  //     this.postService.getallPosts();
+  //   });
 
-  }
+  // }
 
 
 

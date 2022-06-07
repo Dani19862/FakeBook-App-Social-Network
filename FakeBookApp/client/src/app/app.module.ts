@@ -1,3 +1,4 @@
+import { PostEditDeleteComponent } from './posts/post-edit-delete/post-edit-delete.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { SharedModule } from './modules/shared.module';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -46,6 +47,7 @@ import { PostDetailComponent } from './posts/post-detail/post-detail.component';
     PhotoEditorComponent,
     FeedComponent,
     PostDetailComponent,
+    PostEditDeleteComponent
 
 
    ],

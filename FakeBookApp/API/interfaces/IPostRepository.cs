@@ -13,7 +13,9 @@ namespace API.interfaces
 
         void DeletePostAsync(int id);
 
-        Task<Post> EditPostAsync(PostDto postDto);
+        //Task<Post> EditPostAsync(PostDto postDto);
+
+        void EditPostAsync(Post post);
 
         Task<Post> GetPostByIdAsync(int id);
 
@@ -32,7 +34,7 @@ namespace API.interfaces
         //Task<PostDto> GetAllUsersPostsAsync(int id);
 
 
-        void Update (Post post);
+        //void Update (Post post);
 
         //Task <bool> SaveAllAsync();
 

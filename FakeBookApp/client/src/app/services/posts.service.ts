@@ -54,27 +54,28 @@ export class PostsService {
     return this.http.post<Post>(`${this.baseUrl}Post`, post);
   }
 
-  // delete post
-  deletePost(id: number) : Observable<any> {
-    return this.http.delete(`${this.baseUrl}posts/${id}`);
-  }
 
   // get all users posts
-  getUsersPosts(username: string) : Observable<Post[]> {
+   getUsersPosts(username: string) : Observable<Post[]> {
     return this.http.get<Post[]>(`${this.baseUrl}Post/${username}`).pipe(
       tap(posts => this.posts = posts));
-  }
+    }
 
+    // delete post
+    deletePost(postId: number) : Observable<any> {
+      return this.http.delete(`${this.baseUrl}Post/delete-post/${postId}`);
+    }
+
+  // update Post
+   updatePost(post: Post) {
+   return this.http.put(`${this.baseUrl}post`, post);
+
+  }
   getPost(id: number) {
-    return this.http.get<Post>(`${this.baseUrl}/posts/${id}`);
+    return this.http.get<Post>(`${this.baseUrl}post/${id}`);
   }
 
 
-
-  updatePost(id: number, post: Post) {
-    return this.http.put(this.baseUrl + 'posts/' + id, post);
-
-  }
 
 
 
