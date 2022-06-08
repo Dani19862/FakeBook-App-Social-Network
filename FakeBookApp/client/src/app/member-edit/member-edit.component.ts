@@ -6,6 +6,9 @@ import { Member } from '../models/member';
 import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
 import { ToastrService } from 'ngx-toastr';
+import { Post } from '../models/post';
+import { ActivatedRoute } from '@angular/router';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-member-edit',
@@ -16,6 +19,8 @@ export class MemberEditComponent implements OnInit {
   member: Member;
   user: User;
   @ViewChild('editForm') editForm: NgForm
+  posts: Post[] = [];
+
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any){
@@ -27,13 +32,16 @@ export class MemberEditComponent implements OnInit {
   constructor(
     private accounteService: AccountService,
     private memberService: MembersService,
-    private toastr : ToastrService
-  ) {
+    private toastr : ToastrService,private route: ActivatedRoute,
+    private postService: PostsService
+  )
+  {
        this.accounteService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
     }
 
   ngOnInit() {
     this.loadMember();
+    this.getUsersPosts()
   }
 
   loadMember(){
@@ -49,6 +57,13 @@ export class MemberEditComponent implements OnInit {
       console.log(this.member);
     });
 
+  }
+
+  getUsersPosts() {
+    this.postService.getUsersPosts(this.user.username).subscribe(posts => {
+      this.posts = posts;
+      console.log(posts);
+    })
   }
 
 }

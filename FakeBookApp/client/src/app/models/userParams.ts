@@ -1,4 +1,3 @@
-
 // For filtering the user list
 export class UserParams {
   userName: string;

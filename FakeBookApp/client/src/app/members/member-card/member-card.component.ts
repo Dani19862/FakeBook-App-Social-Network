@@ -1,5 +1,3 @@
-import { MembersService } from './../../services/members.service';
-import { AccountService } from './../../services/account.service';
 import { Member } from 'src/app/models/member';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
@@ -9,17 +7,12 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./member-card.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class MemberCardComponent implements OnInit {
+export class MemberCardComponent  {
   @Input() member!: Member;
-  countMembers: any;
 
-  constructor(private membersService: MembersService) {
 
-  }
-   
+ 
 
-  ngOnInit() {
 
-  }
 
 }

@@ -5,7 +5,6 @@ using API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace API.Extensions
 {
     public static class ApplictionServiceExtensions
@@ -14,12 +13,15 @@ namespace API.Extensions
         {
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             
+            //services.AddScoped<IPostRepository,PostRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>(); 
 
             services.AddDbContext<DataContext>(options =>
             options.UseSqlite(config.GetConnectionString("DefaultConncetion")));

@@ -1,5 +1,8 @@
+import { PostsService } from 'src/app/services/posts.service';
+import { Post } from './../models/post';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PaginatedResult, Pagination } from '../models/pagination';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +12,17 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   registerMode = false;
   users: any;
+  loginMode = false;
+  posts : Post[] = [];
 
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient, private postService: PostsService) { }
 
   ngOnInit(): void {
     //this.getUsers();
+    //this.postService.getallPosts();
+
   }
 
   registerToggle() {

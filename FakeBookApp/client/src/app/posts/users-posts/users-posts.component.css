@@ -1,0 +1,41 @@
+.img{
+  width:  50px;
+  border: 2px solid #fff;
+  display: inline;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+.body{
+  background-color:#eee
+}
+.time{
+  font-size: 9px !important}
+
+.socials i{
+  margin-right: 14px;font-size: 17px;color: #d2c8c8;cursor: pointer
+}
+.feed-image img{
+  width: 1100px;
+  margin-bottom: auto;
+
+}
+.container{
+
+  background: #F5F5F5;
+  width: 1110px;
+  height: 190px;
+
+
+}
+
+.btn-group{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

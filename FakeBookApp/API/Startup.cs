@@ -57,6 +57,7 @@ namespace API
 
             app.UseCors(policy =>
             policy.AllowAnyHeader()
+            .AllowCredentials()
             .AllowAnyMethod()
             .WithOrigins("https://localhost:4200"));
 

@@ -1,3 +1,4 @@
+import { PostEditDeleteComponent } from './posts/post-edit-delete/post-edit-delete.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { SharedModule } from './modules/shared.module';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -23,9 +24,8 @@ import { TextInputComponent } from './forms/text-input/text-input.component';
 import { DateInputComponent } from './forms/date-input/date-input.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.component';
-
-
-
+import { FeedComponent } from './posts/feed/feed.component';
+import { PostDetailComponent } from './posts/post-detail/post-detail.component';
 
 
 
@@ -45,6 +45,10 @@ import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.co
     NotificationsComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    FeedComponent,
+    PostDetailComponent,
+    PostEditDeleteComponent
+
 
    ],
   imports: [
@@ -56,7 +60,8 @@ import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.co
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+
   ],
   providers: [
     {

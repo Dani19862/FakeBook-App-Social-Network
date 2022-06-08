@@ -1,4 +1,5 @@
 import { Photo } from './photo';
+import { Post } from './post';
 
 export interface Member {
   id:           number;
@@ -16,4 +17,5 @@ export interface Member {
   city:         string;
   country:      string;
   photos:       Photo[];
+  posts:        Post[];
 }
