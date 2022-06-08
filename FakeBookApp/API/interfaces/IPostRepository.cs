@@ -9,13 +9,13 @@ namespace API.interfaces
 {
     public interface IPostRepository
     {
-        void AddPostAsync(Post post);
+        void AddPost(Post post);
 
-        void DeletePostAsync(int id);
+        void DeletePost(int id);
 
         //Task<Post> EditPostAsync(PostDto postDto);
 
-        void EditPostAsync(Post post);
+        void EditPost(Post post);
 
         Task<Post> GetPostByIdAsync(int id);
 
@@ -31,12 +31,9 @@ namespace API.interfaces
 
        Task<IEnumerable<PostDto>> GetUserPostsAsync(string userName);
 
-        //Task<PostDto> GetAllUsersPostsAsync(int id);
-
-
         //void Update (Post post);
 
-        //Task <bool> SaveAllAsync();
+        
 
         
     }

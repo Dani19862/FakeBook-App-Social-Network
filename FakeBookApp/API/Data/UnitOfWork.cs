@@ -24,6 +24,8 @@ namespace API.Data
         
         public IPostRepository PostRepository => new PostRepository(_context , _mapper, _userRepository);
 
+        public ICommentRepository CommentRepository => new CommentRepository(_context, _mapper);
+
         public async Task<bool> Complete()
         {
             

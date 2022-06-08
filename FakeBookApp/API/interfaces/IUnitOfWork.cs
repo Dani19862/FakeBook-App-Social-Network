@@ -8,6 +8,8 @@ namespace API.interfaces
 
         IPostRepository PostRepository { get;  }
 
+        ICommentRepository CommentRepository { get;  }
+
         Task<bool> Complete();
 
         bool HasChanges();

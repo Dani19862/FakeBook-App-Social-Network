@@ -30,6 +30,8 @@ namespace API.Helpers
 
             CreateMap<PostDto,Post>(); //Map Photo Entity to PhotoForReturnDto
 
+            CreateMap<Comment,CommentDto>(); //Map Comment Entity to CommentDto
+
             //Map RegisterDto to AppUser and configer username to lowercase
             CreateMap<RegisterDto,AppUser>().ForMember 
             (

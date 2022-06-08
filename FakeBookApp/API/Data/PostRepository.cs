@@ -31,14 +31,14 @@ namespace API.Data
 
         // To Add new Post
      
-        public void AddPostAsync(Post post)
+        public void AddPost(Post post)
         {
             _context.Posts.Add(post);
         }
 
         // To Delete Post
 
-        public void DeletePostAsync(int id)
+        public void DeletePost(int id)
         {
             var delete = _context.Posts.Where(p => p.Id == id).FirstOrDefault();
             _context.Posts.Remove(delete);
@@ -47,7 +47,7 @@ namespace API.Data
         //Edit Post
 
         //public async Task<Post> EditPostAsync(PostDto postDto)
-        public void EditPostAsync(Post post)
+        public void EditPost(Post post)
         {
             _context.Entry<Post>(post).State = EntityState.Modified; 
             // var post =  _context.Posts.Where(p => p.Id == postDto.Id).FirstOrDefault();
@@ -74,15 +74,14 @@ namespace API.Data
         }
       
         //Get Post by Id
-
         public async Task<Post> GetPostByIdAsync(int id)
         {
-            var post = _context.Posts.Where(p => p.Id == id).FirstOrDefault();
+            var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
 
             return await Task.FromResult(post);
         }
 
-        //Get All Posts
+        //Get All Posts  => with pagination
 
         // public async Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams)
         // {
@@ -166,12 +165,12 @@ namespace API.Data
 
         }
 
-        // Save Changes in Database
+        // // Save Changes in Database  // not needed
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
+        // public async Task<bool> SaveAllAsync()
+        // {
+        //     return await _context.SaveChangesAsync() > 0;
             
-        }
+        // }
     }
 }

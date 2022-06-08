@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Net;
 using System.Collections.Generic;
-//using Microsoft.AspNetCore.Authorization;
+
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
@@ -15,7 +15,6 @@ using API.Extensions;
 
 namespace API.Controllers
 {
-    //[Authorize]
     public class PostController : BaseApiController
     {
         private readonly IMapper _mapper;
@@ -51,7 +50,7 @@ namespace API.Controllers
 
             };
 
-            _unitOfWork.PostRepository.AddPostAsync(post);
+            _unitOfWork.PostRepository.AddPost(post);
 
             if (await _unitOfWork.Complete()) return Ok(post); //return Ok(_mapper.Map(post, postDto)); // Exception in Mapper
 
@@ -70,7 +69,7 @@ namespace API.Controllers
 
             _mapper.Map(postDto, post); 
             
-             _unitOfWork.PostRepository.EditPostAsync(post);
+             _unitOfWork.PostRepository.EditPost(post);
           
             if (await _unitOfWork.Complete()) return NoContent();   // here have exeptoion with saving because the postDto.Id
 
@@ -86,7 +85,7 @@ namespace API.Controllers
 
             if (post == null) return NotFound();
 
-             _unitOfWork.PostRepository.DeletePostAsync(postId);
+             _unitOfWork.PostRepository.DeletePost(postId);
 
             if (await _unitOfWork.Complete()) return Ok(post);
 

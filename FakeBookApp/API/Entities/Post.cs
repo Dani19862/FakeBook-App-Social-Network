@@ -16,9 +16,6 @@ namespace API.Entities
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set;}
 
-        
-
-        
         //public ICollection<Like> Likes { get; set; }
         
         //public ICollection<Comment> Comments { get; set; }
