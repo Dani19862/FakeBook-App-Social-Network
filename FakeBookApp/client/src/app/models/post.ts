@@ -1,4 +1,3 @@
-
 export interface Post {
   id: number;
   content: string;
@@ -6,5 +5,6 @@ export interface Post {
   memberId : number;
   username : string;
   photoUrl: string;
+  comments: Comment[];
 
 }

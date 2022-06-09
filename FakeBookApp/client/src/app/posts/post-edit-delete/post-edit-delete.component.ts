@@ -13,7 +13,9 @@ export class PostEditDeleteComponent implements OnInit {
   constructor(private postService: PostsService) { }
 
   @Input() post!: Post;
-  userPosts: Post[];
+  @Input() allPosts: Post[];
+
+
 
   @ViewChild('editForm') editForm: NgForm
 
@@ -28,11 +30,9 @@ export class PostEditDeleteComponent implements OnInit {
 
   }
     // delete post
-    deletePost(postid: number) {
-      this.postService.deletePost(postid).subscribe(() => {
-        this.postService.getUsersPosts(this.post.username).subscribe((posts) => {
-          this.userPosts = posts;
-        });
+    deletePost(postId: number) {
+      this.postService.deletePost(postId).subscribe(() => {
+        this.allPosts.splice(this.allPosts.findIndex(post => post.id === postId ), 1);
       });
     }
 

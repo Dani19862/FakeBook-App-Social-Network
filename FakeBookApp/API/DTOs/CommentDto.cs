@@ -11,6 +11,7 @@ namespace API.DTOs
         public int PostId { get; set; }
         public string UserName { get; set; }
         public int AppUserId { get; set; }
+        public string PhotoUrl { get; set; } 
 
     }
 }

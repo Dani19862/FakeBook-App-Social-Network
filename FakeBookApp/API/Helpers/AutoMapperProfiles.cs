@@ -28,7 +28,7 @@ namespace API.Helpers
 
             CreateMap<MemberUpdateDto,AppUser>(); //Map MemberUpdateDto to AppUser
 
-            CreateMap<PostDto,Post>(); //Map Photo Entity to PhotoForReturnDto
+            CreateMap<Post,PostDto>(); //Map Photo Entity to PhotoForReturnDto
 
             CreateMap<Comment,CommentDto>(); //Map Comment Entity to CommentDto
 

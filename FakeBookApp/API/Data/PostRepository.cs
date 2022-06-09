@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using API.DTOs;
 using API.Entities;
+using Microsoft.EntityFrameworkCore;
 using API.Helpers;
 using API.interfaces;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace API.Data
@@ -106,26 +106,43 @@ namespace API.Data
             
         // }
 
-        public async Task<IEnumerable<PostDto>> GetAllPostsAsync()
+        public async Task <List<PostDto>> GetAllPostsAsync()
         {
-            
-            var posts = _context.Posts
-                 .Select(p => p)
-                 .OrderByDescending(p => p.Created)
-                 .AsQueryable();
+            return await _context.Posts
+            .Select(p => p)
+            .Include (c => c.Comments)
+            .OrderBy(p => p.Created)
+            .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
 
-            var postToRetuen = posts.Select(p => new PostDto
-            {
-                Id = p.Id,
-                Content = p.Content,
-                Created = p.Created,
-                AppUserId = p.AppUserId,
-                Username = p.AppUser.UserName,
-                PhotoUrl = p.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url
+            //  var posts = _context.Posts
+            // .Select(p => p)
+            // .Include (c => c.Comments)
+            // .OrderBy(p => p.Created);
+            // .AsQueryable();
+
+           
+            // var postToRetuen = posts.Select(p => new PostDto
+            // {
+            //     PostId = p.Id,
+            //     Content = p.Content,
+            //     Created = p.Created,
+            //     AppUserId = p.AppUserId,
+            //     Username = p.AppUser.UserName,
+            //     PhotoUrl = p.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url,
+            //     Comments = p.Comments.Select(c => new CommentDto
+            //     {
+            //         CommentId = c.Id,
+            //         Content = c.Content,
+            //         Created = c.Created,
+            //         AppUserId = c.AppUserId,
+            //         UserName = c.AppUser.UserName,
+            //         PhotoUrl = c.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url
+            //     }).ToList()
                
-            });
+            // });
 
-            return await Task.FromResult(postToRetuen);
+
+            // return await Task.FromResult(postToRetuen);
             
         }
 

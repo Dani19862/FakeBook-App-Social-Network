@@ -26,6 +26,7 @@ import { MemberEditComponent } from './member-edit/member-edit.component';
 import { PhotoEditorComponent } from './member-edit/photo-editor/photo-editor.component';
 import { FeedComponent } from './posts/feed/feed.component';
 import { PostDetailComponent } from './posts/post-detail/post-detail.component';
+import { CommentComponent } from './comment/comment/comment.component';
 
 
 
@@ -47,7 +48,8 @@ import { PostDetailComponent } from './posts/post-detail/post-detail.component';
     PhotoEditorComponent,
     FeedComponent,
     PostDetailComponent,
-    PostEditDeleteComponent
+    PostEditDeleteComponent,
+    CommentComponent
 
 
    ],

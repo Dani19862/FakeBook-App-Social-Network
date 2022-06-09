@@ -7,22 +7,11 @@ import { Post } from 'src/app/models/post';
   templateUrl: './users-posts.component.html',
   styleUrls: ['./users-posts.component.css']
 })
-export class UsersPostsComponent implements OnInit {
+export class UsersPostsComponent {
 
   constructor(private postService: PostsService) { }
   @Input() post!: Post;
 
-  ngOnInit() {
-
-  }
-
-   // delete post  // NOT USED HERE => USED IN MEMBER-EDIT COMPONENT
-  //  deletePost(postid : number) {
-  //   this.postService.deletePost(this.post.username).subscribe(() => {
-  //     this.postService.getallPosts();
-  //   });
-
-  // }
 
 
 
