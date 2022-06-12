@@ -1,3 +1,5 @@
+import {Comment} from '../models/comment';
+
 export interface Post {
   id: number;
   content: string;
@@ -6,5 +8,6 @@ export interface Post {
   username : string;
   photoUrl: string;
   comments: Comment[];
+  comment: Comment;
 
 }

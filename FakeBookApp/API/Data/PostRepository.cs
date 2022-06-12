@@ -111,7 +111,7 @@ namespace API.Data
             return await _context.Posts
             .Select(p => p)
             .Include (c => c.Comments)
-            .OrderBy(p => p.Created)
+            .OrderByDescending(p => p.Created)
             .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
 
             //  var posts = _context.Posts

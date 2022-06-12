@@ -8,14 +8,23 @@
     <button class="btn btn-primary" type="submit">Publish</button>
   </form>
 </div>
-
-
   <br><br><br>
 
   <div class="col-2 mt-5" *ngFor="let post of posts">
     <app-post-detail [post]="post"></app-post-detail>
-    <div class="col-2 mt-5" *ngFor="let comment of comments">
-      <app-comment [comment]="comment"></app-comment>
+    <div class="container comment text-center">
+      <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post,member)">
+        <div class="form-group">
+          <input type="text" name="comment" class="form-control" ngModel
+            placeholder="+ Add a Comment">
+        </div>
+        <button class="btn btn-primary" type="submit">Comment</button>
+      </form>
+        <div class="row">
+          <div class="row-5" *ngFor="let comment of post.comments">
+            <app-comment [comment]="comment" [post]="post" ></app-comment>
+          </div>
+        </div>
     </div>
   </div>
 

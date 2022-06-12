@@ -14,6 +14,7 @@ export class PostEditDeleteComponent implements OnInit {
 
   @Input() post!: Post;
   @Input() allPosts: Post[];
+  @Input() comments : Comment[] = [];
 
 
 
@@ -25,6 +26,7 @@ export class PostEditDeleteComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  
 
   ngOnInit() {
 

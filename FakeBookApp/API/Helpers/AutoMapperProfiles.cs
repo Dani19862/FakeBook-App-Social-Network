@@ -28,9 +28,33 @@ namespace API.Helpers
 
             CreateMap<MemberUpdateDto,AppUser>(); //Map MemberUpdateDto to AppUser
 
-            CreateMap<Post,PostDto>(); //Map Photo Entity to PhotoForReturnDto
+            CreateMap<Post,PostDto>()
+                .ForMember(
+                    dest => dest.PhotoUrl, //Map First Photo to Main Photo
+                    opt =>{
+                        opt.MapFrom(src => src.AppUser.Photos.FirstOrDefault(p => p.IsMain).Url);
+                    }
+                )
+                .ForMember(
+                    dest => dest.Username, 
+                    opt =>{
+                        opt.MapFrom(src => src.AppUser.UserName);
+                    }
+                );
 
-            CreateMap<Comment,CommentDto>(); //Map Comment Entity to CommentDto
+            CreateMap<Comment,CommentDto>()
+                 .ForMember(
+                    dest => dest.PhotoUrl, //Map First Photo to Main Photo
+                    opt =>{
+                        opt.MapFrom(src => src.AppUser.Photos.FirstOrDefault(p => p.IsMain).Url);
+                    }
+                )
+                .ForMember(
+                    dest => dest.UserName, 
+                    opt =>{
+                        opt.MapFrom(src => src.AppUser.UserName);
+                    }
+                );
 
             //Map RegisterDto to AppUser and configer username to lowercase
             CreateMap<RegisterDto,AppUser>().ForMember 

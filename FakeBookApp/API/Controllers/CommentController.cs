@@ -49,20 +49,13 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<CommentDto>> AddComment(CommentDto commentDto)
         {
-            //var user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());  // with token
-
-            // var userId = User.GetUserId();
-
-            // var user = await _unitOfWork.UserRepository.GetUserByIdAsync(userId);
-            
-            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(commentDto.UserName);
+            var user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());  // with token
 
             var post = await _unitOfWork.PostRepository.GetPostByIdAsync(commentDto.PostId);
             
             if (commentDto == null)  return BadRequest( "Comment is null");
             if(user == null || post == null ) return BadRequest("User or Post not found");
 
-            if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId)) return BadRequest("Comment already exists");
           
             var comment = new Comment
             {
@@ -71,12 +64,13 @@ namespace API.Controllers
                 PostId = post.Id,
                 AppUserId = user.Id,
                 AppUser = user
-
             };
 
+            if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId)) return BadRequest("Comment already exists");
+            
             _unitOfWork.CommentRepository.AddComment(comment);
 
-            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<CommentDto>(comment)); //return Ok(_mapper.Map(comment, commentDto)); // Exception in Mapper
+            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<CommentDto>(comment)); 
 
             return BadRequest("Could not add comment");
 

@@ -52,7 +52,7 @@ namespace API.Controllers
 
             _unitOfWork.PostRepository.AddPost(post);
 
-            if (await _unitOfWork.Complete()) return Ok(post); //return Ok(_mapper.Map(post, postDto)); // Exception in Mapper
+            if (await _unitOfWork.Complete()) return Ok(post); 
 
             return BadRequest ("Could not add post");
             
@@ -71,7 +71,7 @@ namespace API.Controllers
             
              _unitOfWork.PostRepository.EditPost(post);
           
-            if (await _unitOfWork.Complete()) return NoContent();   // here have exeptoion with saving because the postDto.Id
+            if (await _unitOfWork.Complete()) return NoContent();  
 
             return BadRequest("Could not edit post");
 
@@ -92,7 +92,7 @@ namespace API.Controllers
             return BadRequest("Could not delete post");
         }
 
-        // Get all posts of a user
+        // Get all posts of a user with pagination
         // [HttpGet("{id}")]
         // public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
         // {
@@ -111,8 +111,6 @@ namespace API.Controllers
             var posts = await _unitOfWork.PostRepository.GetUserPostsAsync(username);
             return Ok(posts);
         }   
-
-
 
         // Get all posts
         // [HttpGet]
