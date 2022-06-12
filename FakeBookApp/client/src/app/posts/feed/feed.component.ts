@@ -19,7 +19,7 @@ export class FeedComponent implements OnInit {
   posts: Post[] = [];
   comments: Comment[] = [];
   post : Post
-  comment: Comment
+  comment!: Comment
   member : Member;
 
 
@@ -31,13 +31,13 @@ export class FeedComponent implements OnInit {
 
   // @Input() comment: Comment;
 
-  constructor(private PostServices: PostsService, private commentService: CommentService) {
-      // this.accounteService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
-   }
+  constructor(private PostServices: PostsService, private commentService: CommentService) {}
 
-  ngOnInit(): void {
+
+     ngOnInit(): void {
     this.getallPosts();
   }
+
 
     //get all posts without pagination
     getallPosts()  {

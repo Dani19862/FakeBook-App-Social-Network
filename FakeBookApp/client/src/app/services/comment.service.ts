@@ -43,8 +43,8 @@ export class CommentService {
     const payload= {
       postId: commentId,
       content: comment.content,
-      username: this.member.username,
-      photoUrl: this.member.photoUrl
+      // username: this.member.username,
+      // photoUrl: this.member.photoUrl
       }
     return this.http.post<Comment>(`${this.baseUrl}comment`, payload);
     }

@@ -13,7 +13,9 @@ import { CommentComponent } from 'src/app/comment/comment/comment.component';
 })
 export class PostDetailComponent  {
   @Input() post!: Post;
- 
+
+
+
 
 
   // bsModalRef: BsModalRef;

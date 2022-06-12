@@ -1,6 +1,7 @@
 import { Comment } from './../../models/comment';
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
+import { Member } from 'src/app/models/member';
 
 
 
@@ -15,6 +16,9 @@ export class CommentComponent implements OnInit {
 
   @Input() comment!: Comment | any;
   @Input () post!: Post;
+  
+
+
 
 
 
