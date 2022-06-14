@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using API.Entities;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace API.DTOs
         public string Username { get; set; }
         public string PhotoUrl { get; set; }
 
-        public virtual List<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         
         //public AppUser AppUser { get; set; }
         

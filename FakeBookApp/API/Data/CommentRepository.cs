@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Reflection.Metadata;
 using System;
@@ -59,6 +60,19 @@ namespace API.Data
         {
             return _context.Comments.Any(e => e.Id == id);
         }
-        
+
+        public string GetPhotoUrlAsync(int userId)
+        {
+            // var comment = await _context.Comments.FirstOrDefaultAsync(c => c.AppUser.UserName == username);
+            // return comment.PhotoUrl;
+
+            var photos =  _context.Photos.Where(p => p.AppUserId == userId).ToList();
+            var photo = photos.Where(p => p.IsMain).FirstOrDefault();
+
+            var a  = photo.Url;
+
+            return photo.Url.ToString();
+
+        }
     }
 }

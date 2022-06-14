@@ -1,10 +1,18 @@
 <div class="container justify-content-center mt-5 border-left border-right">
 
   <div class="d-flex justify-content-center py-2">
-      <div class="second py-2 px-2"> <span class="text1">{{comment.content}}</span>
+      <div class="second py-2 px-2">
+         <span class="text1">{{comment.content}}</span>
           <div class="d-flex justify-content-between">
-              <div><img src="{{comment.photoUrl || './assets/user.png'}}"  alt="{{comment.photoUrl}}" width="18"><span class="text2">{{comment.username}}</span><span class="created ml-3"> {{comment.created | date}}</span></div>
-              <div><span class="text3">Upvote?</span><span class="thumbup"><i class="fa fa-thumbs-o-up"></i></span><span class="text4">3</span></div>
+              <div><img src="{{member.photoUrl || './assets/user.png'}}"  alt="member.photoUrl" width="18">
+                <span class="text2">{{comment.username}}</span>
+                <span class="created ml-3"> {{comment.created | date}}</span>
+              </div>
+              <div>
+                <span class="text3">Upvote?</span>
+                <span class="thumbup"><i class="fa fa-thumbs-o-up"></i></span>
+                <span class="text4">3</span>
+              </div>
           </div>
       </div>
   </div>

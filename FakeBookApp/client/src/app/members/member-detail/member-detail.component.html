@@ -37,24 +37,19 @@
           <h4>Description:</h4>
           <p>{{member.introduction}}</p>
       </tab>
-      <tab heading="Interests">
-        <h4>Interests:</h4>
-        <p>{{member.interests}}</p>
-      </tab>
       <tab heading="Photos">
         <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
       </tab>
       <tab heading="Messages">
         <p>messages will go here</p>
       </tab>
-      <!-- <tab heading="Posts">
-
-      </tab> -->
+      <tab heading="Posts"> <br>
+        <h4>Posts:</h4>
+        <div class="col-2 mt-5" *ngFor="let post of posts">
+            <app-users-posts [post]="post"></app-users-posts>
+        </div>
+      </tab>
     </tabset>
-    <h4>Posts:</h4>
-    <div class="col-2 mt-5" *ngFor="let post of posts">
-        <app-users-posts [post]="post"></app-users-posts>
-    </div>
   </div>
 </div>
 

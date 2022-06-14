@@ -8,6 +8,6 @@ export interface Post {
   username : string;
   photoUrl: string;
   comments: Comment[];
-  comment: Comment;
+
 
 }

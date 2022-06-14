@@ -9,8 +9,8 @@ namespace API.DTOs
         public string Content { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public int PostId { get; set; }
-        public string UserName { get; set; }
         public int AppUserId { get; set; }
+        public string Username { get; set; }
         public string PhotoUrl { get; set; } 
 
     }

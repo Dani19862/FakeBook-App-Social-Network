@@ -1,6 +1,8 @@
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -55,18 +57,23 @@ namespace API.Controllers
             
             if (commentDto == null)  return BadRequest( "Comment is null");
             if(user == null || post == null ) return BadRequest("User or Post not found");
+            
 
-          
-            var comment = new Comment
+            var comment = new Comment()
             {
                 Content = commentDto.Content,
                 Created = DateTime.Now,
                 PostId = post.Id,
                 AppUserId = user.Id,
-                AppUser = user
+                AppUser = user,
+                Post = post,
+                Username = user.UserName,
+                PhotoUrl = _unitOfWork.CommentRepository.GetPhotoUrlAsync(user.Id)
+           
             };
-
-            if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId)) return BadRequest("Comment already exists");
+            
+            
+            //if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId, comment)) return BadRequest("Comment already exists");
             
             _unitOfWork.CommentRepository.AddComment(comment);
 
@@ -116,9 +123,6 @@ namespace API.Controllers
             await _unitOfWork.Complete();
             return Ok(_mapper.Map<CommentDto>(comment));
         }
-
-      
-
 
     }
 }

@@ -17,7 +17,6 @@ namespace API.Entities
         public virtual AppUser AppUser { get; set;}
         //public ICollection<Like> Likes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-
         //public string PhotoUrl { get; set; }
 
     }

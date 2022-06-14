@@ -188,5 +188,8 @@ namespace API.Controllers
             }
             return BadRequest("Could not delete photo"); //return error message if unsuccessful
         }
+
+        
+    
     }
 }

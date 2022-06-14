@@ -24,7 +24,6 @@ namespace API.Controllers
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-
         }
 
         // Add new Post
@@ -33,11 +32,10 @@ namespace API.Controllers
         {
 
             var appUserid = User.GetUserId(); //get username from token => NameId
-            var user = await _unitOfWork.UserRepository.GetUserByIdAsync(appUserid); //get user by username
+            var user = await _unitOfWork.UserRepository.GetUserByIdAsync(appUserid); 
 
             //_mapper.Map(memberUpdateDto, user); //map MemberUpdateDto to AppUser
 
-            
             var post = new Post 
             {
                 //Id= postDto.Id,    
@@ -93,6 +91,7 @@ namespace API.Controllers
         }
 
         // Get all posts of a user with pagination
+        // ToDo: make posts with pagination
         // [HttpGet("{id}")]
         // public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
         // {
@@ -112,7 +111,8 @@ namespace API.Controllers
             return Ok(posts);
         }   
 
-        // Get all posts
+        // Get all posts with pagination
+        // ToDo: make posts with pagination
         // [HttpGet]
         // public async Task <ActionResult<PostDto>> GetAllPostsAsync([FromQuery] PostParams postParams)  
         // {
@@ -123,17 +123,16 @@ namespace API.Controllers
         //     return Ok(post);
         // } 
 
-
         
         // Get all posts
         [HttpGet]
         public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
         {
+            //var photo =  _unitOfWork.CommentRepository.GetPhotoUrlAsync(1);
             var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
             return Ok(posts);
 
         }
 
-        
     }
 }

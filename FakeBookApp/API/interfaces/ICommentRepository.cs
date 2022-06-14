@@ -19,6 +19,8 @@ namespace API.interfaces
         void UpdateComment(Comment comment);
 
         bool CommentExists(int id);
+
+        string GetPhotoUrlAsync(int userId);
         
 
 

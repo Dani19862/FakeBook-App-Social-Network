@@ -79,6 +79,12 @@ namespace API.Data
             var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
 
             return await Task.FromResult(post);
+
+            // var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
+
+            // var comments = await _context.Comments.Where(c => c.PostId == id).ToListAsync();
+
+            // return post;
         }
 
         //Get All Posts  => with pagination
@@ -108,42 +114,17 @@ namespace API.Data
 
         public async Task <List<PostDto>> GetAllPostsAsync()
         {
-            return await _context.Posts
+            var posts =  _context.Posts
             .Select(p => p)
             .Include (c => c.Comments)
             .OrderByDescending(p => p.Created)
             .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
 
-            //  var posts = _context.Posts
-            // .Select(p => p)
-            // .Include (c => c.Comments)
-            // .OrderBy(p => p.Created);
-            // .AsQueryable();
+            // var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Comment, CommentDto>()).CreateMapper();
+            // var a = posts;
 
-           
-            // var postToRetuen = posts.Select(p => new PostDto
-            // {
-            //     PostId = p.Id,
-            //     Content = p.Content,
-            //     Created = p.Created,
-            //     AppUserId = p.AppUserId,
-            //     Username = p.AppUser.UserName,
-            //     PhotoUrl = p.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url,
-            //     Comments = p.Comments.Select(c => new CommentDto
-            //     {
-            //         CommentId = c.Id,
-            //         Content = c.Content,
-            //         Created = c.Created,
-            //         AppUserId = c.AppUserId,
-            //         UserName = c.AppUser.UserName,
-            //         PhotoUrl = c.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url
-            //     }).ToList()
-               
-            // });
+            return await posts;
 
-
-            // return await Task.FromResult(postToRetuen);
-            
         }
 
         
@@ -174,20 +155,12 @@ namespace API.Data
             return await Task.FromResult(result);
 
         }
-
+        
         // Update Post in Database
         public void Update(Post post)
         {
             _context.Entry<Post>(post).State = EntityState.Modified;
-
         }
 
-        // // Save Changes in Database  // not needed
-
-        // public async Task<bool> SaveAllAsync()
-        // {
-        //     return await _context.SaveChangesAsync() > 0;
-            
-        // }
     }
 }

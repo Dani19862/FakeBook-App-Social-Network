@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using API.Extensions;
 using API.interfaces;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,7 @@ namespace API.Helpers
             var uow = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();  // get the user repository from the request services
 
             var user = await uow.UserRepository.GetUserByIdAsync(userId);
+
 
             user.LastActive = DateTime.Now;
 

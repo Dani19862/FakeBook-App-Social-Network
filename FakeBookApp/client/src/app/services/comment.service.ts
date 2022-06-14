@@ -10,6 +10,7 @@ import { Observable, tap, pipe, ReplaySubject } from 'rxjs';
 import { Member } from '../models/member';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,14 +20,8 @@ export class CommentService {
 
   baseUrl = environment.apiUrl;
   comments: Comment[] = [];
-  post : Post;
-  comment: Comment
-  member : Member;
-  user : User
 
-
-
-
+  members: Member[] = [];
 
 
   // get all comments of Post
@@ -36,18 +31,21 @@ export class CommentService {
   }
 
   // create new comment
-  createComment(comment: Comment|any, post: Post, member: Member) : Observable<Comment> {
-    let commentId = post.id;
+  createComment(comment: Comment |any, post: Post) : Observable<Comment> {
+      let commentId = post.id;
 
-    //return this.http.post<Comment>(`${this.baseUrl}comment/${commentId}`, content)
-    const payload= {
+      const payload= {
       postId: commentId,
       content: comment.content,
-      // username: this.member.username,
-      // photoUrl: this.member.photoUrl
       }
-    return this.http.post<Comment>(`${this.baseUrl}comment`, payload);
+      return this.http.post<Comment>(`${this.baseUrl}comment`, payload);
     }
+
+  // Get Photo URL of Member
+  getPhotoURL(username: string)  {
+    return this.http.get<Member>(`${this.baseUrl}users/${username}`).pipe(
+      tap(member => {this.members.push(member)}) // cache member
+    )}
 
   }
 

@@ -25,7 +25,7 @@ export class FeedComponent implements OnInit {
 
 
   @ViewChild('postForm') postForm: NgForm;
-  @ViewChild('postForm') commentForm: NgForm;
+  @ViewChild('commentForm') commentForm: NgForm;
 
 
 
@@ -43,7 +43,7 @@ export class FeedComponent implements OnInit {
     getallPosts()  {
        this.PostServices.getallPosts().subscribe(posts => {
           this.posts = posts;
-          console.log(this.posts);
+          //console.log(this.posts);
         });
     }
 
@@ -62,10 +62,13 @@ export class FeedComponent implements OnInit {
       });
     }
 
-    createComment(commentForm: NgForm, post: Post, member: Member) {
-      this.commentService.createComment(commentForm.value, post, member).subscribe(() => {
+    createComment(commentForm: NgForm, post: Post) {
+      const content = commentForm.value.content;
+
+      this.commentService.createComment(commentForm.value, post).subscribe(() => {
         this.commentForm.reset();
         this.getallPosts();
+        // console.log(this.comment);
       })
     }
 

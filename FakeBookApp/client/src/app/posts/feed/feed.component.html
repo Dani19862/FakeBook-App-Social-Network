@@ -13,9 +13,9 @@
   <div class="col-2 mt-5" *ngFor="let post of posts">
     <app-post-detail [post]="post"></app-post-detail>
     <div class="container comment text-center">
-      <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post,member)">
+      <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post)">
         <div class="form-group">
-          <input type="text" name="comment" class="form-control" ngModel
+          <input type="text" name="content" class="form-control" ngModel
             placeholder="+ Add a Comment">
         </div>
         <button class="btn btn-primary" type="submit">Comment</button>
