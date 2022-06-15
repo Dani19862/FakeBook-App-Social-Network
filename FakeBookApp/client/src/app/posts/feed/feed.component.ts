@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Comment } from './../../models/comment';
 import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
@@ -31,7 +32,7 @@ export class FeedComponent implements OnInit {
 
   // @Input() comment: Comment;
 
-  constructor(private PostServices: PostsService, private commentService: CommentService) {}
+  constructor(private PostServices: PostsService, private commentService: CommentService, private toastr: ToastrService) {}
 
 
      ngOnInit(): void {
@@ -52,6 +53,8 @@ export class FeedComponent implements OnInit {
       this.PostServices.createPost(postForm.value).subscribe(() => {
         this.postForm.reset();
         this.getallPosts();
+        this.toastr.success('Post created successfully');
+
 
       })
     }
@@ -69,6 +72,8 @@ export class FeedComponent implements OnInit {
         this.commentForm.reset();
         this.getallPosts();
         // console.log(this.comment);
+        this.toastr.success('Comment created successfully');
+
       })
     }
 

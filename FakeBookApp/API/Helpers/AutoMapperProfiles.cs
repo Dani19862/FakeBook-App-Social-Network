@@ -42,19 +42,19 @@ namespace API.Helpers
                     }
                 );
 
-            CreateMap<Comment,CommentDto>() //Map Comment Entity to CommentDto
-                .ForMember(
-                    dest => dest.Username, 
-                    opt =>{
-                        opt.MapFrom(src => src.AppUser.UserName);
-                    }
-                ).
-                ForMember(
-                    dest => dest.PhotoUrl, 
-                    opt =>{
-                        opt.MapFrom(src => src.AppUser.Photos.FirstOrDefault(p => p.IsMain).Url);
-                    }
-                );
+            CreateMap<Comment,CommentDto>().ReverseMap(); //Map Comment Entity to CommentDto
+                // .ForMember(
+                //     dest => dest.Username, 
+                //     opt =>{
+                //         opt.MapFrom(src => src.AppUser.UserName);
+                //     }
+                // ).
+                // ForMember(
+                //     dest => dest.PhotoUrl, 
+                //     opt =>{
+                //         opt.MapFrom(src => src.AppUser.Photos.FirstOrDefault(p => p.IsMain).Url);
+                //     }
+                // );
 
 
             //Map RegisterDto to AppUser and configer username to lowercase

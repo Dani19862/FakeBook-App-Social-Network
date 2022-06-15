@@ -84,6 +84,20 @@ namespace API.Controllers
 
         }
 
+        // Get One comment by commentId
+        [HttpGet("{commentId}")]
+        public async Task<ActionResult<CommentDto>> GetCommentById(int commentId)
+        {
+            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentId);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<CommentDto>(comment));
+        }
+
+
+        // Delete comment
         [HttpDelete("{commentId}")]
         public async Task<ActionResult> DeleteComment(int commentId)
         {
@@ -97,31 +111,23 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // Get One comment by commentId
-        [HttpGet]
-        public async Task<ActionResult<CommentDto>> GetCommentById(int commentId)
+
+        // Edit comment
+        [HttpPut]
+        public async Task<ActionResult<CommentDto>> EditComment( CommentDto commentDto)
         {
-            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentId);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-            return Ok(_mapper.Map<CommentDto>(comment));
-        }
+            
+            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentDto.Id);
 
+            if (comment == null) return NotFound();
 
+           _mapper.Map(commentDto, comment);
 
-        [HttpPut("{commentId}")]
-        public async Task<ActionResult<CommentDto>> UpdateComment(int commentId, CommentDto commentDto)
-        {
-            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentId);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-            _mapper.Map(commentDto, comment);
-            await _unitOfWork.Complete();
-            return Ok(_mapper.Map<CommentDto>(comment));
+            _unitOfWork.CommentRepository.EditComment(comment);
+            
+            if (await _unitOfWork.Complete())  return NoContent();
+
+            return BadRequest("Could not edit comment");
         }
 
     }

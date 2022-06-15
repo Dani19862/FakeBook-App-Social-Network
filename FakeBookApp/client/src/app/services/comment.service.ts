@@ -30,8 +30,8 @@ export class CommentService {
     .pipe( tap((comments: any) => this.comments = comments));
   }
 
-  // create new comment
-  createComment(comment: Comment |any, post: Post) : Observable<Comment> {
+    // create new comment
+    createComment(comment: Comment |any, post: Post) : Observable<Comment> {
       let commentId = post.id;
 
       const payload= {
@@ -41,11 +41,22 @@ export class CommentService {
       return this.http.post<Comment>(`${this.baseUrl}comment`, payload);
     }
 
-  // Get Photo URL of Member
-  getPhotoURL(username: string)  {
-    return this.http.get<Member>(`${this.baseUrl}users/${username}`).pipe(
+    // Get Photo URL of Member
+    getPhotoURL(username: string)  {
+      return this.http.get<Member>(`${this.baseUrl}users/${username}`).pipe(
       tap(member => {this.members.push(member)}) // cache member
-    )}
+     )}
+
+      // delete comment
+      deleteComment(commentId: number) {
+        return this.http.delete(`${this.baseUrl}comment/${commentId}`);
+      }
+
+      // edit comment
+
+      editComment(comment: Comment) {
+        return this.http.put(`${this.baseUrl}comment`, comment);
+      }
 
   }
 

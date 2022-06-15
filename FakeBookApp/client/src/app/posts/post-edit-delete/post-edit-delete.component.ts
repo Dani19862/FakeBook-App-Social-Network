@@ -26,7 +26,7 @@ export class PostEditDeleteComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-  
+
 
   ngOnInit() {
 
