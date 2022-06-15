@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using API.DTOs;
 using API.Entities;
+using Microsoft.EntityFrameworkCore;
 using API.Helpers;
 using API.interfaces;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace API.Data
@@ -79,6 +79,12 @@ namespace API.Data
             var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
 
             return await Task.FromResult(post);
+
+            // var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
+
+            // var comments = await _context.Comments.Where(c => c.PostId == id).ToListAsync();
+
+            // return post;
         }
 
         //Get All Posts  => with pagination
@@ -106,27 +112,19 @@ namespace API.Data
             
         // }
 
-        public async Task<IEnumerable<PostDto>> GetAllPostsAsync()
+        public async Task <List<PostDto>> GetAllPostsAsync()
         {
-            
-            var posts = _context.Posts
-                 .Select(p => p)
-                 .OrderByDescending(p => p.Created)
-                 .AsQueryable();
+            var posts =  _context.Posts
+            .Select(p => p)
+            .Include (c => c.Comments)
+            .OrderByDescending(p => p.Created)
+            .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
 
-            var postToRetuen = posts.Select(p => new PostDto
-            {
-                Id = p.Id,
-                Content = p.Content,
-                Created = p.Created,
-                AppUserId = p.AppUserId,
-                Username = p.AppUser.UserName,
-                PhotoUrl = p.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url
-               
-            });
+            // var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Comment, CommentDto>()).CreateMapper();
+            // var a = posts;
 
-            return await Task.FromResult(postToRetuen);
-            
+            return await posts;
+
         }
 
         
@@ -157,20 +155,12 @@ namespace API.Data
             return await Task.FromResult(result);
 
         }
-
+        
         // Update Post in Database
         public void Update(Post post)
         {
             _context.Entry<Post>(post).State = EntityState.Modified;
-
         }
 
-        // // Save Changes in Database  // not needed
-
-        // public async Task<bool> SaveAllAsync()
-        // {
-        //     return await _context.SaveChangesAsync() > 0;
-            
-        // }
     }
 }

@@ -110,8 +110,6 @@ namespace API.Controllers
         }
 
 
-
-
         [HttpPut("set-main-photo/{photoId}")] //set photo to main 
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
@@ -147,7 +145,6 @@ namespace API.Controllers
             return BadRequest("Could not set photo to main"); //return error message if unsuccessful
 
         }
-
 
 
         // delete photo from user 
@@ -188,5 +185,8 @@ namespace API.Controllers
             }
             return BadRequest("Could not delete photo"); //return error message if unsuccessful
         }
+
+        
+    
     }
 }

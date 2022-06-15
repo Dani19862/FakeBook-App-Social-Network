@@ -63,7 +63,7 @@
       <tab heading="Edit/Delete Posts">
         <h4 class="mt-2">Posts:</h4>
         <div class="col-2" *ngFor="let post of posts">
-          <app-post-edit-delete [post]="post"></app-post-edit-delete> <br><br><br><br>
+          <app-post-edit-delete [post]="post" [allPosts]="posts"></app-post-edit-delete> <br><br><br><br>
       </div>
       </tab>
     </tabset>

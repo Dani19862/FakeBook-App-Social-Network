@@ -21,7 +21,9 @@ namespace API.interfaces
 
         //Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams); => with pagination
 
-        Task <IEnumerable<PostDto>> GetAllPostsAsync();
+        //Task <IEnumerable<PostDto>> GetAllPostsAsync(); // old
+        
+        Task <List<PostDto>> GetAllPostsAsync(); // new
 
         //Task<IEnumerable<PostDto>> GetUserPostsAsync(PostDto postDto);
 

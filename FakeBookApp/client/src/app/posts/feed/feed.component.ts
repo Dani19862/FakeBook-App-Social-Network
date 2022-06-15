@@ -1,8 +1,12 @@
+import { ToastrService } from 'ngx-toastr';
+import { Comment } from './../../models/comment';
 import { NgForm } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PaginatedResult, Pagination } from '../../models/pagination';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {  Pagination } from '../../models/pagination';
 import { Post } from '../../models/post';
 import { PostsService } from '../../services/posts.service';
+import { CommentService } from 'src/app/services/comment.service';
+import { Member } from 'src/app/models/member';
 
 @Component({
   selector: 'app-feed',
@@ -13,42 +17,64 @@ export class FeedComponent implements OnInit {
   pagination: Pagination;
   pageNumber  = 1;
   pageSize = 5;
-  posts: Post[];
+  posts: Post[] = [];
+  comments: Comment[] = [];
   post : Post
+  comment!: Comment
+  member : Member;
+
+
+
   @ViewChild('postForm') postForm: NgForm;
+  @ViewChild('commentForm') commentForm: NgForm;
 
 
 
-  constructor(private PostServices: PostsService) {
-      // this.accounteService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
-   }
+  // @Input() comment: Comment;
 
-  ngOnInit(): void {
-    this.getllPosts();
+  constructor(private PostServices: PostsService, private commentService: CommentService, private toastr: ToastrService) {}
+
+
+     ngOnInit(): void {
+    this.getallPosts();
   }
 
+
     //get all posts without pagination
-    getllPosts() {
-      this.PostServices.getallPosts().subscribe(post => {
-        this.posts = post;
-        console.log(this.posts);
-      })
+    getallPosts()  {
+       this.PostServices.getallPosts().subscribe(posts => {
+          this.posts = posts;
+          //console.log(this.posts);
+        });
     }
 
     // create new post
     createPost(postForm: NgForm) {
       this.PostServices.createPost(postForm.value).subscribe(() => {
         this.postForm.reset();
-        this.getllPosts();
+        this.getallPosts();
+        this.toastr.success('Post created successfully');
+
 
       })
     }
-
 
     getPost(id: number) {
       this.PostServices.getPost(id).subscribe(post => {
         this.post = post;
       });
+    }
+
+    createComment(commentForm: NgForm, post: Post) {
+      const content = commentForm.value.content;
+
+      this.commentService.createComment(commentForm.value, post).subscribe(() => {
+        this.commentForm.reset();
+        this.getallPosts();
+        // console.log(this.comment);
+        this.toastr.success('Comment created successfully');
+
+      })
     }
 
 

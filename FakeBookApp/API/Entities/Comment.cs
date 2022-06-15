@@ -13,7 +13,14 @@ namespace API.Entities
         public DateTime Created { get; set; }
         public int PostId { get; set; }
         public int AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public virtual AppUser AppUser { get; set; }
+        public virtual Post Post { get; set; }
+        public string PhotoUrl { get; set; }
+        public string Username { get; set; }
+        
+        
+
+
 
     }   
 }

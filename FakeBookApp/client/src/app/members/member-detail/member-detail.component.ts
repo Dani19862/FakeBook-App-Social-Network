@@ -20,6 +20,7 @@ export class MemberDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   posts: Post[] = [];
+ 
 
   constructor(private memberService: MembersService, private route: ActivatedRoute, private postService: PostsService) { }
 

@@ -1,6 +1,8 @@
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Net;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -49,40 +51,53 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<CommentDto>> AddComment(CommentDto commentDto)
         {
-            //var user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());  // with token
-
-            // var userId = User.GetUserId();
-
-            // var user = await _unitOfWork.UserRepository.GetUserByIdAsync(userId);
-            
-            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(commentDto.UserName);
+            var user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());  // with token
 
             var post = await _unitOfWork.PostRepository.GetPostByIdAsync(commentDto.PostId);
             
             if (commentDto == null)  return BadRequest( "Comment is null");
             if(user == null || post == null ) return BadRequest("User or Post not found");
+            
 
-            if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId)) return BadRequest("Comment already exists");
-          
-            var comment = new Comment
+            var comment = new Comment()
             {
                 Content = commentDto.Content,
                 Created = DateTime.Now,
                 PostId = post.Id,
                 AppUserId = user.Id,
-                AppUser = user
-
+                AppUser = user,
+                Post = post,
+                Username = user.UserName,
+                PhotoUrl = _unitOfWork.CommentRepository.GetPhotoUrlAsync(user.Id)
+           
             };
-
+            
+            
+            //if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId, comment)) return BadRequest("Comment already exists");
+            
             _unitOfWork.CommentRepository.AddComment(comment);
 
-            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<CommentDto>(comment)); //return Ok(_mapper.Map(comment, commentDto)); // Exception in Mapper
+            if (await _unitOfWork.Complete()) return Ok(_mapper.Map<CommentDto>(comment)); 
 
             return BadRequest("Could not add comment");
 
 
         }
 
+        // Get One comment by commentId
+        [HttpGet("{commentId}")]
+        public async Task<ActionResult<CommentDto>> GetCommentById(int commentId)
+        {
+            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentId);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<CommentDto>(comment));
+        }
+
+
+        // Delete comment
         [HttpDelete("{commentId}")]
         public async Task<ActionResult> DeleteComment(int commentId)
         {
@@ -96,35 +111,24 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // Get One comment by commentId
-        [HttpGet]
-        public async Task<ActionResult<CommentDto>> GetCommentById(int commentId)
+
+        // Edit comment
+        [HttpPut]
+        public async Task<ActionResult<CommentDto>> EditComment( CommentDto commentDto)
         {
-            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentId);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-            return Ok(_mapper.Map<CommentDto>(comment));
+            
+            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentDto.Id);
+
+            if (comment == null) return NotFound();
+
+           _mapper.Map(commentDto, comment);
+
+            _unitOfWork.CommentRepository.EditComment(comment);
+            
+            if (await _unitOfWork.Complete())  return NoContent();
+
+            return BadRequest("Could not edit comment");
         }
-
-
-
-        [HttpPut("{commentId}")]
-        public async Task<ActionResult<CommentDto>> UpdateComment(int commentId, CommentDto commentDto)
-        {
-            var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(commentId);
-            if (comment == null)
-            {
-                return NotFound();
-            }
-            _mapper.Map(commentDto, comment);
-            await _unitOfWork.Complete();
-            return Ok(_mapper.Map<CommentDto>(comment));
-        }
-
-      
-
 
     }
 }

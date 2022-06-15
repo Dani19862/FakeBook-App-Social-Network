@@ -16,9 +16,11 @@ namespace API.interfaces
 
         void DeleteComment(Comment comment);
 
-        void UpdateComment(Comment comment);
+        void EditComment(Comment comment);
 
         bool CommentExists(int id);
+
+        string GetPhotoUrlAsync(int userId);
         
 
 

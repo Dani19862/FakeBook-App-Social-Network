@@ -1,0 +1,50 @@
+
+.date{
+  font-size: 11px
+}
+
+.comment-text{font-size: 12px
+}
+
+.fs-12{font-size: 12px
+}
+
+.shadow-none{box-shadow: none
+}
+
+.name{color: #007bff
+}
+
+.cursor:hover{color: blue
+}
+
+.cursor{cursor: pointer
+}
+
+.textarea{resize: none
+}
+
+
+
+.dropdown-menu {
+  line-height: 12px;
+  width: 18px;
+  font-size: 8pt;
+  font-family: tahoma;
+  margin-top: 1px;
+  margin-right: 2px;
+  position:absolute;
+  top:0;
+  right:0;
+}
+.textarea{
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}

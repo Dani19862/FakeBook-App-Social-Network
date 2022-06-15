@@ -21,6 +21,7 @@ export class MembersService {
   //userParams: UserParams;
   //user: User;
   paginatedResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
+  currentUser$: any;
 
   constructor(private http: HttpClient, /*private accountService: AccountService*/) {
     // accountService.currentUser$

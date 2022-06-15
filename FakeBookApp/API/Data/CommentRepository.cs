@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Reflection.Metadata;
 using System;
@@ -28,37 +29,56 @@ namespace API.Data
             
         }
 
+        // Get all comments by postId
         public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId)
         {
             var comments = await _context.Comments.Where(c => c.PostId == postId).ToListAsync();
             return comments;
         }
 
+        // Get comment by commentId
         public async Task<Comment> GetCommentByIdAsync(int commentId)
         {
             var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
             return comment;
         }
 
+        // Add new comment
         public void AddComment(Comment comment)
         {
             _context.Comments.Add(comment);
         }
 
+        // Delete comment
         public void DeleteComment(Comment comment)
         {
             _context.Comments.Remove(comment);
         }
 
-        public void UpdateComment(Comment comment)
+        // Edit comment
+        public void EditComment(Comment comment)
         {
             _context.Entry<Comment>(comment).State = EntityState.Modified;
         }
         
+        // Check if comment exists
         public bool CommentExists(int id)
         {
             return _context.Comments.Any(e => e.Id == id);
         }
-        
+
+
+        // Get photo url by userId
+        public string GetPhotoUrlAsync(int userId)
+        {
+            // var comment = await _context.Comments.FirstOrDefaultAsync(c => c.AppUser.UserName == username);
+            // return comment.PhotoUrl;
+
+            var photos =  _context.Photos.Where(p => p.AppUserId == userId).ToList();
+            var photo = photos.Where(p => p.IsMain).FirstOrDefault();
+
+            return photo.Url.ToString();
+
+        }
     }
 }

@@ -8,12 +8,9 @@ export interface Member {
   age:          number;
   knownAs:      string;
   created:      Date;
-  lastActive:   Date;
   dateOfBirth:  Date;
   lastActice:   Date;
   introduction: string;
-
-  interests:    string;
   city:         string;
   country:      string;
   photos:       Photo[];

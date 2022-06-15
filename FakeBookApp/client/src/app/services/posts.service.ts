@@ -1,4 +1,5 @@
-import { map, Observable, tap } from 'rxjs';
+import { CommentService } from './comment.service';
+import { map, observable, Observable, tap } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -11,7 +12,7 @@ import { PostParams } from '../models/postParams';
 })
 export class PostsService {
   baseUrl = environment.apiUrl;
-  posts : Post[] = [];
+  posts: Post[] = [];
   postParams : PostParams
   paginatedResult: PaginatedResult<Post[]> = new PaginatedResult<Post[]>();
 
@@ -43,9 +44,9 @@ export class PostsService {
         // }
 
   // get all posts
-  getallPosts(){
+  getallPosts() {
     return this.http.get<Post[]>(`${this.baseUrl}Post`).pipe(
-    tap(posts => this.posts = posts));
+      tap(posts => this.posts = posts));
 
   }
 
@@ -56,9 +57,9 @@ export class PostsService {
 
 
   // get all users posts
-   getUsersPosts(username: string) : Observable<Post[]> {
+   getUsersPosts(username: string)  {
     return this.http.get<Post[]>(`${this.baseUrl}Post/${username}`).pipe(
-      tap(posts => this.posts = posts));
+      tap((posts : Observable<Post[]> | any) => this.posts = posts));
     }
 
     // delete post
@@ -74,9 +75,5 @@ export class PostsService {
   getPost(id: number) {
     return this.http.get<Post>(`${this.baseUrl}post/${id}`);
   }
-
-
-
-
 
 }
