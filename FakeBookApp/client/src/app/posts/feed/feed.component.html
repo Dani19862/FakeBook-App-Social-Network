@@ -1,23 +1,34 @@
 
 <div class="container text-center">
+  <div class="col-5">
+    <h1>Your Feed:</h1>
+    <div class="row-2">
+      <h5><strong>publish your posts and comments </strong></h5>
+    </div>
+  </div> <br>
+  <form #filterForm="ngForm" (ngSubmit)="getPostsWithSearchFilter()" autocomplete="off" class="d-flex" role="search">
+    <input class="form-control me-2 mt-3" type="string" placeholder="Search Post Or Comment" name="search" [(ngModel)]="postParams.search">
+    <button class="btn btn-primary mt-3"  type="submit">Apply Filter</button>
+    <button class="btn btn-danger ml-2 mt-3"  type="button" (click)="resetFilter()" >Reset Filter</button>
+  </form>
   <form #postForm="ngForm" (ngSubmit)="createPost(postForm)">
     <div class="form-group">
-      <input type="text" name="content" class="form-control" ngModel
+      <input type="text" name="content" class="form-control me-2 mt-3" ngModel
         placeholder="Publish Your Post">
+        <button class="btn btn-primary mt-3" type="submit">Publish</button>
     </div>
-    <button class="btn btn-primary" type="submit">Publish</button>
   </form>
 </div>
-  <br><br><br>
+  <br><br><br> <br>
   <div class="col-2 mt-5" *ngFor="let post of posts">
     <app-post-detail [post]="post"></app-post-detail>
     <div class="container comment ">
-      <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post)">
+      <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post,postParams)">
         <div class="form-group">
           <input type="text" name="content" class="form-control" [ngModel]
             placeholder="+ Add a Comment">
+            <button class="btn btn-primary ml-2" type="submit">Comment</button>
         </div>
-        <button class="btn btn-primary" type="submit">Comment</button>
       </form>
         <div class="row">
           <div class="row-5" *ngFor="let comment of post.comments">

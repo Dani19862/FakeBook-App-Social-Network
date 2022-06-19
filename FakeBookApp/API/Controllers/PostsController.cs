@@ -112,7 +112,7 @@ namespace API.Controllers
         }   
 
         // Get all posts with pagination
-        // ToDo: make posts with pagination
+        // TODO: make posts with pagination
         // [HttpGet]
         // public async Task <ActionResult<PostDto>> GetAllPostsAsync([FromQuery] PostParams postParams)  
         // {
@@ -125,13 +125,24 @@ namespace API.Controllers
 
         
         // Get all posts
-        [HttpGet]
-        public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
-        {
-            //var photo =  _unitOfWork.CommentRepository.GetPhotoUrlAsync(1);
-            var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
-            return Ok(posts);
+        // [HttpGet]
+        // public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
+        // {
+        //     //var photo =  _unitOfWork.CommentRepository.GetPhotoUrlAsync(1);
+        //     var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
+        //     return Ok(posts);
 
+        // }
+        [HttpGet]
+        public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync([FromQuery] PostParams postParams)  
+        {
+            if (postParams.Search == null) postParams = new PostParams();
+            var posts = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams);
+            // var posts1 = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams = new PostParams());
+            // if (postParams.Search == null) return NotFound();
+            // BadRequest("No posts found");
+
+            return Ok(posts);
         }
 
     }

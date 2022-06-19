@@ -21,6 +21,13 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm
   posts: Post[] = [];
 
+  postParams : any = {
+    pageNumber: 1,
+    pageSize: 5,
+    search: ''
+  }
+
+
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any){
@@ -60,9 +67,9 @@ export class MemberEditComponent implements OnInit {
   }
 
   getUsersPosts() {
-    this.postService.getUsersPosts(this.user.username).subscribe(posts => {
+    this.postService.getAllPosts(this.postParams).subscribe(posts => {
       this.posts = posts;
-      //console.log(posts);
+
     })
   }
 

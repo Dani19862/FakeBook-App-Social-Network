@@ -112,19 +112,42 @@ namespace API.Data
             
         // }
 
-        public async Task <List<PostDto>> GetAllPostsAsync()
+        // public async Task <List<PostDto>> GetAllPostsAsync()
+        // {
+        //     var posts =  _context.Posts
+        //     .Select(p => p)
+        //     .Include (c => c.Comments)
+        //     .OrderByDescending(p => p.Created)
+        //     .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
+
+        //     // var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Comment, CommentDto>()).CreateMapper();
+        //     // var a = posts;
+
+        //     return await posts;
+
+        // }
+
+        
+        public async Task <List<PostDto>> GetAllPostsAsync(PostParams postParams)
         {
-            var posts =  _context.Posts
-            .Select(p => p)
-            .Include (c => c.Comments)
-            .OrderByDescending(p => p.Created)
-            .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
+            if (!String.IsNullOrEmpty(postParams.Search))
+            {
+                var posts =  _context.Posts
+                   .Where(p => p.Content.Contains(postParams.Search.ToLower()) || (p.Comments.Any(t => t.Content.Contains(postParams.Search.ToLower())))).OrderByDescending(p => p.Created)
+                   .Include (c => c.Comments)
+                   .OrderByDescending(p => p.Created)
+                   .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
 
-            // var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Comment, CommentDto>()).CreateMapper();
-            // var a = posts;
-
-            return await posts;
-
+                   return await posts;
+            }
+            
+            
+            return await _context.Posts
+                    .Select(p => p)
+                    .Include (c => c.Comments)
+                    .OrderByDescending(p => p.Created)
+                    .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
+        
         }
 
         

@@ -13,9 +13,11 @@ namespace API.Helpers
 
         // }
 
-        public string CurrentUsername { get; set; }
+        //public string CurrentUsername { get; set; }
 
-        public int AppUserId { get; set; }
+        //public int AppUserId { get; set; }
+
+        public string Search { get; set; }
         
         
 
