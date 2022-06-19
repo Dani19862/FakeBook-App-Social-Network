@@ -1,11 +1,8 @@
 
-<div class="container text-center">
-  <div class="col-5">
-    <h1>Your Feed:</h1>
-    <div class="row-2">
-      <h5><strong>publish your posts and comments </strong></h5>
-    </div>
+  <div class=" d-flex justify-content-center">
+    <h1>Your Feed </h1>
   </div> <br>
+<div class="container text-center">
   <form #filterForm="ngForm" (ngSubmit)="getPostsWithSearchFilter()" autocomplete="off" class="d-flex" role="search">
     <input class="form-control me-2 mt-3" type="string" placeholder="Search Post Or Comment" name="search" [(ngModel)]="postParams.search">
     <button class="btn btn-primary mt-3"  type="submit">Apply Filter</button>

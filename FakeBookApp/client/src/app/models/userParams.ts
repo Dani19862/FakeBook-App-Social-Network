@@ -1,4 +1,5 @@
 // For filtering the user list
+
 export class UserParams {
   userName: string;
   minAge: 18;
@@ -7,7 +8,11 @@ export class UserParams {
   pageSize = 5;
   //orderBy = 'lastActive';
 
-  constructor() {}
+  constructor() {
+
+    this.minAge = 18;
+    this.maxAge = 120;
+  }
 
 
 }

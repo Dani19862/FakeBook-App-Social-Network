@@ -58,6 +58,12 @@ namespace API.Data
             var query = _context.Users.AsQueryable();  
             //filter => all users except current user
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            
+            // filter => users with age between min and max
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+            query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
 
             return await PagedList<MemberDto>.CreateAsync
             (
@@ -67,7 +73,7 @@ namespace API.Data
             );
         }
 
-        // Get the user by username after mapping it to MemberDto
+        // Get the user by username from the database and map it to UserDto
         public async Task<MemberDto> GetMemberAsync(string userName)
         {
             return await _context.Users
