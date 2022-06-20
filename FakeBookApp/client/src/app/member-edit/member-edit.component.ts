@@ -67,9 +67,9 @@ export class MemberEditComponent implements OnInit {
   }
 
   getUsersPosts() {
-    this.postService.getAllPosts(this.postParams).subscribe(posts => {
+    this.postService.getUsersPosts(this.user.username).subscribe(posts => {
       this.posts = posts;
-
+      console.log(posts);
     })
   }
 

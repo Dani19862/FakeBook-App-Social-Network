@@ -72,8 +72,7 @@ namespace API.Controllers
            
             };
             
-            
-            //if (_unitOfWork.CommentRepository.CommentExists(commentDto.PostId, comment)) return BadRequest("Comment already exists");
+            if (String.IsNullOrEmpty(comment.Content))  return BadRequest("You Cannot Publis Empty Comment");
             
             _unitOfWork.CommentRepository.AddComment(comment);
 

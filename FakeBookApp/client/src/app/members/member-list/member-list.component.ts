@@ -15,16 +15,10 @@ export class MemberListComponent implements OnInit {
 
   members: Member[];
   pagination: Pagination;
-  pageNumber  = 1;
-  pageSize = 5;
+  // pageNumber  = 1;
+  // pageSize = 5;
   userParams: UserParams;
-  // genderList= [{
-  //   value: 'male',
-  //   display: 'Males'
-  // },{
-  //   value: 'female',
-  //   display: 'Females'
-  // }];
+
 
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.userParams;
@@ -50,7 +44,8 @@ export class MemberListComponent implements OnInit {
   }
 
   pageChanged({ page }: any) {
-   this.pageNumber = page;
+   this.userParams.pageNumber = page;
+   this.memberService.UserParams = this.userParams;
     this.loadMembers();
   }
 

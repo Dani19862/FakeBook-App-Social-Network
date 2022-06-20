@@ -82,6 +82,7 @@ export class CommentComponent implements OnInit {
     this.commentService.editComment(comment).subscribe(() => {
         this.comment = comment;
         this.toastr.success('Comment edited successfully');
+        this.showTextArea = false;
     });
   }
 }

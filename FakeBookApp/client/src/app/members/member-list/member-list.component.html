@@ -11,53 +11,15 @@
     <div>
     <button type="submit" class="btn btn-primary ml-1">Apply Filters </button>
     <button (click)="resetFilters()" type="button" class="btn btn-info ml-1">Reset Filters </button>
+
+    <button type="button" class="btn btn-primary ml-4" name="orderBy" btnRadio="lastActive" (click)="loadMembers()"
+          [(ngModel)]="userParams.orderBy">Last Active</button>
+
+    <button type="button" class="btn btn-primary ml-1" name="orderBy" btnRadio="created" (click)="loadMembers()"
+          [(ngModel)]="userParams.orderBy">Newest Members</button>
     </div>
   </form>
 </div>
-
-      <!-- <button type="button"
-      class="btn btn-primary"
-      name="orderBy"
-      btnRadio="lastActive"
-      (click)="loadMembers()"
-      [(ngModel)]="userParams.orderBy">
-      Last Active
-      </button>
-      <button type="button"
-      class="btn btn-primary"
-      name="orderBy"
-      btnRadio="created"
-      (click)="loadMembers()"
-      [(ngModel)]="userParams.orderBy">
-      Newest Member
-      </button>
-    </div>
-    <div class="col">
-      <div class="btn-group float-right">
-
-        <button
-          type="button"
-          class="btn btn-primary mr-3"
-          name="orderBy"
-          btnRadio="lastActive"
-          (click)="loadMembers()"
-          >
-          Last Active
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary "
-          name="orderBy"
-          btnRadio="created"
-          (click)="loadMembers()"
-          >
-          Newest Member
-        </button>
-      </div>
-    </div>
-  </form>
-</div> -->
-
 
  <div class="row " >
    <div class="col-2" *ngFor="let member of members">

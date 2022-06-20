@@ -50,26 +50,6 @@ namespace API.Data
         public void EditPost(Post post)
         {
             _context.Entry<Post>(post).State = EntityState.Modified; 
-            // var post =  _context.Posts.Where(p => p.Id == postDto.Id).FirstOrDefault();
-
-            // var user = await _userRepository.GetUserByIdAsync(postDto.AppUserId);
-            
-            // if (post == null) return null;
-            
-            // var postToRetuen = new PostDto()   // only content and created can be edited
-            // {
-            //     Id = post.Id,
-            //     Content = postDto.Content,
-            //     Created = post.Created,
-            //     AppUserId = post.AppUserId,
-            //     Username = user.UserName
-            // };
-                
-            // _mapper.Map(postToRetuen, post);
-            
-            // _context.Posts.Update(post);
-
-            // return post;
 
         }
       
@@ -181,8 +161,9 @@ namespace API.Data
         
         // Update Post in Database
         public void Update(Post post)
-        {
+        {   
             _context.Entry<Post>(post).State = EntityState.Modified;
+
         }
 
     }

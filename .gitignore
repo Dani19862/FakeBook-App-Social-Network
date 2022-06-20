@@ -106,6 +106,8 @@ dist
 StudentAssets 
 **/obj
 **/bin
+.obj
+.bin
 .vs
 .vs**
 **/appsettings.json

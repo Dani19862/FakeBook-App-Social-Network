@@ -6,12 +6,17 @@ export class UserParams {
   maxAge: 120;
   pageNumber = 1;
   pageSize = 5;
-  //orderBy = 'lastActive';
+  orderBy = 'lastActive';
 
   constructor() {
 
     this.minAge = 18;
     this.maxAge = 120;
+    this.pageNumber = 1;
+    this.pageSize = 5;
+    this.orderBy = 'lastActive';
+
+
   }
 
 

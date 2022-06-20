@@ -1,3 +1,4 @@
+using System.Text;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
@@ -34,20 +35,16 @@ namespace API.Controllers
             var appUserid = User.GetUserId(); //get username from token => NameId
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(appUserid); 
 
-            //_mapper.Map(memberUpdateDto, user); //map MemberUpdateDto to AppUser
-
             var post = new Post 
             {
-                //Id= postDto.Id,    
                 Created = DateTime.Now,
                 Content = postDto.Content,
                 AppUserId = appUserid,
-                //Username = user.UserName,
-                //PhotoUrl =  postDto.PhotoUrl
                 AppUser = user
-
             };
 
+            if (String.IsNullOrEmpty(postDto.Content))  return BadRequest("You Cannot Publis Empty Post");
+      
             _unitOfWork.PostRepository.AddPost(post);
 
             if (await _unitOfWork.Complete()) return Ok(post); 
@@ -61,11 +58,13 @@ namespace API.Controllers
         [HttpPut] 
         public async Task<ActionResult> EditPost(PostDto postDto)
         {
+            if (String.IsNullOrEmpty(postDto.Content)) return BadRequest("You Cannot Edit Empty Post");
+
             var post = await _unitOfWork.PostRepository.GetPostByIdAsync(postDto.Id);
 
             if (post == null) return NotFound();
 
-            _mapper.Map(postDto, post); 
+            _mapper.Map<PostDto>(post); 
             
              _unitOfWork.PostRepository.EditPost(post);
           
