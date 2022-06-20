@@ -28,36 +28,23 @@ namespace API.Data
         // Get all users accept from currentUser from the database and map them to MemberDto
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            
-            //var query = _context.Users.AsQueryable();  
-            // filter => all users except current user
-            //query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            
-            // filter => users with age between min and max
-           // var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
-            //var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
-            
-            //query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
-
-            // query = userParams.OrderBy switch
-            // {
-            //     "created" => query.OrderByDescending(u => u.Created),
-            //     _ => query.OrderByDescending(u => u.LastActive)
-            // };
-            
-
-            // return await PagedList<MemberDto>.CreateAsync
-            // (
-            //     query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider),    
-            //     userParams.PageNumber, 
-            //     userParams.PageSize
-            // );
-
-            //////////////////
-
+          
             var query = _context.Users.AsQueryable();  
             //filter => all users except current user
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            
+            // filter => users with age between min and max
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
+            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+
+            query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
+
+            //sorting members by created or last active
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
 
             return await PagedList<MemberDto>.CreateAsync
             (
@@ -67,7 +54,7 @@ namespace API.Data
             );
         }
 
-        // Get the user by username after mapping it to MemberDto
+        // Get the user by username from the database and map it to UserDto
         public async Task<MemberDto> GetMemberAsync(string userName)
         {
             return await _context.Users

@@ -15,7 +15,11 @@
                     </div>
         </div>
         <div class="btn-group" dropdown>
-        <button [disabled]="editForm.pristine" form="editForm" id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle"
+        <button [disabled]="editForm.pristine"
+
+                form="editForm" id="button-basic"
+                dropdownToggle type="button"
+                class="btn btn-light dropdown-toggle"
                 aria-controls="dropdown-basic">
            <span class="caret"></span>
         </button>
@@ -37,4 +41,5 @@
 </div>
 </form>
 
-
+<!--
+  disabled]="!contentLength(post.content)" -->

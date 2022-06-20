@@ -1,3 +1,4 @@
+using System.Text;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
@@ -34,20 +35,16 @@ namespace API.Controllers
             var appUserid = User.GetUserId(); //get username from token => NameId
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(appUserid); 
 
-            //_mapper.Map(memberUpdateDto, user); //map MemberUpdateDto to AppUser
-
             var post = new Post 
             {
-                //Id= postDto.Id,    
                 Created = DateTime.Now,
                 Content = postDto.Content,
                 AppUserId = appUserid,
-                //Username = user.UserName,
-                //PhotoUrl =  postDto.PhotoUrl
                 AppUser = user
-
             };
 
+            if (String.IsNullOrEmpty(postDto.Content))  return BadRequest("You Cannot Publis Empty Post");
+      
             _unitOfWork.PostRepository.AddPost(post);
 
             if (await _unitOfWork.Complete()) return Ok(post); 
@@ -61,11 +58,13 @@ namespace API.Controllers
         [HttpPut] 
         public async Task<ActionResult> EditPost(PostDto postDto)
         {
+            if (String.IsNullOrEmpty(postDto.Content)) return BadRequest("You Cannot Edit Empty Post");
+
             var post = await _unitOfWork.PostRepository.GetPostByIdAsync(postDto.Id);
 
             if (post == null) return NotFound();
 
-            _mapper.Map(postDto, post); 
+            _mapper.Map<PostDto>(post); 
             
              _unitOfWork.PostRepository.EditPost(post);
           
@@ -112,7 +111,7 @@ namespace API.Controllers
         }   
 
         // Get all posts with pagination
-        // ToDo: make posts with pagination
+        // TODO: make posts with pagination
         // [HttpGet]
         // public async Task <ActionResult<PostDto>> GetAllPostsAsync([FromQuery] PostParams postParams)  
         // {
@@ -125,13 +124,24 @@ namespace API.Controllers
 
         
         // Get all posts
-        [HttpGet]
-        public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
-        {
-            //var photo =  _unitOfWork.CommentRepository.GetPhotoUrlAsync(1);
-            var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
-            return Ok(posts);
+        // [HttpGet]
+        // public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
+        // {
+        //     //var photo =  _unitOfWork.CommentRepository.GetPhotoUrlAsync(1);
+        //     var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
+        //     return Ok(posts);
 
+        // }
+        [HttpGet]
+        public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync([FromQuery] PostParams postParams)  
+        {
+            if (postParams.Search == null) postParams = new PostParams();
+            var posts = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams);
+            // var posts1 = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams = new PostParams());
+            // if (postParams.Search == null) return NotFound();
+            // BadRequest("No posts found");
+
+            return Ok(posts);
         }
 
     }

@@ -34,15 +34,10 @@ export class CommentComponent implements OnInit {
    }
 
 
-
-
-
-
   ngOnInit() {
     // console.log(this.comment);
-    // ToDo: make func get photo more efficient
+    // TODO: make func get photo more efficient
     this.getPhoto()
-
 
   }
 
@@ -64,12 +59,12 @@ export class CommentComponent implements OnInit {
     return this.commentService.getPhotoURL(this.comment.username)
     .subscribe(member => {
       this.member = member;
-      // if(this.member.photoUrl)
-      //   {console.log(this.member.photoUrl);}
-      // else{
-      //   this.member.photoUrl = "./assets/user.png";
-      //   {console.log(this.member.photoUrl);}
-      // }
+      if(this.member.photoUrl)
+        {console.log(this.member.photoUrl);}
+      else{
+        this.member.photoUrl = "./assets/user.png";
+        {console.log(this.member.photoUrl);}
+      }
      }
     );
   }
@@ -87,6 +82,7 @@ export class CommentComponent implements OnInit {
     this.commentService.editComment(comment).subscribe(() => {
         this.comment = comment;
         this.toastr.success('Comment edited successfully');
+        this.showTextArea = false;
     });
   }
 }

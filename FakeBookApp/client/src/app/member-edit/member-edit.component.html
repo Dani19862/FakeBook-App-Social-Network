@@ -1,6 +1,6 @@
 <div class="row" *ngIf="member">
-  <div class="col-4">
-    <h1>Your Profile</h1>
+  <div class="col-4 ">
+    <h1 class="ml-3">Your Profile</h1>
   </div>
   <div class="col-8">
 
@@ -11,9 +11,9 @@
 
    </div>
   </div>
-  <div class="col-4">
+  <div class="col-3 ml-2" >
       <div class="card">
-          <img class="card-img-top img-thumbnail" src="{{member.photoUrl || './assets/user.png'}}"
+          <img class="img card-img-top img-thumbnail" src="{{member.photoUrl || './assets/user.png'}}"
               alt="{{member.knownAs}}">
           <div class="card-body">
               <div>
@@ -51,8 +51,8 @@
             <input type="text" [(ngModel)]="member.city" name="city" class="form-control mx-2">
             <label for="Country">Country:</label>
             <input type="text" [(ngModel)]="member.country" name="country" class="form-control mx-2">
-            <label for="Country">Name:</label>
-            <input type="text" [(ngModel)]="member.username" name="name" class="form-control mx-2">
+            <label for="Country">NickName:</label>
+            <input type="text" [(ngModel)]="member.knownAs" name="name" class="form-control mx-2">
           </div>
         </form>
       </tab>

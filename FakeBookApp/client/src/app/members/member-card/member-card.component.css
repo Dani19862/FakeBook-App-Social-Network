@@ -35,3 +35,10 @@
 .animate {
   transition: all 0.3s ease-in-out;
 }
+
+.fa  {
+  font-size: 18px;
+  font-display: block;
+}
+
+

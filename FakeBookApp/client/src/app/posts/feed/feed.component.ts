@@ -1,7 +1,8 @@
+import { PostParams } from './../../models/postParams';
 import { ToastrService } from 'ngx-toastr';
 import { Comment } from './../../models/comment';
 import { NgForm } from '@angular/forms';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import {  Pagination } from '../../models/pagination';
 import { Post } from '../../models/post';
 import { PostsService } from '../../services/posts.service';
@@ -13,7 +14,7 @@ import { Member } from 'src/app/models/member';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnChanges {
   pagination: Pagination;
   pageNumber  = 1;
   pageSize = 5;
@@ -23,37 +24,56 @@ export class FeedComponent implements OnInit {
   comment!: Comment
   member : Member;
 
-
+  postParams : PostParams = {
+    pageNumber: 1,
+    pageSize: 5,
+    search: ''
+  }
 
   @ViewChild('postForm') postForm: NgForm;
   @ViewChild('commentForm') commentForm: NgForm;
+  @ViewChild('filterForm') filterForm: NgForm;
 
 
 
-  // @Input() comment: Comment;
+
 
   constructor(private PostServices: PostsService, private commentService: CommentService, private toastr: ToastrService) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.resetFilter();
+
+  }
+
 
      ngOnInit(): void {
-    this.getallPosts();
+    this.getAllPosts();
   }
 
 
     //get all posts without pagination
-    getallPosts()  {
-       this.PostServices.getallPosts().subscribe(posts => {
-          this.posts = posts;
-          //console.log(this.posts);
-        });
+    getAllPosts()  {
+      this.PostServices.getAllPosts(this.postParams).subscribe(posts => {
+        this.posts = posts;
+      })
+    }
+
+    // get posts with Search Filter
+    getPostsWithSearchFilter() {
+      this.PostServices.getAllPosts(this.postParams).subscribe(posts => {
+        this.posts = posts;
+        this.filterForm.reset();
+
+
+      })
     }
 
     // create new post
     createPost(postForm: NgForm) {
       this.PostServices.createPost(postForm.value).subscribe(() => {
         this.postForm.reset();
-        this.getallPosts();
         this.toastr.success('Post created successfully');
+        this.getAllPosts();
 
 
       })
@@ -65,18 +85,25 @@ export class FeedComponent implements OnInit {
       });
     }
 
-    createComment(commentForm: NgForm, post: Post) {
+    // create new comment
+    createComment(commentForm: NgForm, post: Post, postParams: PostParams) {
       const content = commentForm.value.content;
 
       this.commentService.createComment(commentForm.value, post).subscribe(() => {
         this.commentForm.reset();
-        this.getallPosts();
-        // console.log(this.comment);
         this.toastr.success('Comment created successfully');
+        this.getAllPosts();
+        // console.log(this.comment);
 
       })
     }
 
+    resetFilter() {
+      this.PostServices.resetFilter().subscribe(posts => {
+        this.posts = posts;
+        this.filterForm.reset();
+      })
+    }
 
     // get all posts with pagination
     // getllPosts() {

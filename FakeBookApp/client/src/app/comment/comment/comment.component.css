@@ -24,7 +24,10 @@
 .textarea{resize: none
 }
 
-
+#dropdown-animated{
+  animation: fadeIn 0.5s;
+  cursor: pointer;
+}
 
 .dropdown-menu {
   line-height: 12px;
@@ -48,3 +51,10 @@
   font-size: 16px;
   resize: none;
 }
+
+.container {
+  padding: 16px;
+  width: auto;
+  height: auto;
+}
+

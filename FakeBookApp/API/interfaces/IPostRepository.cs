@@ -23,7 +23,7 @@ namespace API.interfaces
 
         //Task <IEnumerable<PostDto>> GetAllPostsAsync(); // old
         
-        Task <List<PostDto>> GetAllPostsAsync(); // new
+        Task <List<PostDto>> GetAllPostsAsync(PostParams postParams); // new
 
         //Task<IEnumerable<PostDto>> GetUserPostsAsync(PostDto postDto);
 

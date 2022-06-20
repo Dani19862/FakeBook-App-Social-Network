@@ -14,11 +14,13 @@ export class PostsService {
   baseUrl = environment.apiUrl;
   posts: Post[] = [];
   postParams : PostParams
-  paginatedResult: PaginatedResult<Post[]> = new PaginatedResult<Post[]>();
+  //paginatedResult: PaginatedResult<Post[]> = new PaginatedResult<Post[]>(); not used for now
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+   }
 
 
   // getallPosts(page?:number, itemsPerPage?:number) : Observable <PaginatedResult<Post[]>> {
@@ -44,9 +46,26 @@ export class PostsService {
         // }
 
   // get all posts
-  getallPosts() {
-    return this.http.get<Post[]>(`${this.baseUrl}Post`).pipe(
-      tap(posts => this.posts = posts));
+  getAllPosts(postParams: PostParams) {
+
+    let params = new HttpParams();
+    if(postParams.pageNumber != null && postParams.pageSize != null){
+      params = params.append('pageNumber', postParams.pageNumber.toString());
+      params = params.append('pageSize', postParams.pageSize.toString());
+      params = params.append('search', postParams.search);
+    }
+
+    return this.http.get<Post[]>(`${this.baseUrl}post`, {
+      observe: 'response',
+      params
+    }).pipe(
+      map((res: HttpResponse<Post[]>) => {
+        return res.body as Post[];
+      })
+    );
+
+    // return this.http.get<Post[]>(`${this.baseUrl}Post?Search=?${postParams.search}`).pipe(
+    //   tap(posts => this.posts = posts));
 
   }
 
@@ -72,8 +91,21 @@ export class PostsService {
    return this.http.put(`${this.baseUrl}post`, post);
 
   }
+
+  // get post by id
   getPost(id: number) {
     return this.http.get<Post>(`${this.baseUrl}post/${id}`);
   }
+
+  // reset filter
+  resetFilter() {
+    this.postParams = {
+      pageNumber: 1,
+      pageSize: 3,
+      search: ''
+    }
+     return this.getAllPosts(this.postParams);
+  }
+
 
 }
