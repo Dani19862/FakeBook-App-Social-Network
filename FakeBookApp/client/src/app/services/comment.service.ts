@@ -20,7 +20,6 @@ export class CommentService {
 
   baseUrl = environment.apiUrl;
   comments: Comment[] = [];
-
   members: Member[] = [];
 
 

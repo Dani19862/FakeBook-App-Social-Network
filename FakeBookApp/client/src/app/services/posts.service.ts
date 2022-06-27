@@ -64,8 +64,7 @@ export class PostsService {
       })
     );
 
-    // return this.http.get<Post[]>(`${this.baseUrl}Post?Search=?${postParams.search}`).pipe(
-    //   tap(posts => this.posts = posts));
+   
 
   }
 

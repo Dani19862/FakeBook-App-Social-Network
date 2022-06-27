@@ -1,4 +1,5 @@
 import {Comment} from '../models/comment';
+import { Like } from './like.interface';
 
 export interface Post {
   id: number;
@@ -8,6 +9,7 @@ export interface Post {
   username : string;
   photoUrl: string;
   comments: Comment[];
+  likes: Like [] ;
 
 
 }

@@ -56,9 +56,9 @@ namespace API.Data
         //Get Post by Id
         public async Task<Post> GetPostByIdAsync(int id)
         {
-            var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
+            var post = _context.Posts.Where(p => p.Id == id).FirstOrDefaultAsync();
 
-            return await Task.FromResult(post);
+            return await post;
 
             // var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
 

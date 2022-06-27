@@ -10,6 +10,8 @@ namespace API.interfaces
 
         ICommentRepository CommentRepository { get;  }
 
+        ILikeRepository LikeRepository { get;  }
+
         Task<bool> Complete();
 
         bool HasChanges();

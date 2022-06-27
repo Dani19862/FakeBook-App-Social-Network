@@ -26,6 +26,8 @@ namespace API.Data
 
         public ICommentRepository CommentRepository => new CommentRepository(_context, _mapper);
 
+        public ILikeRepository LikeRepository => new LikeRepository(_context, _mapper);
+
         public async Task<bool> Complete()
         {
             

@@ -9,6 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using API.Extensions;
 using API.Middleware;
+using Newtonsoft.Json;
+
+
 
 namespace API
 {
@@ -28,7 +31,9 @@ namespace API
         {   
             services.AddApplicationServices(_config);
             
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                       options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });

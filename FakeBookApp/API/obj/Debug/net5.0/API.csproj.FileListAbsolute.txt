@@ -72,3 +72,6 @@ C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Socia
 C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\obj\Debug\net5.0\API.RazorTargetAssemblyInfo.cache
 C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\obj\Debug\net5.0\API.csproj.CopyComplete
 C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\obj\Debug\net5.0\API.genruntimeconfig.cache
+C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\mazal\Desktop\HakerU\Victor\FakeBookAPPSocialNetwork\FakeBook-App-Social-Network\FakeBookApp\API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
