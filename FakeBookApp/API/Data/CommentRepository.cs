@@ -77,6 +77,10 @@ namespace API.Data
             var photos =  _context.Photos.Where(p => p.AppUserId == userId).ToList();
             var photo = photos.Where(p => p.IsMain).FirstOrDefault();
 
+            var defaultPhotoUrl = "https://res.cloudinary.com/hakeru/image/upload/v1656422095/blank-profile-picture-973460_1280_r8wevh.png";
+
+            if (photo == null) return defaultPhotoUrl;
+
             return photo.Url.ToString();
 
         }

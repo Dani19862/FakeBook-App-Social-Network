@@ -6,13 +6,14 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { MessagesComponent } from './messages/messages.component';
 import { HomeComponent } from './home/home.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListsComponent } from './lists/lists.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PreventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
 
@@ -47,6 +48,9 @@ const routes: Routes = [
   },
   {
     path : 'notifications',component:NotificationsComponent
+  },
+  {
+    path : 'about', component : AboutComponent
   },
 
 

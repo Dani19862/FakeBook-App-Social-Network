@@ -3,13 +3,14 @@ import { Post } from './../models/post';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { PaginatedResult, Pagination } from '../models/pagination';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   registerMode = false;
   users: any;
   loginMode = false;
@@ -17,27 +18,20 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private postService: PostsService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  ngOnInit(): void {
-    //this.getUsers();
-    //this.postService.getallPosts();
 
-  }
 
   registerToggle() {
     this.registerMode = !this.registerMode
   }
 
-  ///  NOT USED
-  // getUsers(){
-  //   this.http.get('https://localhost:5001/api/users')
-  //   .subscribe(
-  //     users => this.users = users,
-  //     error => console.log(error))
-  // }
-
   cancelRegisterMode($event: boolean){
     this.registerMode = $event;
+  }
+
+  aboutPage(){
+    this.router.navigate(['/about']);
+
   }
 }
