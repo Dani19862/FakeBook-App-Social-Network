@@ -25,7 +25,7 @@ In this project was used Repository and UnitOfWork design patterns.
   
   -AppUser : implement User 
   
-  ### This applictaion developed by Daniel Levy
-  ## mail:daniellevy1989@gmail.com
+  ### This applictaion developed by _Daniel Levy
+  ## mail : daniellevy1989@gmail.com
   
   
