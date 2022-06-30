@@ -12,15 +12,19 @@ In this project was used Repository and UnitOfWork design patterns.
 
 
  ### 2. Run The Appliction :
- - To run the application 
+ - To run the application you need to to run server with in cli with command `dotnet run`and on API folder.
+   if the DB is not exist The we'll create it in the Program with and actiavte migration by - Database.MigrateAsync(), with the data Seed.
+ - after that open new terminal on client folder and run the command `ng serve` to run client side server angular.  
  
  ### 3. Usage :
   - Create account and in home pahe by Register button and start comunicate with your friends.
   - Go to feed page and publich posts and comments, marks likeson posts.
   - go to member to watch your card's friends, send them a meesages.
   
-   ## Enjoy.
-   
+  ### 4. Entities&RealationShip :
+  
+  -AppUser : implement User 
+  
   ### This applictaion developed by Daniel Levy
   ## mail:daniellevy1989@gmail.com
   
