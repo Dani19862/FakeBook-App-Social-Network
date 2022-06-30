@@ -1,4 +1,4 @@
-# FakeBook Social Network Aoolication
+# FakeBook - Social Network Application
 
 ### 1.	About This Project
 
