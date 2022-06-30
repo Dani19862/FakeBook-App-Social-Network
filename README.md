@@ -17,7 +17,7 @@ In this project was used Repository and UnitOfWork design patterns.
  - after that open new terminal on client folder and run the command `ng serve` to run client side server angular.  
  
  ### 3. Usage :
-  - Create account and in home pahe by Register button and start comunicate with your friends.
+  - Create a account in home pahe by Register button and start comunicate with your friends.
   - Go to feed page and publich posts and comments, marks likeson posts.
   - go to member to watch your card's friends, send them a meesages.
   
