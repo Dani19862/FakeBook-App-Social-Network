@@ -6,7 +6,7 @@ import { Post } from 'src/app/models/post';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CommentComponent } from 'src/app/comment/comment/comment.component';
 import { LikeService } from 'src/app/services/like.service';
-import { Like } from 'src/app/models/like.interface';
+import { Like } from 'src/app/models/like';
 
 
 
@@ -17,12 +17,11 @@ import { Like } from 'src/app/models/like.interface';
 })
 export class PostDetailComponent implements OnInit {
   @Input() post: Post;
-  @Output() showCommentsEvent = new EventEmitter<boolean>();
-  //showComments: boolean = false;
-  likeCount: any;
+  // @Output() showCommentsEvent = new EventEmitter<number>();
+  likeCount: number;
   isLiked = false;
   like: Like;
-  isComment = false;
+  numberOfComments: number;
 
 
 
@@ -31,7 +30,8 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLikeCount(this.post)
-    console.log(this.post.comments);
+    this.numberOfComments = this.post.comments.length;
+
   }
 
 
@@ -41,7 +41,6 @@ export class PostDetailComponent implements OnInit {
       this.likeCount = data.likeCount;
       this.isLiked = data.isLiked;
 
-      // console.log(data.likeCount);
     });
   }
 
@@ -49,7 +48,6 @@ export class PostDetailComponent implements OnInit {
     this.likeService.addLike(post)?.subscribe((likeCount) => {
       this.toastr.success(`You liked ${post.username}'s post`);
       this.likeCount = likeCount;
-      // console.log(likeCount);
       this.isLiked = true;
       });
   }
@@ -62,10 +60,15 @@ export class PostDetailComponent implements OnInit {
     });
   }
 
-  showCommentsButton() {
-   this.showCommentsEvent.emit(true);
-
-  }
+  // showCommentsButton(post: Post) {
+  //   if(post.comments.length > 0){
+  //     this.showCommentsEvent.emit(post.id);
+  //     console.log('pd', post.id)
+  //   }
+  //   else{
+  //     this.toastr.error(`No comments for this post`);
+  //   }
+  // }
 
 
 

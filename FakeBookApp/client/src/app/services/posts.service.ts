@@ -64,7 +64,7 @@ export class PostsService {
       })
     );
 
-   
+
 
   }
 
@@ -92,8 +92,9 @@ export class PostsService {
   }
 
   // get post by id
-  getPost(id: number) {
-    return this.http.get<Post>(`${this.baseUrl}post/${id}`);
+  getPost(id: number) : Observable<Post> {
+    return this.http.get<Post>(`${this.baseUrl}post/${id}`).pipe(
+      tap((post : Observable<Post> | any) => this.posts = post));
   }
 
   // reset filter

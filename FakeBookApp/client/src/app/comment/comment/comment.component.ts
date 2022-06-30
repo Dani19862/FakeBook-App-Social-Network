@@ -1,3 +1,4 @@
+import { PostsService } from './../../services/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, take } from 'rxjs';
 import { AccountService } from './../../services/account.service';
@@ -21,15 +22,18 @@ export class CommentComponent implements OnInit {
 
   @Input() comment!: Comment ;
   @Input () post!: Post;
+
   member: Member;
   user:User;
+  // commentsToShow: number[];
 
   currentUser$: Observable<User | null>;
   showTextArea = false;
+   numberOFComments: number;
 
   @ViewChild('editForm') editForm: NgForm
 
-  constructor(private commentService: CommentService,private accountService: AccountService, private toastr: ToastrService) {
+  constructor(private commentService: CommentService,private accountService: AccountService, private toastr: ToastrService, private postService:PostsService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
    }
 
@@ -38,8 +42,18 @@ export class CommentComponent implements OnInit {
     // console.log(this.comment);
     // TODO: make func get photo more efficient
     this.getPhoto()
+    // this.getCommentsToShow()
 
   }
+
+  // getCommentsToShow() {
+  //   console.log('Hello')
+  //   this.commentsToShow = this.commentService.commentsToShow;
+  //   if (this.commentsToShow.includes(this.comment.id)) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   getPhoto(){
     this.member = {  id: 1,
@@ -59,12 +73,12 @@ export class CommentComponent implements OnInit {
     return this.commentService.getPhotoURL(this.comment.username)
     .subscribe(member => {
       this.member = member;
-      if(this.member.photoUrl)
-        {console.log(this.member.photoUrl);}
-      else{
-        this.member.photoUrl = "./assets/user.png";
-        {console.log(this.member.photoUrl);}
-      }
+      // if(this.member.photoUrl)
+      //   {console.log(this.member.photoUrl);}
+      // else{
+      //   this.member.photoUrl = "./assets/user.png";
+      //   {console.log(this.member.photoUrl);}
+      // }
      }
     );
   }
@@ -72,7 +86,7 @@ export class CommentComponent implements OnInit {
   // delete comment
   deleteComment(commentId: number) {
     this.commentService.deleteComment(commentId).subscribe(() => {
-      this.post.comments.splice(this.post.comments.findIndex(comment => comment.id === commentId ), 1);
+      this.post.comments.splice(this.post.comments.findIndex(comment => comment.id === commentId ), 1)
       this.toastr.success('Comment deleted successfully');
     });
   }
@@ -85,4 +99,17 @@ export class CommentComponent implements OnInit {
         this.showTextArea = false;
     });
   }
+
+  like(){
+    this.toastr.error('not implemented yet');
+  }
+
+  replay(){
+    this.toastr.error('not implemented yet');
+  }
+
+  share(){
+    this.toastr.error('not implemented yet');
+  }
+
 }

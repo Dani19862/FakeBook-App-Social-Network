@@ -108,6 +108,8 @@ StudentAssets
 **/bin
 .obj
 .bin
+bin/
+obj/
 .vs
 .vs**
 **/appsettings.json

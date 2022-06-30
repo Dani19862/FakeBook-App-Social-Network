@@ -19,14 +19,13 @@ namespace API.Data
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
+        
         
 
-        public PostRepository(DataContext context, IMapper mapper, IUserRepository userRepository)
+        public PostRepository(DataContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _userRepository = userRepository;
         }
 
         // To Add new Post

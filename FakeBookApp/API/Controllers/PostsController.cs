@@ -90,7 +90,7 @@ namespace API.Controllers
         }
 
         // Get all posts of a user with pagination
-        // ToDo: make posts with pagination
+        // TODO: make posts with pagination
         // [HttpGet("{id}")]
         // public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
         // {

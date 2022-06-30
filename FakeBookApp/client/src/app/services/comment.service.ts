@@ -1,12 +1,9 @@
-import { User } from './../models/user';
-import { AccountService } from './account.service';
 import { Post } from 'src/app/models/post';
-import { MembersService } from 'src/app/services/members.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable, tap, pipe, ReplaySubject } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Member } from '../models/member';
 
 
@@ -16,18 +13,19 @@ import { Member } from '../models/member';
 })
 export class CommentService {
 
-  constructor(private http: HttpClient, private accountService: AccountService, private memberService :MembersService  ){ }
+  constructor(private http: HttpClient, private postService: PostsService){ }
 
   baseUrl = environment.apiUrl;
   comments: Comment[] = [];
   members: Member[] = [];
 
 
+
   // get all comments of Post
-  getComments(postId: number) : Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.baseUrl}comment/${postId}`)
-    .pipe( tap((comments: any) => this.comments = comments));
-  }
+    getComments(postId: number) : Observable<Comment[]> {
+      return this.http.get<Comment[]>(`${this.baseUrl}comment/${postId}`)
+      .pipe( tap((comments: any) => this.comments = comments));
+    }
 
     // create new comment
     createComment(comment: Comment |any, post: Post) : Observable<Comment> {
