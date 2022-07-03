@@ -53,7 +53,6 @@ export class FeedComponent implements OnInit, OnChanges {
     //get all posts without pagination
     getAllPosts()  {
       this.PostServices.getAllPosts(this.postParams).subscribe(posts => {
-        console.log('comments',this.commentsCount);
         this.$posts = posts;
 
       })

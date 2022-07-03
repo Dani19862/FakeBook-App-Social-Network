@@ -1,39 +1,50 @@
 
-  <div class=" d-flex justify-content-center">
-    <h1>Your Feed </h1>
-  </div> <br>
-<div class="container text-center">
-  <form #filterForm="ngForm" (ngSubmit)="getPostsWithSearchFilter()" autocomplete="off" class="d-flex" role="search">
-    <input class="form-control me-2 mt-3" type="string" placeholder="Search Post Or Comment" name="search" [(ngModel)]="postParams.search">
-    <button class="btn btn-primary mt-3"  type="submit">Apply Filter</button>
-    <button class="btn btn-danger ml-2 mt-3"  type="button" (click)="resetFilter()" >Reset Filter</button>
-  </form>
-  <form #postForm="ngForm" (ngSubmit)="createPost(postForm)">
-    <div class="form-group">
-      <input type="text" name="content" class="form-control me-2 mt-3" ngModel
-        placeholder="What Are You Thinking?">
-        <button class="btn btn-primary mt-3" type="submit">Post</button>
-    </div>
-  </form>
-</div>
-  <br><br><br> <br>
-  <div class="col-2 mt-5" *ngFor="let post$ of $posts">
-    <app-post-detail [post]="post$" ></app-post-detail>
-    <div class="container comment ">
-      <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post$)">
-        <div class="form-group">
-          <input type="text" name="content" class="form-control" [ngModel]
-            placeholder="+ Add a Comment">
-            <button class="btn btn-primary ml-2" type="submit">Comment</button>
+  <div class="container mt-3">
+    <div class="container">
+      <h1>Your Feed </h1>
+    </div> <br>
+  <div class="row d-flex justify-content-center">
+    <form #filterForm="ngForm" (ngSubmit)="getPostsWithSearchFilter()" autocomplete="off" class="d-flex" role="search">
+      <input class="form-control me-2 mt-3" type="string" placeholder="Search Post Or Comment" name="search" [(ngModel)]="postParams.search">
+      <button class="btn btn-primary mt-3"  type="submit">Apply Filter</button>
+      <button class="btn btn-danger ml-2 mt-3"  type="button" (click)="resetFilter()" >Reset Filter</button>
+    </form>
+    <div class="row d-flex  justify-content-center">
+      <form #postForm="ngForm" (ngSubmit)="createPost(postForm)">
+        <div class="d-flex">
+          <input type="text" name="content" class="form-control me-2 mt-3" ngModel
+            placeholder="What Are You Thinking?">
+            <button class="btn btn-primary mt-3 md-3" type="submit">Post</button>
         </div>
       </form>
-        <div class="row">
-          <div class="row-5" *ngFor="let comment of post$.comments">
-            <app-comment [comment]="comment" [post]="post$"></app-comment>
+    </div>
+    <div>
+    </div >
+
+    <div class="posts" *ngFor="let post$ of $posts">
+      <div class="row border border-info-1 mt-5 bg-light rounded ">
+        <app-post-detail [post]="post$" ></app-post-detail>
+        <form #commentForm="ngForm" (ngSubmit)="createComment(commentForm,post$)">
+          <div class="mt-2 mb-3">
+            <div class="d-flex">
+              <input type="text" name="content" class="form-control" [ngModel]
+               placeholder="+Add A Comment">
+                <button class="btn btn-primary d-flex ml-2" type="submit">Comment</button>
+            </div>
+              <div class="container justify-content-center col-7 mt-2 md-2">
+                <div  *ngFor="let comment of post$.comments" class="mt-2 md-2" >
+
+                    <app-comment [comment]="comment" [post]="post$"></app-comment>
+
+                </div>
+              </div>
           </div>
-        </div>
+        </form>
+      </div>
     </div>
   </div>
+  </div>
+
 
 
 

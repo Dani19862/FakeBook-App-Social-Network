@@ -22,7 +22,6 @@ namespace API.Helpers
 
             var user = await uow.UserRepository.GetUserByIdAsync(userId);
 
-
             user.LastActive = DateTime.Now;
 
             await uow.Complete();

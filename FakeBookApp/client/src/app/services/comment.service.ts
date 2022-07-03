@@ -1,5 +1,7 @@
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Comment } from './../models/comment';
 import { Post } from 'src/app/models/post';
-import { PostsService } from 'src/app/services/posts.service';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -13,7 +15,7 @@ import { Member } from '../models/member';
 })
 export class CommentService {
 
-  constructor(private http: HttpClient, private postService: PostsService){ }
+  constructor(private http: HttpClient, private toastr: ToastrService){ }
 
   baseUrl = environment.apiUrl;
   comments: Comment[] = [];
@@ -31,7 +33,7 @@ export class CommentService {
     createComment(comment: Comment |any, post: Post) : Observable<Comment> {
       let commentId = post.id;
 
-      const payload= {
+      const payload = {
       postId: commentId,
       content: comment.content,
       }
@@ -41,7 +43,7 @@ export class CommentService {
     // Get Photo URL of Member
     getPhotoURL(username: string)  {
       return this.http.get<Member>(`${this.baseUrl}users/${username}`).pipe(
-      tap(member => {this.members.push(member)}) // cache member
+      tap(member => {this.members.push(member)})
      )}
 
       // delete comment
@@ -50,7 +52,6 @@ export class CommentService {
       }
 
       // edit comment
-
       editComment(comment: Comment) {
         return this.http.put(`${this.baseUrl}comment`, comment);
       }

@@ -12,12 +12,12 @@ using API.interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using API.Helpers;
-//using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using API.Extensions;
 
 namespace API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CommentController : BaseApiController
     {
         private readonly IMapper _mapper;
@@ -112,6 +112,7 @@ namespace API.Controllers
 
 
         // Edit comment
+        //TODO : Edit comment -> after this call it goes to the AddComment method -> check why?
         [HttpPut]
         public async Task<ActionResult<CommentDto>> EditComment( CommentDto commentDto)
         {
@@ -120,13 +121,16 @@ namespace API.Controllers
 
             if (comment == null) return NotFound();
 
-           _mapper.Map(commentDto, comment);
+            comment.Content = commentDto.Content;
+
+            //  _mapper.Map(commentDto, comment);
 
             _unitOfWork.CommentRepository.EditComment(comment);
             
             if (await _unitOfWork.Complete())  return NoContent();
 
             return BadRequest("Could not edit comment");
+            
         }
 
     }

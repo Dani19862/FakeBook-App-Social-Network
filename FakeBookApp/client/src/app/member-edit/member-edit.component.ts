@@ -61,7 +61,6 @@ export class MemberEditComponent implements OnInit {
     this.memberService.updateMember(this.member).subscribe(() =>{
       this.toastr.success('Member updated successfully');
       this.editForm.reset(this.member); // reset the form to the original state
-      console.log(this.member);
     });
 
   }
@@ -69,7 +68,6 @@ export class MemberEditComponent implements OnInit {
   getUsersPosts() {
     this.postService.getUsersPosts(this.user.username).subscribe(posts => {
       this.posts = posts;
-      console.log(posts);
     })
   }
 

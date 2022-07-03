@@ -36,10 +36,7 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model)
     .subscribe(response => {
       this.router.navigateByUrl('/feed');
-      console.log(response);
-    }, () => {
       this.toastr.success('Logged in successfully');
-      console.log('Login complete');
     });
   }
 

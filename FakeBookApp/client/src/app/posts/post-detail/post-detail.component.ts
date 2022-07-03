@@ -1,10 +1,6 @@
-import { Observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Comment } from './../../models/comment';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { CommentComponent } from 'src/app/comment/comment/comment.component';
 import { LikeService } from 'src/app/services/like.service';
 import { Like } from 'src/app/models/like';
 
@@ -33,7 +29,6 @@ export class PostDetailComponent implements OnInit {
     this.numberOfComments = this.post.comments.length;
 
   }
-
 
   // display the current count of likes each post has
   getLikeCount(post: Post) {

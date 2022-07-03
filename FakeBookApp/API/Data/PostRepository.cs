@@ -59,11 +59,6 @@ namespace API.Data
 
             return await post;
 
-            // var post = _context.Posts.Where(p => p.Id == id).SingleOrDefault();
-
-            // var comments = await _context.Comments.Where(c => c.PostId == id).ToListAsync();
-
-            // return post;
         }
 
         //Get All Posts  => with pagination

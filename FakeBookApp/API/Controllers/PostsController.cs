@@ -64,9 +64,9 @@ namespace API.Controllers
 
             if (post == null) return NotFound();
 
-            _mapper.Map<PostDto>(post); 
+            post.Content = postDto.Content;
             
-             _unitOfWork.PostRepository.EditPost(post);
+            _unitOfWork.PostRepository.EditPost(post);
           
             if (await _unitOfWork.Complete()) return NoContent();  
 

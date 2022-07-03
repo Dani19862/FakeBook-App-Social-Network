@@ -1,7 +1,7 @@
 import { MessageService } from './../../services/message.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { MembersService } from './../../services/members.service';
-import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member';
 import { ActivatedRoute } from '@angular/router';
 import {NgxGalleryOptions} from '@kolkov/ngx-gallery';
@@ -49,6 +49,8 @@ export class MemberDetailComponent implements OnInit {
       params['tab'] ? this.selectTab(params['tab']) : this.selectTab(0);
     });
     this.getUsersPosts();
+
+    // console.log(this.member);
   }
 
   getImages(): NgxGalleryImage[]{
@@ -79,13 +81,15 @@ export class MemberDetailComponent implements OnInit {
 
   }
 
+  //TODO - check this Error in the console: "Cannot read 'tabs'
   selectTab(tabId: number) {
-    this.memberTabs.tabs[tabId].active = true;
+    //this.memberTabs.tabs[tabId].active = true;
+
   }
 
   onTabActivated(data: TabDirective){
     this.activeTab = data;
-    if(this.activeTab.heading === 'Messages' && this.messages.length === 0) {
+    if(this.activeTab?.heading === 'Messages' && this.messages?.length === 0) {
       this.loadMessages();
     }
   }
