@@ -1,4 +1,3 @@
-import { MessageService } from './../../services/message.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { MembersService } from './../../services/members.service';
 import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
@@ -10,6 +9,7 @@ import {NgxGalleryAnimation} from '@kolkov/ngx-gallery';
 import { Post } from 'src/app/models/post';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Message } from 'src/app/models/message';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -93,7 +93,7 @@ export class MemberDetailComponent implements OnInit {
   }
 
   loadMessages() {
-    this.messageService.getMessageThread(this.member.username).subscribe(messages => {
+    this.messageService.getMessageThread(this.member.username).subscribe((messages : Message| any) => {
       this.messages = messages;
     })
   }

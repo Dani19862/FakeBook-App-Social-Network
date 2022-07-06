@@ -1,12 +1,12 @@
-import { ShowComments } from './../models/showComments';
-import { CommentService } from './comment.service';
+
+
 import { BehaviorSubject, map, observable, Observable, tap } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post';
-import { PaginatedResult } from '../models/pagination';
 import { PostParams } from '../models/postParams';
+import { ShowComments } from '../models/showComments';
 
 @Injectable({
   providedIn: 'root'
