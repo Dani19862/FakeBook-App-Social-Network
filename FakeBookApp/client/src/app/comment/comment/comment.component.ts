@@ -8,6 +8,7 @@ import { Post } from 'src/app/models/post';
 import { Member } from 'src/app/models/member';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { PostsService } from 'src/app/services/posts.service';
 
 
 
@@ -21,24 +22,28 @@ export class CommentComponent implements OnInit {
 
   @Input() comment!: Comment ;
   @Input () post!: Post;
+
   member: Member;
   user:User;
 
+
   currentUser$: Observable<User | null>;
   showTextArea = false;
+  numberOFComments: number;
+  showComments: boolean = false;
 
   @ViewChild('editForm') editForm: NgForm
 
-  constructor(private commentService: CommentService,private accountService: AccountService, private toastr: ToastrService) {
+  constructor(private commentService: CommentService,private accountService: AccountService, private toastr: ToastrService, private postsService: PostsService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
    }
 
 
   ngOnInit() {
-    // console.log(this.comment);
+
     // TODO: make func get photo more efficient
     this.getPhoto()
-
+    this.showCommentsFunc();
   }
 
   getPhoto(){
@@ -59,12 +64,7 @@ export class CommentComponent implements OnInit {
     return this.commentService.getPhotoURL(this.comment.username)
     .subscribe(member => {
       this.member = member;
-      if(this.member.photoUrl)
-        {console.log(this.member.photoUrl);}
-      else{
-        this.member.photoUrl = "./assets/user.png";
-        {console.log(this.member.photoUrl);}
-      }
+     
      }
     );
   }
@@ -72,12 +72,12 @@ export class CommentComponent implements OnInit {
   // delete comment
   deleteComment(commentId: number) {
     this.commentService.deleteComment(commentId).subscribe(() => {
-      this.post.comments.splice(this.post.comments.findIndex(comment => comment.id === commentId ), 1);
+      this.post.comments.splice(this.post.comments.findIndex(comment => comment.id === commentId ), 1)
       this.toastr.success('Comment deleted successfully');
     });
   }
 
-  // edit comment
+  // edit comment => show text area and fill the form with the current comment
   editComment(comment: Comment | any) {
     this.commentService.editComment(comment).subscribe(() => {
         this.comment = comment;
@@ -85,4 +85,26 @@ export class CommentComponent implements OnInit {
         this.showTextArea = false;
     });
   }
+
+  // show comments => subscribe to the showComments behavior subject un the post service to find out whther to show comments or not
+  showCommentsFunc(){
+    this.postsService.showComments.subscribe(show =>{
+      if(show.id == this.post.id){
+        this.showComments = show.show;
+      }
+    })
+  }
+
+  like(){
+    this.toastr.error('not implemented yet');
+  }
+
+  replay(){
+    this.toastr.error('not implemented yet');
+  }
+
+  share(){
+    this.toastr.error('not implemented yet');
+  }
+
 }

@@ -90,24 +90,7 @@ namespace API.Data
             _context.Entry<AppUser>(user).State = EntityState.Modified; //update user in database 
         }
 
-        //Search filter accept him self
-
-        // public async Task<PagedList<MemberDto>> Search(string search, UserParams userParams)
-        // {
-        //     var query = _context.Users.AsQueryable();
-        //     if (!string.IsNullOrEmpty(userParams.Search) && userParams.CurrentUsername != query.)
-        //     {
-        //         query = query.Where(u => u.UserName.ToLower().Contains(userParams.Search.ToLower()) ||
-        //                                  u.KnownAs.ToLower().Contains(userParams.Search.ToLower()));
-        //     }
-           
-        //     return await PagedList<MemberDto>.CreateAsync
-        //     (
-        //         query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
-        //         userParams.PageNumber,
-        //         userParams.PageSize
-        //     );
-        // }
+       
 
     }
 }

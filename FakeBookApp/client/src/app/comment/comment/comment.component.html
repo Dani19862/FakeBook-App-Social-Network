@@ -1,47 +1,47 @@
-<div class="container">
-  <div class="d-flex justify-content-center row">
-      <div class="col-md-8">
+
+      <div class="col-md-8" *ngIf="showComments">
           <div class="d-flex flex-column comment-section">
-              <div class="p-2 border bg-white">
+              <div class="comments-details p-2 border bg-white">
                   <div class="d-flex">
-                    <div class="btn-group" dropdown  *ngIf="user.username == comment.username " >
-                      <button id="button-animated" form="editForm" dropdownToggle type="button" class="btn btn-primary border dropdown-toggle d-flex flex-column justify-content-end"
+                    <div dropdown  *ngIf="user.username == comment.username " >
+                      <button id="button-animated" form="editForm" dropdownToggle type="button" class="btn btn-primary  dropdown-toggle content-end"
                               aria-controls="dropdown-animated">
                          <span class="caret"></span>
                       </button>
-                      <span class="d-flex justify-content-end">
-                        <ul  id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                      <div class="d-flex justify-content-end">
+                        <ul  id="dropdown-animated" *dropdownMenu class="dropdown-menu animated fadeIn"
                            role="menu" aria-labelledby="button-animated">
                          <li role="menuitem"><a class="dropdown-item text-primary font-weight-bold" (click)="showTextArea=true">Edit Comment</a></li>
                          <li role="menuitem"><a class="dropdown-item text-danger font-weight-bold" (click)="deleteComment(comment.id)">Delete Comment</a>
                          </li>
                        </ul>
-                      </span>
+                      </div>
                     </div>
                     <img class="rounded-circle" src="{{member.photoUrl || './assets/user.png'}}"  alt="member.photoUrl" width="40">
                       <div class="d-flex flex-column justify-content-start ml-2">
                         <span class="d-block font-weight-bold name">{{comment.username}}</span>
-                        <span class="date text-black-50">{{comment.created | date}}</span>
+                        <span class="date text-black-50">{{comment.created | timeago}}</span>
                       </div>
                   </div>
                   <div class="mt-2">
                       <div class="comment-text">{{comment.content}}</div>
                       <span *ngIf="user.username == comment.username && showTextArea">
                         <textarea [(ngModel)]="comment.content" class= textarea name="content" cols="5" rows="2"></textarea>
-                        <button  class="btn btn-danger" (click)="showTextArea=false">Cancel</button>
-                        <button  class="btn btn-primary ml-1" (click)="editComment(comment)">Save</button>
+                        <button  class="btn btn-danger" (click)="showTextArea = false">Cancel</button>
+                        <button type="button"  class="btn btn-primary ml-1 cursor" (click)="editComment(comment)">Save</button>
                       </span>
                   </div>
               </div>
               <div class="bg-white border">
                   <div class="d-flex justify-content-end flex-row fs-12">
-                      <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
-                      <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
-                      <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                      <div class="like p-2 cursor" (click)="like()"><i class="fa fa-thumbs-o-up"></i>Like</div>
+                      <div class="like p-2 cursor"(click)="replay()"><i class="fa fa-commenting-o"></i><span class="ml-1">Comment</span></div>
+                      <div class="like p-2 cursor" (click)="share()"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
                   </div>
               </div>
+
           </div>
       </div>
-  </div>
-</div>
+
+
 

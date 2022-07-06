@@ -11,7 +11,6 @@ namespace API.Data
 
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
 
         public UnitOfWork(DataContext context, IMapper mapper, IConfiguration config)
         {
@@ -22,11 +21,13 @@ namespace API.Data
      
         public IUserRepository UserRepository => new UserRepository(_context, _mapper ); 
         
-        public IPostRepository PostRepository => new PostRepository(_context , _mapper, _userRepository);
+        public IPostRepository PostRepository => new PostRepository(_context , _mapper);
 
         public ICommentRepository CommentRepository => new CommentRepository(_context, _mapper);
 
         public ILikeRepository LikeRepository => new LikeRepository(_context, _mapper);
+
+        public IMessageRepository MessageRepository => new MessageRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {

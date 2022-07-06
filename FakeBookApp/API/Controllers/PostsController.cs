@@ -64,9 +64,9 @@ namespace API.Controllers
 
             if (post == null) return NotFound();
 
-            _mapper.Map<PostDto>(post); 
+            post.Content = postDto.Content;
             
-             _unitOfWork.PostRepository.EditPost(post);
+            _unitOfWork.PostRepository.EditPost(post);
           
             if (await _unitOfWork.Complete()) return NoContent();  
 
@@ -90,7 +90,7 @@ namespace API.Controllers
         }
 
         // Get all posts of a user with pagination
-        // ToDo: make posts with pagination
+        // TODO: make posts with pagination
         // [HttpGet("{id}")]
         // public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
         // {

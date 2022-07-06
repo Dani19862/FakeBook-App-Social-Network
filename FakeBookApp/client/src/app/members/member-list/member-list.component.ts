@@ -15,8 +15,6 @@ export class MemberListComponent implements OnInit {
 
   members: Member[];
   pagination: Pagination;
-  // pageNumber  = 1;
-  // pageSize = 5;
   userParams: UserParams;
 
 
@@ -28,6 +26,8 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();
   }
 
+
+  // get all members
   loadMembers() {
     this.memberService.UserParams = this.userParams;
     this.memberService.getMembers(this.userParams).subscribe(
@@ -38,20 +38,19 @@ export class MemberListComponent implements OnInit {
     )
   }
 
+
+  // reset filters
   resetFilters() {
     this.userParams = this.memberService.resetUserParams();
     this.loadMembers();
   }
 
+  // change page while pagination is working and load the members
   pageChanged({ page }: any) {
    this.userParams.pageNumber = page;
    this.memberService.UserParams = this.userParams;
     this.loadMembers();
   }
 
-  // resetFilters() {
-  //   this.userParams = this.memberService.resetUserParams();
-  //   this.loadMembers();
-  // }
 }
 

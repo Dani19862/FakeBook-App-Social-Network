@@ -1,2 +1,65 @@
-<p>messages works!</p>
+<div class="row mb-4">
+  <div class="btn-group" name="container">
+    <button class="btn btn-primary" btnRadio="Unread" [(ngModel)]="container" (click)="getMessages()">
+      <i class="fa fa-envelope"></i> Unread
+    </button>
+    <button class="btn btn-primary" btnRadio="Inbox" [(ngModel)]="container" (click)="getMessages()">
+      <i class="fa fa-envelope-open"></i> Inbox
+    </button>
+    <button class="btn btn-primary" btnRadio="Outbox" [(ngModel)]="container" (click)="getMessages()">
+      <i class="fa fa-paper-plane"></i> Outbox
+    </button>
+  </div>
+</div>
 
+<div class="row" [ngSwitch]="messages.length">
+  <h3 *ngSwitchCase="0">No messages</h3>
+  <table *ngSwitchDefault class="table table-hover" style="cursor: pointer;"  >
+    <thead>
+      <tr>
+        <th style="width: 38%;">Messages</th>
+        <th style="width: 15%;">From / To</th>
+        <th style="width: 15%;">Sent / Received</th>
+        <th style="width: 15%;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [hidden]="loading" *ngFor="let message of messages"
+       [queryParams]="{tab:2}"
+        [routerLink]="'/members/' + (container === 'Outbox' ? message.recipientName : message.senderName)">
+
+        <td>{{message.content}}</td>
+        <td>
+          <ng-container [ngSwitch]="container">
+
+            <div *ngSwitchCase="'Outbox'">
+              <img
+                class="img-circle rounded-circle mr-2"
+                src="{{message.recipientPhotoUrl || './assets/user.png'}}"
+                alt="{{message.recipientName}}">
+              <strong>{{message.recipientName | titlecase}}</strong>
+            </div>
+            <div *ngSwitchDefault>
+              <img
+                class="img-circle rounded-circle mr-2"
+                src="{{message.senderPhotoUrl || './assets/user.png'}}"
+                alt="{{message.senderName}}">
+              <strong>{{message.senderName | titlecase}}</strong>
+            </div>
+          </ng-container>
+        </td>
+        <td>{{message.messageSent | timeago}}</td>
+        <td>
+          <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)"  class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div  class="d-flex justify-content-center" *ngIf="pagination && !loading">
+  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemPerPage"
+    [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+    nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
+</div>

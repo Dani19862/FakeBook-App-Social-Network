@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, of, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Like } from '../models/like.interface';
+import { Like } from '../models/like';
 import { Post } from '../models/post';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenType } from '../models/token.type';

@@ -1,5 +1,6 @@
+import { ShowComments } from './../models/showComments';
 import { CommentService } from './comment.service';
-import { map, observable, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, observable, Observable, tap } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -16,11 +17,9 @@ export class PostsService {
   postParams : PostParams
   //paginatedResult: PaginatedResult<Post[]> = new PaginatedResult<Post[]>(); not used for now
 
+  public showComments = new BehaviorSubject<ShowComments>({show: false});
 
-
-  constructor(private http: HttpClient) {
-
-   }
+  constructor(private http: HttpClient) {}
 
 
   // getallPosts(page?:number, itemsPerPage?:number) : Observable <PaginatedResult<Post[]>> {
@@ -64,7 +63,7 @@ export class PostsService {
       })
     );
 
-   
+
 
   }
 
@@ -91,10 +90,6 @@ export class PostsService {
 
   }
 
-  // get post by id
-  getPost(id: number) {
-    return this.http.get<Post>(`${this.baseUrl}post/${id}`);
-  }
 
   // reset filter
   resetFilter() {

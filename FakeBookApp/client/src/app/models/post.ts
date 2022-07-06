@@ -1,5 +1,5 @@
 import {Comment} from '../models/comment';
-import { Like } from './like.interface';
+import { Like } from './like';
 
 export interface Post {
   id: number;

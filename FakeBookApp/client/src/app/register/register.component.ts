@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from './../services/account.service';
@@ -80,7 +79,6 @@ export class RegisterComponent implements OnInit {
       }
     }
     )
-    console.log(this.registerForm.value);
   }
   cancel(){
     this.cancelRegister.emit(false);

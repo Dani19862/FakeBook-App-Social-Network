@@ -74,6 +74,7 @@ namespace API.Controllers
             };
         }
 
+        // this method checks if user exist in database
         private async Task<bool> UserExist(string username)
         {
             return await _context.Users.AnyAsync(x => x.UserName.ToLower() == username.ToLower());

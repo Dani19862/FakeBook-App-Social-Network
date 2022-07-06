@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5001/api/'
-        
+   apiUrl: 'https://localhost:5001/api/'     // vsCode
+  //apiUrl: 'https://localhost:44326/api/'   // Vs
+
 
 };
 

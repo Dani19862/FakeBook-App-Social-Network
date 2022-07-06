@@ -1,20 +1,37 @@
-.container{
-
-  margin-left: 365px;
-  background: #F5F5F5;
-  width: 1100px;
-  height: 101px;
+.publish {
+  padding: 0px;
+  cursor: pointer;
 }
-.form-group{
-  margin-top: 1rem;
-  background: #F5F5F5;
-  width: 1100px;
-  display: flex;
 
+.btn{
+
+  border-radius: 4px;
+  background-color: #614cef;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
 }
-.comment{
-  margin-left: 365px;
-  background: #F5F5F5;
-  width: 1100px;
-  height: auto;
+.btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn:hover span {
+  padding-right: 10px;
+  
 }

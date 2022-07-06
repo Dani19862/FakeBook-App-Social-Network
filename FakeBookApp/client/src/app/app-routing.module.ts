@@ -34,7 +34,7 @@ const routes: Routes = [
     ]
   },
 
-  { path : 'feed', component: FeedComponent},
+  { path : 'feed', component: FeedComponent, canActivate: [AuthGuard] },
 
   {
     path: 'errors', component: TestErrorsComponent

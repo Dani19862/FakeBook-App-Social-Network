@@ -1,12 +1,10 @@
-import { Observable, Subscription } from 'rxjs';
+import { PostsService } from 'src/app/services/posts.service';
+import { ShowComments } from './../../models/showComments';
 import { ToastrService } from 'ngx-toastr';
-import { Comment } from './../../models/comment';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { CommentComponent } from 'src/app/comment/comment/comment.component';
 import { LikeService } from 'src/app/services/like.service';
-import { Like } from 'src/app/models/like.interface';
+import { Like } from 'src/app/models/like';
 
 
 
@@ -17,23 +15,23 @@ import { Like } from 'src/app/models/like.interface';
 })
 export class PostDetailComponent implements OnInit {
   @Input() post: Post;
-  @Output() showCommentsEvent = new EventEmitter<boolean>();
-  //showComments: boolean = false;
-  likeCount: any;
+  likeCount: number;
   isLiked = false;
   like: Like;
-  isComment = false;
+  commentsCount: number;
+  showComments : ShowComments;
 
 
-
-  constructor(private likeService : LikeService, private toastr: ToastrService) { }
+  constructor(private likeService : LikeService, private toastr: ToastrService, private postService: PostsService) { }
 
 
   ngOnInit(): void {
     this.getLikeCount(this.post)
-    console.log(this.post.comments);
-  }
+    this.showComments = {show: false, id: this.post.id};
+    this.commentsCount = this.post.comments.length;
+    this.showCommentsFunc();
 
+  }
 
   // display the current count of likes each post has
   getLikeCount(post: Post) {
@@ -41,7 +39,6 @@ export class PostDetailComponent implements OnInit {
       this.likeCount = data.likeCount;
       this.isLiked = data.isLiked;
 
-      // console.log(data.likeCount);
     });
   }
 
@@ -49,7 +46,6 @@ export class PostDetailComponent implements OnInit {
     this.likeService.addLike(post)?.subscribe((likeCount) => {
       this.toastr.success(`You liked ${post.username}'s post`);
       this.likeCount = likeCount;
-      // console.log(likeCount);
       this.isLiked = true;
       });
   }
@@ -62,8 +58,27 @@ export class PostDetailComponent implements OnInit {
     });
   }
 
+  //show comments for a post
+  showCommentsFunc(){
+    this.postService.showComments.subscribe(show =>{
+      if (show.id == this.post.id){
+        this.showComments.show = show.show;
+      }
+    })
+  }
+
+
+
   showCommentsButton() {
-   this.showCommentsEvent.emit(true);
+   if (this.showComments.id == this.post.id && this.commentsCount > 0){
+      this.showComments.show = !this.showComments.show;
+      this.postService.showComments.next(this.showComments);
+    }
+    else if (this.commentsCount <= 0){
+      this.showComments.show = true;
+      this.postService.showComments.next(this.showComments);
+      this.toastr.error(`You have no comments to show`);
+    }
 
   }
 
