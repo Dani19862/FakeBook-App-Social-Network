@@ -21,10 +21,7 @@ In this project was used Repository and UnitOfWork design patterns.
   - Go to feed page and publich posts and comments, marks likeson posts.
   - go to member to watch your card's friends, send them a meesages.
   
-  ### 4. Entities&RealationShip :
-  
-  -AppUser : implement User 
-  
+   
   ### This applictaion developed by _Daniel Levy
   ## mail : daniellevy1989@gmail.com
   
