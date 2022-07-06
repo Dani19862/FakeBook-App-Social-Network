@@ -12,6 +12,7 @@ namespace API.Extensions
 {
     public static class IdentityServiceExtensions
     {
+        // Add JWT Bearer Authentication to the service collection.
         public static IServiceCollection AddIdentityServices(this IServiceCollection services,IConfiguration config)
         {
             

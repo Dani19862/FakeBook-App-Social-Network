@@ -64,12 +64,7 @@ export class CommentComponent implements OnInit {
     return this.commentService.getPhotoURL(this.comment.username)
     .subscribe(member => {
       this.member = member;
-      // if(this.member.photoUrl)
-      //   {console.log(this.member.photoUrl);}
-      // else{
-      //   this.member.photoUrl = "./assets/user.png";
-      //   {console.log(this.member.photoUrl);}
-      // }
+     
      }
     );
   }
@@ -82,7 +77,7 @@ export class CommentComponent implements OnInit {
     });
   }
 
-  // edit comment
+  // edit comment => show text area and fill the form with the current comment
   editComment(comment: Comment | any) {
     this.commentService.editComment(comment).subscribe(() => {
         this.comment = comment;
@@ -92,7 +87,6 @@ export class CommentComponent implements OnInit {
   }
 
   // show comments => subscribe to the showComments behavior subject un the post service to find out whther to show comments or not
-
   showCommentsFunc(){
     this.postsService.showComments.subscribe(show =>{
       if(show.id == this.post.id){

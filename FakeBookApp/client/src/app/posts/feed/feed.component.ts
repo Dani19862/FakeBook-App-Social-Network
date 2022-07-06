@@ -1,8 +1,6 @@
 import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
-import { PostDetailComponent } from './../post-detail/post-detail.component';
-import { Comment } from './../../models/comment';
 import { ToastrService } from 'ngx-toastr';
 
 import { PostsService } from '../../services/posts.service';
@@ -85,14 +83,7 @@ export class FeedComponent implements OnInit, OnChanges {
 
       })
     }
-    /*
-    Hello, I am a comment.
-    */
-    getPost(id: number) {
-      this.postServices.getPost(id).subscribe(post => {
-        this.$post = post;
-      });
-    }
+ 
 
     // create new comment
     createComment(commentForm: NgForm, post: Post) {

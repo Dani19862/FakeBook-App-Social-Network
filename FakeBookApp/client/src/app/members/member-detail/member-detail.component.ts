@@ -49,8 +49,6 @@ export class MemberDetailComponent implements OnInit {
       params['tab'] ? this.selectTab(params['tab']) : this.selectTab(0);
     });
     this.getUsersPosts();
-
-    // console.log(this.member);
   }
 
   getImages(): NgxGalleryImage[]{

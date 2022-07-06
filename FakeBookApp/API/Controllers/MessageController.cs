@@ -24,6 +24,7 @@ namespace API.Controllers
             
         }
 
+        // add new message => send a message to a user
         [HttpPost]
         public async Task<ActionResult<MessageDto>> AddMessage(CreateMessageDto createMessageDto)
         {
@@ -62,6 +63,8 @@ namespace API.Controllers
             
         }
 
+
+        // get all messages => get all messages between two users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams)
         {
@@ -75,6 +78,7 @@ namespace API.Controllers
             return Ok(messages);
         }
 
+        // display all messages => get all messages between two users
         [HttpGet("thread/{username}")]
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
         {
@@ -83,8 +87,8 @@ namespace API.Controllers
 
             return Ok(messageThread);
         }
-
-
+    
+        // delete message
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMessage(int id)
         {

@@ -71,9 +71,7 @@ namespace API.Data
         // Get photo url by userId
         public string GetPhotoUrlAsync(int userId)
         {
-            // var comment = await _context.Comments.FirstOrDefaultAsync(c => c.AppUser.UserName == username);
-            // return comment.PhotoUrl;
-
+           
             var photos =  _context.Photos.Where(p => p.AppUserId == userId).ToList();
             var photo = photos.Where(p => p.IsMain).FirstOrDefault();
 

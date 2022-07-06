@@ -19,9 +19,7 @@ export class PostsService {
 
   public showComments = new BehaviorSubject<ShowComments>({show: false});
 
-  constructor(private http: HttpClient) {
-
-   }
+  constructor(private http: HttpClient) {}
 
 
   // getallPosts(page?:number, itemsPerPage?:number) : Observable <PaginatedResult<Post[]>> {
@@ -92,11 +90,6 @@ export class PostsService {
 
   }
 
-  // get post by id
-  getPost(id: number) : Observable<Post> {
-    return this.http.get<Post>(`${this.baseUrl}post/${id}`).pipe(
-      tap((post : Observable<Post> | any) => this.posts = post));
-  }
 
   // reset filter
   resetFilter() {

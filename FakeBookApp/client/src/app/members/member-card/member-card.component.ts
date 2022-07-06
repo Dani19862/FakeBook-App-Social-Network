@@ -11,8 +11,5 @@ export class MemberCardComponent  {
   @Input() member!: Member;
 
 
- 
-
-
 
 }

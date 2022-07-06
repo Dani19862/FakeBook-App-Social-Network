@@ -29,22 +29,18 @@ namespace API.Controllers
             
         }
 
-        // Add new Like
+        // Add new Like => like a post
         [HttpPost]
         public async Task<ActionResult<LikeDto>> AddLike(LikeDto likeDto)
         {
             var appUserid = User.GetUserId(); //get username from token => NameId
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(appUserid);
             
-            //var user = await _unitOfWork.UserRepository.GetUserByIdAsync(likeDto.LikerId);
-            //var post = await _unitOfWork.PostRepository.GetPostByIdAsync(likeDto.PostId);
-            //var comment = await _unitOfWork.CommentRepository.GetCommentByIdAsync(likeDto.CommentId);
-           
             if (user == null) return BadRequest("User not found");
 
             var isExist = await _unitOfWork.LikeRepository.IsExist(likeDto.PostID, likeDto.LikerId);
             
-            if (isExist) return BadRequest("You already exists like this post"); 
+            if (isExist) return BadRequest("You already liked this post"); 
 
             var like = new Like 
             {
@@ -64,7 +60,7 @@ namespace API.Controllers
 
         }
 
-        // Delete Like
+        // Delete Like => unlike a post
         [HttpDelete("{postId},{likerId}")]
         public async Task<ActionResult<LikeDto>> DeleteLike(int postId, int likerId)
         {
@@ -82,6 +78,7 @@ namespace API.Controllers
             return BadRequest("Could not delete like");
         }
 
+        // Get Like Count for a post by postId
         [HttpGet("{postId}")]
         public async Task<ActionResult<LikeDto>> GetLikeCount(int postId)
         {
