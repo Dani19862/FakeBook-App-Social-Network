@@ -1,5 +1,5 @@
-<div class="container mt-2">
-  <div class="bg-white border mt-1 ml-1 mr-3">
+<div class="container  mt-2">
+  <div class="bg-white border mt-1 ">
     <div>
       <div class="d-flex flex-row justify-content-between align-items-center p-2 border-bottom">
         <div class="d-flex flex-row align-items-center feed-text px-2">
@@ -16,10 +16,11 @@
         <div class="p-2 px-3">{{post.content}}
         </div>
         <div class="d-flex justify-content-end p-2 py-3">
-          <li *ngIf="!isLiked" class="list-inline-item "><button class="btn" (click)="addLike(post)"><i class="fa fa-thumbs-o-up text-muted"> &nbsp; {{likeCount}}  </i></button></li>
-          <li *ngIf="isLiked" class="list-inline-item cursor"><button class="btn" (click)="deleteLike(post)"><i class=" fa fa-thumbs-up text-primary"> &nbsp; {{likeCount}}  </i></button></li>
-          <li class="list-inline-item"><button class="btn" ><i class="fa fa-comments-o"></i> &nbsp; {{numberOfComments}}</button></li>
-          <!-- <li class="list-inline-item"><button class="btn" ><i class="fa fa-comments-o"></i> &nbsp; {{numberOfComments -1}}</button></li> -->
+          <li *ngIf="!isLiked"class="  list-inline-item ">&nbsp;<button class="btn" (click)="addLike(post)"> &nbsp;<i class="fa fa-thumbs-o-up text-muted"> </i></button> likes : &nbsp; {{likeCount}}  </li>
+          <li *ngIf="isLiked" class="  list-inline-item ">&nbsp;<button class="btn" (click)="deleteLike(post)"> &nbsp;<i class=" fa fa-thumbs-up text-primary"> </i></button>&nbsp;likes :  {{likeCount}}</li>
+          <li class="list-inline-item">
+            <button title="click to show the comments" class="btn" type="button" (click)="showCommentsButton()" ><i class="fa fa-comments-o"> </i> </button>
+            comments : &nbsp; {{commentsCount}}</li>
    </div>
 </div>
 

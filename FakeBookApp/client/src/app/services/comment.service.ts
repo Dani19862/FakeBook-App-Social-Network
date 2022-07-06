@@ -37,7 +37,8 @@ export class CommentService {
       postId: commentId,
       content: comment.content,
       }
-      return this.http.post<Comment>(`${this.baseUrl}comment`, payload);
+      debugger;
+      return this.http.post<Comment>(`${this.baseUrl}comment/create`, payload);
     }
 
     // Get Photo URL of Member
@@ -53,7 +54,9 @@ export class CommentService {
 
       // edit comment
       editComment(comment: Comment) {
-        return this.http.put(`${this.baseUrl}comment`, comment);
+        debugger;
+        return this.http.put(`${this.baseUrl}comment/edit`, comment);
+
       }
 
   }

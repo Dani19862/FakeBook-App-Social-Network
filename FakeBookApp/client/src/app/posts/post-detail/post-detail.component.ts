@@ -1,3 +1,5 @@
+import { PostsService } from 'src/app/services/posts.service';
+import { ShowComments } from './../../models/showComments';
 import { ToastrService } from 'ngx-toastr';
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
@@ -13,20 +15,21 @@ import { Like } from 'src/app/models/like';
 })
 export class PostDetailComponent implements OnInit {
   @Input() post: Post;
-  // @Output() showCommentsEvent = new EventEmitter<number>();
   likeCount: number;
   isLiked = false;
   like: Like;
-  numberOfComments: number;
+  commentsCount: number;
+  showComments : ShowComments;
 
 
-
-  constructor(private likeService : LikeService, private toastr: ToastrService) { }
+  constructor(private likeService : LikeService, private toastr: ToastrService, private postService: PostsService) { }
 
 
   ngOnInit(): void {
     this.getLikeCount(this.post)
-    this.numberOfComments = this.post.comments.length;
+    this.showComments = {show: false, id: this.post.id};
+    this.commentsCount = this.post.comments.length;
+    this.showCommentsFunc();
 
   }
 
@@ -55,15 +58,29 @@ export class PostDetailComponent implements OnInit {
     });
   }
 
-  // showCommentsButton(post: Post) {
-  //   if(post.comments.length > 0){
-  //     this.showCommentsEvent.emit(post.id);
-  //     console.log('pd', post.id)
-  //   }
-  //   else{
-  //     this.toastr.error(`No comments for this post`);
-  //   }
-  // }
+  //show comments for a post
+  showCommentsFunc(){
+    this.postService.showComments.subscribe(show =>{
+      if (show.id == this.post.id){
+        this.showComments.show = show.show;
+      }
+    })
+  }
+
+
+
+  showCommentsButton() {
+   if (this.showComments.id == this.post.id && this.commentsCount > 0){
+      this.showComments.show = !this.showComments.show;
+      this.postService.showComments.next(this.showComments);
+    }
+    else if (this.commentsCount <= 0){
+      this.showComments.show = true;
+      this.postService.showComments.next(this.showComments);
+      this.toastr.error(`You have no comments to show`);
+    }
+
+  }
 
 
 

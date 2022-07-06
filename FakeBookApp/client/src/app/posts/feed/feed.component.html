@@ -6,10 +6,10 @@
   <div class="row d-flex justify-content-center">
     <form #filterForm="ngForm" (ngSubmit)="getPostsWithSearchFilter()" autocomplete="off" class="d-flex" role="search">
       <input class="form-control me-2 mt-3" type="string" placeholder="Search Post Or Comment" name="search" [(ngModel)]="postParams.search">
-      <button class="btn btn-primary mt-3"  type="submit">Apply Filter</button>
-      <button class="btn btn-danger ml-2 mt-3"  type="button" (click)="resetFilter()" >Reset Filter</button>
+      <button class="btn btn-primary mt-3"  type="submit"><span> </span> Apply Filter</button>
+      <button class="btn btn-danger ml-2 mt-3"  type="button" (click)="resetFilter()" ><span></span> Reset Filter</button>
     </form>
-    <div class="row d-flex  justify-content-center">
+    <div class="row publish d-flex justify-content-center">
       <form #postForm="ngForm" (ngSubmit)="createPost(postForm)">
         <div class="d-flex">
           <input type="text" name="content" class="form-control me-2 mt-3" ngModel
@@ -30,12 +30,10 @@
               <input type="text" name="content" class="form-control" [ngModel]
                placeholder="+Add A Comment">
                 <button class="btn btn-primary d-flex ml-2" type="submit">Comment</button>
-            </div>
-              <div class="container justify-content-center col-7 mt-2 md-2">
+            </div >
+              <div class="main-comment  mt-2" >
                 <div  *ngFor="let comment of post$.comments" class="mt-2 md-2" >
-
                     <app-comment [comment]="comment" [post]="post$"></app-comment>
-
                 </div>
               </div>
           </div>

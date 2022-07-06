@@ -1,14 +1,18 @@
-import { PostDetailComponent } from './../post-detail/post-detail.component';
-import { PostParams } from './../../models/postParams';
-import { ToastrService } from 'ngx-toastr';
-import { Comment } from './../../models/comment';
 import { NgForm } from '@angular/forms';
 import { Component, Input, OnInit, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import {  Pagination } from '../../models/pagination';
-import { Post } from '../../models/post';
+
+import { PostDetailComponent } from './../post-detail/post-detail.component';
+import { Comment } from './../../models/comment';
+import { ToastrService } from 'ngx-toastr';
+
 import { PostsService } from '../../services/posts.service';
 import { CommentService } from 'src/app/services/comment.service';
-import { Member } from 'src/app/models/member';
+
+import {  Pagination } from '../../models/pagination';
+import { PostParams } from './../../models/postParams';
+import { Post } from '../../models/post';
+import { ShowComments } from './../../models/showComments';
+
 
 @Component({
   selector: 'app-feed',
@@ -22,7 +26,7 @@ export class FeedComponent implements OnInit, OnChanges {
   $posts: Post[] = [];
   $post : Post
   commentsCount: number;
-
+  showComments: ShowComments;
 
 
   postParams : PostParams = {
@@ -36,7 +40,10 @@ export class FeedComponent implements OnInit, OnChanges {
   @ViewChild('filterForm') filterForm: NgForm;
 
 
-  constructor(private PostServices: PostsService, private commentService: CommentService, private toastr: ToastrService) {}
+  constructor(
+    private postServices: PostsService,
+    private commentService: CommentService,
+    private toastr: ToastrService) {}
 
   ngOnChanges(): void {
     this.resetFilter();
@@ -52,7 +59,7 @@ export class FeedComponent implements OnInit, OnChanges {
 
     //get all posts without pagination
     getAllPosts()  {
-      this.PostServices.getAllPosts(this.postParams).subscribe(posts => {
+      this.postServices.getAllPosts(this.postParams).subscribe(posts => {
         this.$posts = posts;
 
       })
@@ -60,7 +67,7 @@ export class FeedComponent implements OnInit, OnChanges {
 
     // get posts with Search Filter
     getPostsWithSearchFilter() {
-      this.PostServices.getAllPosts(this.postParams).subscribe(posts => {
+      this.postServices.getAllPosts(this.postParams).subscribe(posts => {
         this.$posts = posts;
         this.filterForm.reset();
 
@@ -70,7 +77,7 @@ export class FeedComponent implements OnInit, OnChanges {
 
     // create new post
     createPost(postForm: NgForm) {
-      this.PostServices.createPost(postForm.value).subscribe(() => {
+      this.postServices.createPost(postForm.value).subscribe(() => {
         this.postForm.reset();
         this.toastr.success('Post created successfully');
         this.getAllPosts();
@@ -78,9 +85,11 @@ export class FeedComponent implements OnInit, OnChanges {
 
       })
     }
-
+    /*
+    Hello, I am a comment.
+    */
     getPost(id: number) {
-      this.PostServices.getPost(id).subscribe(post => {
+      this.postServices.getPost(id).subscribe(post => {
         this.$post = post;
       });
     }
@@ -94,11 +103,15 @@ export class FeedComponent implements OnInit, OnChanges {
         this.toastr.success('Comment created successfully');
         this.getAllPosts();
 
+      // This two lines open the comments for the current post when submiting a new comment
+        this.showComments = {show:true, id: post.id};
+        this.postServices.showComments.next(this.showComments);
+
       })
     }
 
     resetFilter() {
-      this.PostServices.resetFilter().subscribe(posts => {
+      this.postServices.resetFilter().subscribe(posts => {
         this.$posts = posts;
         this.filterForm.reset();
       })

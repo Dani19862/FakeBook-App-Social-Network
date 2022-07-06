@@ -49,7 +49,8 @@ namespace API.Controllers
 
         // Create new comment
         [HttpPost]
-        public async Task<ActionResult<CommentDto>> AddComment(CommentDto commentDto)
+        [Route("create")]
+        public async Task<ActionResult<CommentDto>> CreateComment(CommentDto commentDto)
         {
             var user = await _unitOfWork.UserRepository.GetUserByIdAsync(User.GetUserId());  // with token
 
@@ -112,8 +113,8 @@ namespace API.Controllers
 
 
         // Edit comment
-        //TODO : Edit comment -> after this call it goes to the AddComment method -> check why?
         [HttpPut]
+        [Route("edit")]
         public async Task<ActionResult<CommentDto>> EditComment( CommentDto commentDto)
         {
             
@@ -123,7 +124,7 @@ namespace API.Controllers
 
             comment.Content = commentDto.Content;
 
-            //  _mapper.Map(commentDto, comment);
+            _mapper.Map(commentDto, comment);
 
             _unitOfWork.CommentRepository.EditComment(comment);
             

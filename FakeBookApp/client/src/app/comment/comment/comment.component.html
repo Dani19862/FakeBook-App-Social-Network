@@ -1,8 +1,7 @@
-<div >
-  <div>
-      <div class="col-md-8">
+
+      <div class="col-md-8" *ngIf="showComments">
           <div class="d-flex flex-column comment-section">
-              <div class="p-2 border bg-white">
+              <div class="comments-details p-2 border bg-white">
                   <div class="d-flex">
                     <div dropdown  *ngIf="user.username == comment.username " >
                       <button id="button-animated" form="editForm" dropdownToggle type="button" class="btn btn-primary  dropdown-toggle content-end"
@@ -28,8 +27,8 @@
                       <div class="comment-text">{{comment.content}}</div>
                       <span *ngIf="user.username == comment.username && showTextArea">
                         <textarea [(ngModel)]="comment.content" class= textarea name="content" cols="5" rows="2"></textarea>
-                        <button  class="btn btn-danger" (click)="showTextArea=false">Cancel</button>
-                        <button  class="btn btn-primary ml-1 cursor" (click)="editComment(comment)">Save</button>
+                        <button  class="btn btn-danger" (click)="showTextArea = false">Cancel</button>
+                        <button type="button"  class="btn btn-primary ml-1 cursor" (click)="editComment(comment)">Save</button>
                       </span>
                   </div>
               </div>
@@ -43,6 +42,6 @@
 
           </div>
       </div>
-  </div>
-</div>
+
+
 

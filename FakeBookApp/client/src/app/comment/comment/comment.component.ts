@@ -1,4 +1,3 @@
-import { PostsService } from './../../services/posts.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, take } from 'rxjs';
 import { AccountService } from './../../services/account.service';
@@ -9,6 +8,7 @@ import { Post } from 'src/app/models/post';
 import { Member } from 'src/app/models/member';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
+import { PostsService } from 'src/app/services/posts.service';
 
 
 
@@ -25,35 +25,26 @@ export class CommentComponent implements OnInit {
 
   member: Member;
   user:User;
-  // commentsToShow: number[];
+
 
   currentUser$: Observable<User | null>;
   showTextArea = false;
-   numberOFComments: number;
+  numberOFComments: number;
+  showComments: boolean = false;
 
   @ViewChild('editForm') editForm: NgForm
 
-  constructor(private commentService: CommentService,private accountService: AccountService, private toastr: ToastrService, private postService:PostsService) {
+  constructor(private commentService: CommentService,private accountService: AccountService, private toastr: ToastrService, private postsService: PostsService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User);
    }
 
 
   ngOnInit() {
-    // console.log(this.comment);
+
     // TODO: make func get photo more efficient
     this.getPhoto()
-    // this.getCommentsToShow()
-
+    this.showCommentsFunc();
   }
-
-  // getCommentsToShow() {
-  //   console.log('Hello')
-  //   this.commentsToShow = this.commentService.commentsToShow;
-  //   if (this.commentsToShow.includes(this.comment.id)) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   getPhoto(){
     this.member = {  id: 1,
@@ -98,6 +89,16 @@ export class CommentComponent implements OnInit {
         this.toastr.success('Comment edited successfully');
         this.showTextArea = false;
     });
+  }
+
+  // show comments => subscribe to the showComments behavior subject un the post service to find out whther to show comments or not
+
+  showCommentsFunc(){
+    this.postsService.showComments.subscribe(show =>{
+      if(show.id == this.post.id){
+        this.showComments = show.show;
+      }
+    })
   }
 
   like(){
