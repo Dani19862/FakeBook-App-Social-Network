@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj": {}
+    "c:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj": {
+    "c:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj",
+        "projectUniqueName": "c:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj",
+        "projectPath": "c:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj",
         "packagesPath": "C:\\Users\\mazal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\obj\\",
+        "outputPath": "c:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -25,7 +25,6 @@
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,6 +68,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.13, )"
+            },
+            "OmniSharp.Extensions.JsonRpc": {
+              "target": "Package",
+              "version": "[0.19.5, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
