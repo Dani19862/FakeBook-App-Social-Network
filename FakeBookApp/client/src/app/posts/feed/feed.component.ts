@@ -9,7 +9,8 @@ import { CommentService } from 'src/app/services/comment.service';
 import {  Pagination } from '../../models/pagination';
 import { PostParams } from './../../models/postParams';
 import { Post } from '../../models/post';
-import { ShowComments } from './../../models/showComments';
+import { ShowComments } from 'src/app/models/showComments';
+
 
 
 @Component({
@@ -83,7 +84,7 @@ export class FeedComponent implements OnInit, OnChanges {
 
       })
     }
- 
+
 
     // create new comment
     createComment(commentForm: NgForm, post: Post) {
