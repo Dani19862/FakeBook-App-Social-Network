@@ -1,6 +1,6 @@
 import { PostsService } from 'src/app/services/posts.service';
 import { MembersService } from './../../services/members.service';
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Member } from 'src/app/models/member';
 import { ActivatedRoute } from '@angular/router';
 import {NgxGalleryOptions} from '@kolkov/ngx-gallery';
@@ -19,7 +19,7 @@ import { MessageService } from 'src/app/services/message.service';
 
 
 export class MemberDetailComponent implements OnInit {
-  member: Member;
+  member: Member | any;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   posts: Post[] = [];
@@ -33,6 +33,8 @@ export class MemberDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loadMember();
+
+
 
     this.galleryOptions = [
       {
@@ -51,6 +53,8 @@ export class MemberDetailComponent implements OnInit {
     this.getUsersPosts();
   }
 
+  
+
   getImages(): NgxGalleryImage[]{
     const imageUrls = [];
     for (const photo of this.member.photos) {
@@ -67,6 +71,7 @@ export class MemberDetailComponent implements OnInit {
     const username = this.route.snapshot.paramMap.get('username') as string;
     this.memberService.getMember(username).subscribe(member => {
       this.member = member;
+      console.log(this.member);
       this.galleryImages = this.getImages();
     })
   }
