@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L2eJ1zMwIYDjEzWM90nFGTofG7KPsstNjFniykrLk5xM+ETBz4ij4AyDhWBRrcG96Oobtb1eBbhkaQ2rspZcRw==",
+  "dgSpecHash": "o9olnhTJ0TIK9ZYlCZPHlertyOVwCIl5SW+MnGmyQQlxsktFdyJ13i6hCtWc34Rp5KNISDaYSlHGr4kitUWOQQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\mazal\\Desktop\\HakerU\\Victor\\FakeBookAPPSocialNetwork\\FakeBook-App-Social-Network\\FakeBookApp\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mazal\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\mazal\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
