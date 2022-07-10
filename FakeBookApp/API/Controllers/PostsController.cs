@@ -89,20 +89,9 @@ namespace API.Controllers
             return BadRequest("Could not delete post");
         }
 
-        // Get all posts of a user with pagination
-        // TODO: make posts with pagination
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<PostDto>> GetUserPostsAsync([FromQuery] PostParams postParams)
-        // {
-        //     var post = await _unitOfWork.PostRepository.GetUserPostsAsync(postParams);
+     
 
-        //     Response.AddPaginationHeader(post.CurrentPage, post.PageSize, post.TotalCount, post.TotalPages);
-
-        //     return Ok(post);
-            
-        // }   
-
-        // Get all posts of a user without pagination
+        // Get all posts of a user 
         [HttpGet("{username}", Name = "GetUserPostsAsync")]
         public async Task<ActionResult<PostDto>> GetUserPostsAsync(string username)
         {
@@ -110,26 +99,6 @@ namespace API.Controllers
             return Ok(posts);
         }   
 
-        // Get all posts with pagination
-        // TODO: make posts with pagination
-        // [HttpGet]
-        // public async Task <ActionResult<PostDto>> GetAllPostsAsync([FromQuery] PostParams postParams)  
-        // {
-        //     var post = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams);
-
-        //     Response.AddPaginationHeader(post.CurrentPage, post.PageSize, post.TotalCount, post.TotalPages);
-
-        //     return Ok(post);
-        // } 
-
-        
-        // Get all posts
-        // [HttpGet]
-        // public async Task <ActionResult<IEnumerable<PostDto>>> GetAllPostsAsync()  
-        // {
-        //     //var photo =  _unitOfWork.CommentRepository.GetPhotoUrlAsync(1);
-        //     var posts = await _unitOfWork.PostRepository.GetAllPostsAsync();
-        //     return Ok(posts);
 
         // }
         [HttpGet]
@@ -137,9 +106,7 @@ namespace API.Controllers
         {
             if (postParams.Search == null) postParams = new PostParams();
             var posts = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams);
-            // var posts1 = await _unitOfWork.PostRepository.GetAllPostsAsync(postParams = new PostParams());
-            // if (postParams.Search == null) return NotFound();
-            // BadRequest("No posts found");
+           
 
             return Ok(posts);
         }

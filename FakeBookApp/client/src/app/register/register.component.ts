@@ -69,7 +69,8 @@ export class RegisterComponent implements OnInit {
 
   register(){
     this.accountService.register(this.registerForm.value).subscribe(
-      (reg) => {
+      () => {
+       this.toastr.success('Registration successful');
        this.router.navigate(['/member/edit']);
        this.cancel();
       },

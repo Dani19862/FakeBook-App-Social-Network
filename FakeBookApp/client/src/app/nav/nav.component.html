@@ -5,9 +5,6 @@
     <ul class="navbar-nav mr-auto">
       <ng-container *ngIf="currentUser$ | async">
         <li class="nav-item">
-          <a class="nav-link ml-5" routerLinkActive="active" routerLink="/notifications"><i class="fa fa-bell"></i> Notifications</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/members"> <i class="fa fa-users"></i> Members</a>
         </li>
         <li class="nav-item">

@@ -41,7 +41,6 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
 
-    // TODO: make func get photo more efficient
     this.getPhoto()
     this.showCommentsFunc();
   }
@@ -64,7 +63,7 @@ export class CommentComponent implements OnInit {
     return this.commentService.getPhotoURL(this.comment.username)
     .subscribe(member => {
       this.member = member;
-     
+
      }
     );
   }

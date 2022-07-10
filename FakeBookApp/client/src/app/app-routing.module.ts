@@ -1,12 +1,11 @@
 import { FeedComponent } from './posts/feed/feed.component';
 
-import { AppComponent } from './app.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { MessagesComponent } from './messages/messages.component';
 import { HomeComponent } from './home/home.component';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListsComponent } from './lists/lists.component';
 import { AuthGuard } from './guards/auth.guard';

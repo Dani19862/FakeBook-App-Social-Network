@@ -18,7 +18,7 @@ export class LikeService {
   constructor(private http: HttpClient) {}
 
 
-  // add like
+  // add like  == like
   addLike(post: Post | undefined) {
     let like: Like = {
       id: 0,
@@ -44,7 +44,7 @@ export class LikeService {
     }
     return of(0)
   }
-   // delete like
+   // delete like ==  unlike
   deleteLike(post: Post) {
     let liketoDelete :Like | any = {
       likerId: post.memberId,

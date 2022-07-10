@@ -109,21 +109,5 @@ export class FeedComponent implements OnInit, OnChanges {
       })
     }
 
-    // get all posts with pagination
-    // getllPosts() {
-    //   this.PostServices.getallPosts(this.pageNumber, this.pageSize).subscribe((response:PaginatedResult<Post[]>) => {
-    //     this.posts = response.result;
-    //     this.pagination = response.pagination;
-    //   });
-
-  // pageChanged({page}: any) {
-  //   this.pageNumber = page;
-  //   this.getllPosts();
-  // }
-
-
-    // showComment() {
-    //   this.commentService.commentsToShow.push(this.$post.id);
-    // }
-
+  
 }

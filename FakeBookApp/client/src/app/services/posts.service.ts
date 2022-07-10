@@ -15,34 +15,11 @@ export class PostsService {
   baseUrl = environment.apiUrl;
   posts: Post[] = [];
   postParams : PostParams
-  //paginatedResult: PaginatedResult<Post[]> = new PaginatedResult<Post[]>(); not used for now
+
 
   public showComments = new BehaviorSubject<ShowComments>({show: false});
 
   constructor(private http: HttpClient) {}
-
-
-  // getallPosts(page?:number, itemsPerPage?:number) : Observable <PaginatedResult<Post[]>> {
-
-    //   let params = new HttpParams();
-    //   if(page != null && itemsPerPage != null){
-  //     params = params.append('pageNumber', page.toString());
-  //     params = params.append('pageSize', itemsPerPage.toString());
-  //   }
-  //   return this.http.get<Post[]>(`${this.baseUrl}`, {
-  //     observe: 'response',
-  //     params
-  //   }).pipe(
-    //     map((res: HttpResponse<Post[]>) => {
-      //       this.paginatedResult.result = res.body as Post[];
-      //       if(res.headers.get('Pagination') != null){
-        //         this.paginatedResult.pagination = JSON.parse(res.headers.get('Pagination')|| '');
-        //       }
-        //       return this.paginatedResult;
-        //     })
-        //   );
-
-        // }
 
   // get all posts
   getAllPosts(postParams: PostParams) {
@@ -62,8 +39,6 @@ export class PostsService {
         return res.body as Post[];
       })
     );
-
-
 
   }
 

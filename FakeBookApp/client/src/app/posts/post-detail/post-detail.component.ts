@@ -68,7 +68,7 @@ export class PostDetailComponent implements OnInit {
   }
 
 
-
+  // this function shows the the comments each post has, by click the the icon comment button
   showCommentsButton() {
    if (this.showComments.id == this.post.id && this.commentsCount > 0){
       this.showComments.show = !this.showComments.show;

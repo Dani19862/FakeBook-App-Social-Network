@@ -10,8 +10,6 @@ namespace API.interfaces
     {
 
 
-        //Task<IEnumerable<Like>> GetCommentLikes(int commentId);
-
         void AddLike(Like like);
 
         Task<int> DeleteLike(int postId, int likerId);

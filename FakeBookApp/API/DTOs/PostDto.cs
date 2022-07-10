@@ -17,9 +17,6 @@ namespace API.DTOs
 
         public virtual ICollection<Comment> Comments { get; set; }
         
-        //public AppUser AppUser { get; set; }
-
-        
         public ICollection<Like> Likes { get; set; }
         
 

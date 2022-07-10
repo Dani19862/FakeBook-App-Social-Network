@@ -53,7 +53,7 @@ namespace API.Controllers
             _unitOfWork.LikeRepository.AddLike(like);
 
             var likeCount = (await _unitOfWork.LikeRepository.GetLikesCount(likeDto.PostID)) + 1;
-            // var likeCount = await _unitOfWork.LikeRepository.GetLikesCount(postId);
+            
            if (await _unitOfWork.Complete()) return Ok(likeCount);
 
             return BadRequest("Could not add like");

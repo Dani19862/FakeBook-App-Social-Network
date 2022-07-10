@@ -19,7 +19,6 @@ namespace API.interfaces
         
         Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername);
 
-        
 
     }
 }

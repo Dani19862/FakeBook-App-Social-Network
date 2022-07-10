@@ -1,8 +1,5 @@
-import { PostsService } from 'src/app/services/posts.service';
 import { Post } from './../models/post';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
-import { PaginatedResult, Pagination } from '../models/pagination';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +15,7 @@ export class HomeComponent {
 
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor( private router: Router) { }
 
 
 

@@ -6,6 +6,7 @@ namespace API.Extensions
 {
     public static class HttpExtesions
     {
+        // this mthod is used to get the paging parameters from the request and add it to the header of the response
         public static void AddPaginationHeader(this HttpResponse response,int currentPage, int itemPerPage, int totalItems, int totalPages)
         {
             var paginationHeader = new PaginationHeader(currentPage, itemPerPage, totalItems, totalPages);

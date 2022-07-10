@@ -61,47 +61,9 @@ namespace API.Data
 
         }
 
-        //Get All Posts  => with pagination
+       
 
-        // public async Task<PagedList<PostDto>> GetAllPostsAsync (PostParams postParams)
-        // {
-            
-        //     var posts = _context.Posts
-        //         .Select(p => p)
-        //         .OrderByDescending(p => p.Created)
-        //         .AsQueryable();
-
-        //    //if (postParams.CurrentUsername == null)  return new PagedList<PostDto>(new List<PostDto>{}, 0, 0, 0);
-
-        //     var postToRetuen = posts.Select(p => new PostDto
-        //     {
-        //         Id = p.Id,
-        //         Content = p.Content,
-        //         Created = p.Created,
-        //         AppUserId = p.AppUserId,
-               
-        //     });
-
-        //     return await PagedList<PostDto>.CreateAsync(postToRetuen, postParams.PageNumber, postParams.PageSize);
-            
-        // }
-
-        // public async Task <List<PostDto>> GetAllPostsAsync()
-        // {
-        //     var posts =  _context.Posts
-        //     .Select(p => p)
-        //     .Include (c => c.Comments)
-        //     .OrderByDescending(p => p.Created)
-        //     .ProjectTo<PostDto>(_mapper.ConfigurationProvider).ToListAsync();
-
-        //     // var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Comment, CommentDto>()).CreateMapper();
-        //     // var a = posts;
-
-        //     return await posts;
-
-        // }
-
-        
+        // get all posts => including Search filter
         public async Task <List<PostDto>> GetAllPostsAsync(PostParams postParams)
         {
             if (!String.IsNullOrEmpty(postParams.Search))
@@ -131,8 +93,7 @@ namespace API.Data
 
             var posts = _context.Posts.Where(p => p.AppUser.UserName == userName).AsQueryable();
 
-            // if (postParams.CurrentUsername == null) return new PagedList<PostDto>(new List<PostDto>{}, 0, 0, 0); => with pagination
-
+            
             var result = posts.Select
             (
                 p => new PostDto
@@ -147,7 +108,6 @@ namespace API.Data
                 }
             );
 
-            //return await PagedList<PostDto>.CreateAsync(result, postParams.PageNumber, postParams.PageSize); 
             
             return await Task.FromResult(result);
 

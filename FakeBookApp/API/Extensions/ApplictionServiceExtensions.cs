@@ -9,6 +9,7 @@ namespace API.Extensions
 {
     public static class ApplictionServiceExtensions
     {
+        // this method is used to add the services apllication by dependency injection mechanism 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration config)
         {
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));

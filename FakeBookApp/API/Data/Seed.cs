@@ -8,6 +8,7 @@ namespace API.Data
 {
     public static class Seed
     {
+        // this method will be called when the database is created and fill it with some data
         public static async Task SeedUsers(DataContext context)
         {
             

@@ -10,8 +10,6 @@ namespace API.interfaces
     {
         void Update(AppUser user);
 
-        //Task<bool> SaveAllAsync();
-
         Task<AppUser> GetUserByIdAsync (int id);
 
         Task<AppUser> GetUserByUserNameAsync(string username);
