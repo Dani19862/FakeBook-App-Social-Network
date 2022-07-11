@@ -17,12 +17,12 @@ In this project, Repository and UnitOfWork design patterns were used.
  - if it dosen't work run the command `npm install` to update all packages and then tun again `ng serve`.
 
  ### 3. Usage :
-  - Create a account in the home page by Register button and start comunicate with your friends.
-  - Go to feed page and publich posts and comments, marks likeson posts.
-  - go to member to watch your card's friends, send them a meesages.
+  - Create an account in the home page by clicking the Register button and start communicate with your friends.
+  - Go to the feed page and publish posts and comments, like posts.
+  - go to the member page to watch your friends cards, send them meesages.
 
   
-  ### This applictaion developed by _Daniel Levy
+  ### This applictaion was developed by _Daniel Levy
   ## mail : daniellevy1989@gmail.com
   
   
